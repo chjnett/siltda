@@ -11,6 +11,8 @@ type DrawTarget = "dredge" | "restore" | null;
 interface Props {
   project: ProjectState;
   step: StepId;
+  introActive: boolean;
+  introRunId: number;
   compareMode: CompareMode;
   drawTarget: DrawTarget;
   satelliteVisible: boolean;
@@ -18,6 +20,8 @@ interface Props {
   onProjectChange: (next: ProjectState) => void;
   onSelectCandidate: (kind: CandidateKind, id: string) => void;
   onMapReady: (status: string) => void;
+  onIntroPhase: (phase: 0 | 1 | 2) => void;
+  onIntroComplete: () => void;
 }
 
 declare global {
@@ -254,12 +258,60 @@ export default function CesiumScene(props: Props) {
   }, [props.satelliteVisible]);
 
   useEffect(() => {
-    for (const entity of candidateEntitiesRef.current) entity.show = props.candidatesVisible;
-  }, [props.candidatesVisible]);
+    for (const entity of candidateEntitiesRef.current) entity.show = props.candidatesVisible && !props.introActive;
+  }, [props.candidatesVisible, props.introActive]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
-    if (!viewer || !ready) return;
+    if (!viewer || !ready || !props.introActive) return;
+
+    let koreaTimer: number | undefined;
+    let busanTimer: number | undefined;
+    let finishTimer: number | undefined;
+    viewer.camera.cancelFlight();
+    viewer.scene.screenSpaceCameraController.enableInputs = false;
+    props.onIntroPhase(0);
+    viewer.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(127.6, 35.3, 19_000_000),
+      orientation: { heading: 0, pitch: Cesium.Math.toRadians(-90), roll: 0 },
+    });
+
+    koreaTimer = window.setTimeout(() => {
+      props.onIntroPhase(1);
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(127.7, 36.1, 2_250_000),
+        orientation: { heading: Cesium.Math.toRadians(4), pitch: Cesium.Math.toRadians(-78), roll: 0 },
+        duration: 2.25,
+        easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
+        complete: () => {
+          busanTimer = window.setTimeout(() => {
+            props.onIntroPhase(2);
+            viewer.camera.flyTo({
+              destination: Cesium.Cartesian3.fromDegrees(129.02, 35.12, 82_000),
+              orientation: { heading: Cesium.Math.toRadians(14), pitch: Cesium.Math.toRadians(-56), roll: 0 },
+              duration: 2.4,
+              easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
+              complete: () => {
+                finishTimer = window.setTimeout(props.onIntroComplete, 850);
+              },
+            });
+          }, 450);
+        },
+      });
+    }, 1050);
+
+    return () => {
+      if (koreaTimer) window.clearTimeout(koreaTimer);
+      if (busanTimer) window.clearTimeout(busanTimer);
+      if (finishTimer) window.clearTimeout(finishTimer);
+      viewer.camera.cancelFlight();
+      viewer.scene.screenSpaceCameraController.enableInputs = true;
+    };
+  }, [props.introActive, props.introRunId, props.onIntroComplete, props.onIntroPhase, ready]);
+
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer || !ready || props.introActive) return;
     const oldStep = previousStepRef.current;
     cameraByStepRef.current.set(oldStep, {
       destination: Cesium.Cartesian3.clone(viewer.camera.positionWC),
@@ -280,7 +332,7 @@ export default function CesiumScene(props: Props) {
       duration: 1.6,
       easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
     });
-  }, [props.step, ready, props.project.selectedDepositId, props.project.selectedErosionId]);
+  }, [props.step, ready, props.introActive, props.project.selectedDepositId, props.project.selectedErosionId]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
@@ -290,7 +342,7 @@ export default function CesiumScene(props: Props) {
 
     const configs: Array<{ key: "dredgePolygon" | "restorationPolygon"; target: "dredge" | "restore"; color: Cesium.Color }> = [
       { key: "dredgePolygon", target: "dredge", color: Cesium.Color.fromCssColorString("#22d3ee") },
-      { key: "restorationPolygon", target: "restore", color: Cesium.Color.fromCssColorString("#fbbf24") },
+      { key: "restorationPolygon", target: "restore", color: Cesium.Color.fromCssColorString("#4fd39a") },
     ];
     for (const config of configs) {
       const points = props.project[config.key];
@@ -352,7 +404,7 @@ export default function CesiumScene(props: Props) {
           points: props.project.restorationPolygon,
           baseHeight: 6,
           deltaHeight: props.project.fillThickness,
-          color: Cesium.Color.fromCssColorString("#eab308").withAlpha(props.compareMode === "compare" ? 0.58 : 0.86),
+          color: Cesium.Color.fromCssColorString("#2fbf87").withAlpha(props.compareMode === "compare" ? 0.58 : 0.86),
         });
         if (restore) deformationRef.current.restore = viewer.scene.primitives.add(restore);
       }

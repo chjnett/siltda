@@ -20,6 +20,9 @@ Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`�
 
 ## 구현된 기능
 
+- 첫 진입 시 지구 → 대한민국 → 부산으로 이어지는 3D 카메라 시퀀스
+- 인트로 건너뛰기와 작업 화면의 `지구본 보기` 재생 기능
+- 해양 연구·공공 GIS 성격의 단계별 디자인 시스템
 - CesiumJS 3D 지구본과 Esri 위성영상
 - 항만 준설 후보와 침식 복원 후보 폴리곤
 - 후보 선택 및 부드러운 카메라 이동
@@ -37,7 +40,7 @@ Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`�
 
 - 위치 좌표는 GeoJSON과 호환되는 WGS84 경위도 순서 `[longitude, latitude]`를 사용합니다.
 - Cesium 렌더링 높이는 WGS84 타원체고를 사용합니다.
-- 현재 수심 표면은 실제 측량 자료가 없는 경우를 위한 가상 DEM입니다. UI에 `DEMO DATA`로 명시됩니다.
+- 현재 수심 표면은 실제 측량 자료가 없는 경우를 위한 가상 DEM입니다. UI에 `가상 데이터`로 명시됩니다.
 - 위성영상은 표면 영상이며 수심 데이터가 아닙니다.
 - 준설·복원 변형은 Cesium 지형 타일을 수정하지 않습니다. 독립적인 `Cesium.Geometry` 삼각형 메시를 생성하고, 슬라이더 값에 따라 정점 높이를 다시 계산합니다.
 - 실제 프로젝트에서는 GeoTIFF/DEM을 서버 또는 Web Worker에서 격자로 변환한 뒤 셀별 전후 높이 차를 적분하도록 `lib/geo.ts` 계산 계층을 교체할 수 있습니다.

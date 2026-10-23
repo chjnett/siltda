@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
-  Layers3, MapPinned, Mountain, PanelTop, Rotate3D, Save, Ship, SlidersHorizontal,
-  Sparkles, Undo2, Waves, X, ZoomIn,
+  Anchor, ArrowRight, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
+  Globe2, Layers3, MapPinned, Mountain, PanelTop, Save, Ship, SlidersHorizontal,
+  Sparkles, Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
 import { candidates, initialProject } from "@/lib/demoData";
@@ -30,6 +30,9 @@ export default function CoastalStudio() {
   const [mapStatus, setMapStatus] = useState("3D 엔진 초기화 중");
   const [saved, setSaved] = useState(false);
   const [notice, setNotice] = useState("가상 수심 DEM · 실제 측량 자료가 아닙니다");
+  const [introActive, setIntroActive] = useState(true);
+  const [introPhase, setIntroPhase] = useState<0 | 1 | 2>(0);
+  const [introRunId, setIntroRunId] = useState(0);
 
   useEffect(() => {
     const stored = localStorage.getItem("siltda-project-v1");
@@ -67,6 +70,17 @@ export default function CoastalStudio() {
     window.setTimeout(() => setSaved(false), 1800);
   };
 
+  const finishIntro = useCallback(() => {
+    setIntroActive(false);
+    setIntroPhase(2);
+  }, []);
+
+  const replayIntro = useCallback(() => {
+    setIntroPhase(0);
+    setIntroRunId((current) => current + 1);
+    setIntroActive(true);
+  }, []);
+
   const changeStep = (next: StepId) => {
     setStep(next);
     setDrawTarget(null);
@@ -91,7 +105,7 @@ export default function CoastalStudio() {
   )), [step]);
 
   return (
-    <main className="studio-shell">
+    <main className={`studio-shell step-${step} ${introActive ? "intro-active" : "workspace-active"}`}>
       <header className="app-header">
         <div className="brand-block">
           <video className="brand-video" autoPlay muted loop playsInline aria-hidden="true">
@@ -103,12 +117,13 @@ export default function CoastalStudio() {
           </div>
         </div>
         <div className="project-identity">
-          <span className="project-kicker">ACTIVE PROJECT</span>
+          <span className="project-kicker">진행 중인 프로젝트</span>
           <strong>부산 연안 퇴적물 순환 실증</strong>
           <span className="project-id">SDA-BUSAN-2607</span>
         </div>
         <div className="header-status">
           <span className="data-badge"><Database size={14} /> {mapStatus}</span>
+          <button className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</button>
           <button className="icon-button" title="도움말"><CircleHelp size={18} /></button>
           <button className={`save-button ${saved ? "saved" : ""}`} onClick={saveProject}>
             {saved ? <Check size={16} /> : <Save size={16} />}
@@ -120,7 +135,7 @@ export default function CoastalStudio() {
       <div className="workspace-grid">
         <aside className="left-panel glass-panel">
           <div className="workflow-heading">
-            <span>WORKFLOW</span>
+            <span>설계 과정</span>
             <strong>{completion}%</strong>
           </div>
           <div className="workflow-progress"><span style={{ width: `${completion}%` }} /></div>
@@ -156,7 +171,7 @@ export default function CoastalStudio() {
 
           {step === 1 ? (
             <section className="candidate-list">
-              <div className="section-label"><Sparkles size={14} /> AI 추천 후보</div>
+            <div className="section-label"><Sparkles size={14} /> 추천 후보지</div>
               {candidates.map((candidate) => {
                 const selected = candidate.id === project.selectedDepositId || candidate.id === project.selectedErosionId;
                 return (
@@ -187,7 +202,7 @@ export default function CoastalStudio() {
 
           <div className="data-disclaimer">
             <Database size={15} />
-            <span><strong>DEMO DATA</strong> 표시된 수심과 지형 변형은 시각화용 가상 데이터입니다.</span>
+            <span><strong>가상 데이터</strong> 표시된 수심과 지형 변형은 시각화용 데이터입니다.</span>
           </div>
         </aside>
 
@@ -195,6 +210,8 @@ export default function CoastalStudio() {
           <CesiumScene
             project={project}
             step={step}
+            introActive={introActive}
+            introRunId={introRunId}
             compareMode={compareMode}
             drawTarget={drawTarget}
             satelliteVisible={satelliteVisible}
@@ -202,9 +219,38 @@ export default function CoastalStudio() {
             onProjectChange={setProject}
             onSelectCandidate={selectCandidate}
             onMapReady={setMapStatus}
+            onIntroPhase={setIntroPhase}
+            onIntroComplete={finishIntro}
           />
 
-          {step > 1 && (
+          {introActive && (
+            <section className="globe-intro" aria-label="siltDA 서비스 소개">
+              <div className="intro-topbar">
+                <div className="intro-brand"><span>silt</span>DA <small>COASTAL DIGITAL TWIN</small></div>
+                <button onClick={finishIntro}>건너뛰기</button>
+              </div>
+              <div className="intro-story">
+                <span className="intro-eyebrow">SEDIMENT CIRCULATION PLATFORM</span>
+                <h1>버려지는 흙을<br /><em>해안의 미래로.</em></h1>
+                <p>항만에서 발생한 준설토와 침식되는 연안을 연결해<br />선정부터 설계, 복원까지 하나의 3D 공간에서 검토합니다.</p>
+                <button className="intro-cta" onClick={finishIntro}>부산 실증 지역 열기 <ArrowRight size={17} /></button>
+              </div>
+              <div className="intro-journey" aria-label="카메라 이동 단계">
+                {[
+                  [0, "01", "지구", "전 지구 연안 관측"],
+                  [1, "02", "대한민국", "연안 침식 현황"],
+                  [2, "03", "부산", "퇴적물 순환 실증"],
+                ].map(([phase, number, title, copy]) => (
+                  <div key={number} className={introPhase >= Number(phase) ? "active" : ""}>
+                    <span>{number}</span><strong>{title}</strong><small>{copy}</small>
+                  </div>
+                ))}
+              </div>
+              <div className="intro-data-note"><Database size={14} /> WGS84 · 시각화용 가상 수심 데이터 포함</div>
+            </section>
+          )}
+
+          {!introActive && step > 1 && (
             <div className="comparison-switch" role="group" aria-label="지형 비교 모드">
               {(["before", "after", "compare", "section"] as CompareMode[]).map((mode) => (
                 <button key={mode} className={compareMode === mode ? "active" : ""} onClick={() => setCompareMode(mode)}>
@@ -214,7 +260,7 @@ export default function CoastalStudio() {
             </div>
           )}
 
-          {compareMode === "section" && step > 1 && (
+          {!introActive && compareMode === "section" && step > 1 && (
             <div className="section-chart glass-panel">
               <div className="section-chart-head">
                 <span>{step === 2 ? "준설 횡단면 A—A′" : "복원 횡단면 B—B′"}</span>
@@ -236,14 +282,14 @@ export default function CoastalStudio() {
 
         <aside className="right-panel glass-panel">
           <div className="inspector-heading">
-            <span>{step === 1 ? "SITE INSPECTOR" : step === 2 ? "DREDGING MODEL" : "RESTORATION MODEL"}</span>
-            <span className="quality-chip"><span /> VERIFIED INPUT</span>
+            <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "복원 설계"}</span>
+            <span className="quality-chip"><span /> 입력 데이터 확인</span>
           </div>
 
           {step === 1 ? (
             <>
               <section className="selection-card deposit-card">
-                <span className="card-eyebrow">퇴적지 · SOURCE</span>
+                <span className="card-eyebrow">퇴적지 · 공급원</span>
                 <h2>{deposit.name}</h2>
                 <p>{deposit.subtitle}</p>
                 <div className="property-grid">
@@ -254,7 +300,7 @@ export default function CoastalStudio() {
               </section>
               <div className="match-connector"><span /><strong>{routeDistance.toFixed(1)} km</strong><span /></div>
               <section className="selection-card erosion-card">
-                <span className="card-eyebrow">침식지 · DESTINATION</span>
+                <span className="card-eyebrow">침식지 · 복원 대상</span>
                 <h2>{erosion.name}</h2>
                 <p>{erosion.subtitle}</p>
                 <div className="property-grid">
@@ -271,7 +317,7 @@ export default function CoastalStudio() {
           ) : (
             <>
               <section className="model-summary">
-                <span className="card-eyebrow">{step === 2 ? "CUSTOM EXCAVATION MESH" : "CUSTOM FILL MESH"}</span>
+                <span className="card-eyebrow">{step === 2 ? "사용자 정의 굴착 메시" : "사용자 정의 성토 메시"}</span>
                 <h2>{step === 2 ? "준설 구역 설계" : "침식지 복원 설계"}</h2>
                 <p>Cesium 지형과 분리된 사용자 정의 삼각형 메시를 실시간으로 갱신합니다.</p>
               </section>
@@ -332,7 +378,7 @@ export default function CoastalStudio() {
       <footer className="material-balance">
         <div className="balance-title">
           <Ship size={18} />
-          <span><small>MATERIAL BALANCE</small><strong>준설토 수급 현황</strong></span>
+          <span><small>토량 수급</small><strong>준설토 수급 현황</strong></span>
         </div>
         <div className="balance-stat supply"><small>준설 공급량</small><strong>{integer.format(dredgeVolume)} <i>m³</i></strong></div>
         <div className="balance-flow"><span style={{ width: `${Math.min(100, restorationVolume && dredgeVolume ? (Math.min(dredgeVolume, restorationVolume) / Math.max(dredgeVolume, restorationVolume)) * 100 : 0)}%` }} /></div>
