@@ -230,12 +230,31 @@ button { color: inherit; }
 .balance-result.negative strong { color: var(--danger); }
 .system-note { display: flex; align-items: center; gap: 8px; justify-self: end; color: #617984; font-size: 8px; text-align: right; }
 
-.loading-shell { position: relative; z-index: 2; height: 100vh; display: grid; place-content: center; justify-items: center; color: #cfe8f1; }
-.loading-mark { font-size: 34px; font-weight: 800; letter-spacing: -1px; }
-.loading-shell p { color: #7694a1; font-size: 12px; }
-.loading-bar { width: 220px; height: 2px; background: rgba(255,255,255,.1); overflow: hidden; }
-.loading-bar span { display: block; width: 45%; height: 100%; background: var(--cyan); animation: loading 1.2s ease-in-out infinite alternate; }
-@keyframes loading { to { transform: translateX(125%); } }
+.loading-shell {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+.loading-mark {
+  color: rgba(238, 248, 251, .96);
+  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(44px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.065em;
+  text-shadow: 0 8px 32px rgba(0, 18, 29, .34);
+  animation: wordmark-reveal .8s cubic-bezier(.2, .7, .2, 1) both;
+}
+.loading-mark strong {
+  color: var(--cyan);
+  font-weight: 650;
+}
+@keyframes wordmark-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .cesium-viewer-bottom { opacity: .7; }
 .cesium-widget-credits { font-size: 9px !important; }
