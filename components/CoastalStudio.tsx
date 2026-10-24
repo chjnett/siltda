@@ -176,7 +176,7 @@ export default function CoastalStudio() {
     <main className={`studio-shell step-${step} ${introActive ? "intro-active" : "workspace-active"}`}>
       <header className="app-header">
         <div className="brand-block">
-          <video className="brand-video" autoPlay muted loop playsInline aria-hidden="true">
+          <video className="brand-video" autoPlay muted loop playsInline preload="auto" aria-hidden="true">
             <source src="/media/ocean-loop.mp4" type="video/mp4" />
           </video>
           <div className="brand-copy">
@@ -331,7 +331,7 @@ export default function CoastalStudio() {
 
           {splashPhase !== "hidden" && (
             <div className={`ocean-splash ${splashPhase === "leaving" ? "leaving" : ""}`} aria-label="3D 지도 준비 중">
-              <video autoPlay muted loop playsInline aria-hidden="true">
+              <video autoPlay muted loop playsInline preload="auto" aria-hidden="true">
                 <source src="/media/ocean-loop.mp4" type="video/mp4" />
               </video>
               <div className="ocean-splash-shade" aria-hidden="true" />
