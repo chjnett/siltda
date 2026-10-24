@@ -93,7 +93,7 @@ export default function CoastalStudio() {
 
   useEffect(() => {
     if (splashPhase !== "hidden" || !introActive) return;
-    const timer = window.setTimeout(finishIntro, 7600);
+    const timer = window.setTimeout(finishIntro, 3800);
     return () => window.clearTimeout(timer);
   }, [finishIntro, introActive, introRunId, splashPhase]);
 
