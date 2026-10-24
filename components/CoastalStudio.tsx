@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
-  Globe2, Layers3, MapPinned, Mountain, PanelTop, Save, Ship, SlidersHorizontal,
+  Globe2, Layers3, MapPinned, Mountain, PanelLeftClose, PanelLeftOpen,
+  PanelRightClose, PanelRightOpen, PanelTop, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
@@ -36,6 +37,8 @@ export default function CoastalStudio() {
   const [mapStatus, setMapStatus] = useState("3D 엔진 초기화 중");
   const [saved, setSaved] = useState(false);
   const [notice, setNotice] = useState("가상 수심 DEM · 실제 측량 자료가 아닙니다");
+  const [leftPanelOpen, setLeftPanelOpen] = useState(true);
+  const [rightPanelOpen, setRightPanelOpen] = useState(true);
   const [candidateFocus, setCandidateFocus] = useState<{ id: string | null; requestId: number }>({ id: null, requestId: 0 });
   const [introActive, setIntroActive] = useState(true);
   const [introRunId, setIntroRunId] = useState(0);
@@ -165,8 +168,8 @@ export default function CoastalStudio() {
         </div>
       </header>
 
-      <div className="workspace-grid">
-        <aside className="left-panel glass-panel">
+      <div className={`workspace-grid ${leftPanelOpen ? "" : "left-panel-collapsed"} ${rightPanelOpen ? "" : "right-panel-collapsed"}`}>
+        <aside className="left-panel glass-panel" aria-hidden={!leftPanelOpen}>
           <div className="workflow-heading">
             <span>설계 과정</span>
             <strong>{completion}%</strong>
@@ -238,6 +241,32 @@ export default function CoastalStudio() {
         </aside>
 
         <section className="map-column">
+          {!introActive && (
+            <>
+              <Button
+                variant="outline"
+                size="icon"
+                className="panel-toggle panel-toggle-left"
+                onClick={() => setLeftPanelOpen((open) => !open)}
+                aria-label={leftPanelOpen ? "왼쪽 사이드바 닫기" : "왼쪽 사이드바 열기"}
+                aria-expanded={leftPanelOpen}
+                title={leftPanelOpen ? "설계 도구 닫기" : "설계 도구 열기"}
+              >
+                {leftPanelOpen ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="panel-toggle panel-toggle-right"
+                onClick={() => setRightPanelOpen((open) => !open)}
+                aria-label={rightPanelOpen ? "오른쪽 사이드바 닫기" : "오른쪽 사이드바 열기"}
+                aria-expanded={rightPanelOpen}
+                title={rightPanelOpen ? "후보지 정보 닫기" : "후보지 정보 열기"}
+              >
+                {rightPanelOpen ? <PanelRightClose size={16} /> : <PanelRightOpen size={16} />}
+              </Button>
+            </>
+          )}
           <CesiumScene
             project={project}
             step={step}
@@ -299,7 +328,7 @@ export default function CoastalStudio() {
           )}
         </section>
 
-        <aside className="right-panel glass-panel">
+        <aside className="right-panel glass-panel" aria-hidden={!rightPanelOpen}>
           <div className="inspector-heading">
             <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "복원 설계"}</span>
             <Badge variant="success" className="quality-chip"><span /> 데이터 확인됨</Badge>
