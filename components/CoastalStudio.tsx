@@ -54,6 +54,22 @@ export default function CoastalStudio() {
   }, []);
 
   useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 640px)");
+    const syncPanels = () => {
+      if (mobile.matches) {
+        setLeftPanelOpen(false);
+        setRightPanelOpen(false);
+      } else {
+        setLeftPanelOpen(true);
+        setRightPanelOpen(true);
+      }
+    };
+    syncPanels();
+    mobile.addEventListener("change", syncPanels);
+    return () => mobile.removeEventListener("change", syncPanels);
+  }, []);
+
+  useEffect(() => {
     const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 4200);
     return () => window.clearTimeout(timer);
   }, []);
@@ -91,6 +107,22 @@ export default function CoastalStudio() {
     }));
     setCandidateFocus((current) => ({ id, requestId: current.requestId + 1 }));
     setNotice(kind === "deposit" ? "퇴적지 후보를 프로젝트에 연결했습니다" : "침식지 후보를 프로젝트에 연결했습니다");
+    if (window.matchMedia("(max-width: 640px)").matches) {
+      setLeftPanelOpen(false);
+      setRightPanelOpen(false);
+    }
+  };
+
+  const toggleLeftPanel = () => {
+    const next = !leftPanelOpen;
+    setLeftPanelOpen(next);
+    if (next && window.matchMedia("(max-width: 640px)").matches) setRightPanelOpen(false);
+  };
+
+  const toggleRightPanel = () => {
+    const next = !rightPanelOpen;
+    setRightPanelOpen(next);
+    if (next && window.matchMedia("(max-width: 640px)").matches) setLeftPanelOpen(false);
   };
 
   const saveProject = () => {
@@ -168,11 +200,22 @@ export default function CoastalStudio() {
         </div>
       </header>
 
-      <div className={`workspace-grid ${leftPanelOpen ? "" : "left-panel-collapsed"} ${rightPanelOpen ? "" : "right-panel-collapsed"}`}>
+      <div className={`workspace-grid ${leftPanelOpen ? "" : "left-panel-collapsed"} ${rightPanelOpen ? "" : "right-panel-collapsed"} ${leftPanelOpen || rightPanelOpen ? "mobile-panel-open" : ""}`}>
+        <button
+          type="button"
+          className="mobile-panel-backdrop"
+          aria-label="사이드바 닫기"
+          aria-hidden={!(leftPanelOpen || rightPanelOpen)}
+          tabIndex={leftPanelOpen || rightPanelOpen ? 0 : -1}
+          onClick={() => { setLeftPanelOpen(false); setRightPanelOpen(false); }}
+        />
         <aside className="left-panel glass-panel" aria-hidden={!leftPanelOpen}>
           <div className="workflow-heading">
             <span>설계 과정</span>
-            <strong>{completion}%</strong>
+            <span className="panel-heading-actions">
+              <strong>{completion}%</strong>
+              <Button variant="ghost" size="icon" className="mobile-panel-close" onClick={() => setLeftPanelOpen(false)} aria-label="설계 도구 닫기"><X size={16} /></Button>
+            </span>
           </div>
           <Progress value={completion} className="workflow-progress" />
 
@@ -247,7 +290,7 @@ export default function CoastalStudio() {
                 variant="outline"
                 size="icon"
                 className="panel-toggle panel-toggle-left"
-                onClick={() => setLeftPanelOpen((open) => !open)}
+                onClick={toggleLeftPanel}
                 aria-label={leftPanelOpen ? "왼쪽 사이드바 닫기" : "왼쪽 사이드바 열기"}
                 aria-expanded={leftPanelOpen}
                 title={leftPanelOpen ? "설계 도구 닫기" : "설계 도구 열기"}
@@ -258,7 +301,7 @@ export default function CoastalStudio() {
                 variant="outline"
                 size="icon"
                 className="panel-toggle panel-toggle-right"
-                onClick={() => setRightPanelOpen((open) => !open)}
+                onClick={toggleRightPanel}
                 aria-label={rightPanelOpen ? "오른쪽 사이드바 닫기" : "오른쪽 사이드바 열기"}
                 aria-expanded={rightPanelOpen}
                 title={rightPanelOpen ? "후보지 정보 닫기" : "후보지 정보 열기"}
@@ -331,7 +374,10 @@ export default function CoastalStudio() {
         <aside className="right-panel glass-panel" aria-hidden={!rightPanelOpen}>
           <div className="inspector-heading">
             <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "복원 설계"}</span>
-            <Badge variant="success" className="quality-chip"><span /> 데이터 확인됨</Badge>
+            <span className="panel-heading-actions">
+              <Badge variant="success" className="quality-chip"><span /> 데이터 확인됨</Badge>
+              <Button variant="ghost" size="icon" className="mobile-panel-close" onClick={() => setRightPanelOpen(false)} aria-label="후보지 정보 닫기"><X size={16} /></Button>
+            </span>
           </div>
 
           {step === 1 ? (

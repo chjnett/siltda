@@ -481,6 +481,8 @@ button { color: inherit; }
 }
 .workspace-grid.left-panel-collapsed .left-panel { transform: translateX(-12px); }
 .workspace-grid.right-panel-collapsed .right-panel { transform: translateX(12px); }
+.mobile-panel-backdrop, .mobile-panel-close { display: none; }
+.panel-heading-actions { display: flex; align-items: center; gap: 7px; }
 .panel-toggle.ui-button {
   position: absolute;
   top: 50%;
@@ -630,9 +632,92 @@ button { color: inherit; }
 }
 
 @media (max-width: 640px) {
+  html, body { height: 100%; min-height: 0; overflow: hidden; }
+  .studio-shell { height: 100dvh; min-height: 0; grid-template-rows: 52px minmax(0, 1fr) 56px; }
+  .studio-shell.intro-active { min-height: 0; grid-template-rows: 0 minmax(0, 1fr) 0; }
+
+  .app-header { grid-template-columns: minmax(0, 1fr) auto; }
+  .brand-block { border-right: 0; padding: 0 12px; }
+  .brand-mark { font-size: 18px; }
+  .brand-subtitle { font-size: 8px; letter-spacing: 0; }
+  .project-identity, .data-badge, .icon-button { display: none; }
+  .header-status { gap: 5px; padding-right: 8px; }
+  .globe-button.ui-button, .save-button.ui-button { width: 34px; height: 34px; padding: 0; font-size: 0; gap: 0; }
+
+  .workspace-grid,
+  .workspace-grid.left-panel-collapsed,
+  .workspace-grid.right-panel-collapsed,
+  .workspace-grid.left-panel-collapsed.right-panel-collapsed {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 6px;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .intro-active .workspace-grid { padding: 0; }
+  .map-column { grid-column: 1; grid-row: 1; min-width: 0; width: 100%; }
+
+  .left-panel, .right-panel {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    z-index: 17;
+    width: min(86vw, 330px);
+    padding: 14px;
+    background: rgba(17,17,19,.98);
+    box-shadow: 0 20px 55px rgba(0,0,0,.55);
+    transition: transform .28s ease, opacity .2s ease;
+  }
+  .left-panel { left: 6px; }
+  .right-panel { right: 6px; left: auto; }
+  .workspace-grid.left-panel-collapsed .left-panel { transform: translateX(calc(-100% - 12px)); }
+  .workspace-grid.right-panel-collapsed .right-panel { transform: translateX(calc(100% + 12px)); }
+
+  .mobile-panel-backdrop {
+    display: block;
+    position: absolute;
+    inset: 6px;
+    z-index: 16;
+    border: 0;
+    border-radius: var(--radius);
+    background: rgba(0,0,0,.48);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .mobile-panel-open .mobile-panel-backdrop { opacity: 1; pointer-events: auto; }
+  .mobile-panel-close.ui-button { display: inline-flex; width: 30px; height: 30px; padding: 0; }
+
+  .panel-toggle.ui-button { top: auto; bottom: 12px; width: 42px; height: 42px; transform: none; border-radius: 999px; }
+  .panel-toggle-left { left: 12px; }
+  .panel-toggle-right { right: 12px; }
+  .workspace-grid:not(.left-panel-collapsed) .panel-toggle-left,
+  .workspace-grid:not(.right-panel-collapsed) .panel-toggle-right { display: none; }
+
+  .candidate-copy small, .candidate-item .score { display: block; }
+  .candidate-item { grid-template-columns: 8px 1fr 30px; min-height: 50px; }
+  .step-nav button { min-height: 48px; }
+  .selection-card dl { display: block; }
+  .recommendation-box { display: flex; }
+
+  .map-topline { top: 8px; left: 8px; max-width: calc(100% - 16px); padding: 6px 7px; font-size: 7px; }
+  .camera-presets { top: 42px; right: 8px; }
+  .camera-presets button { padding: 7px 9px; }
+  .comparison-switch { bottom: 10px; max-width: calc(100% - 112px); white-space: nowrap; }
+  .comparison-switch .ui-button { padding: 0 7px; font-size: 8px; }
+  .section-chart { left: 8px; right: 8px; bottom: 56px; height: 170px; padding: 10px; }
+  .section-chart svg { height: 128px; }
+
+  .material-balance { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; padding: 0 8px; }
+  .balance-title, .balance-flow, .system-note { display: none; }
+  .balance-stat, .balance-result { min-width: 0; padding: 0 7px; }
+  .balance-stat:first-of-type { border-left: 0; }
+  .balance-stat small, .balance-result small { font-size: 8px; white-space: nowrap; }
+  .balance-stat strong, .balance-result strong { overflow: hidden; font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
+  .cesium-widget-credits { font-size: 7px !important; }
 }
 
-@media (max-height: 760px) {
+@media (max-height: 760px) and (min-width: 641px) {
   .studio-shell { min-height: 660px; grid-template-rows: 58px minmax(0, 1fr) 66px; }
   .workspace-grid { padding: 7px; gap: 7px; }
   .left-panel, .right-panel { padding: 12px; }
