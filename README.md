@@ -19,11 +19,11 @@
 아래 이미지를 누르면 68초 분량의 무음 데모 영상을 볼 수 있습니다.
 
 <div align="center">
-  <a href="./docs/demo/siltda-demo.mp4">
+  <a href="https://github.com/chjnett/siltda/raw/refs/heads/codex/globe-first-gis-design/docs/demo/siltda-demo.mp4">
     <img src="./docs/demo/siltda-demo-cover.jpg" alt="siltDA 3D Coastal Studio 데모 영상" width="100%" />
   </a>
   <br />
-  <sub>▶ 이미지를 클릭해 데모 영상 재생</sub>
+  <sub>▶ 이미지를 클릭하면 브라우저에서 데모 영상이 바로 재생됩니다</sub>
 </div>
 
 ## 🌊 프로젝트 소개
