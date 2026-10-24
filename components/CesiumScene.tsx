@@ -65,6 +65,7 @@ export default function CesiumScene(props: Props) {
   const deformationRef = useRef<{ dredge?: Cesium.Primitive; restore?: Cesium.Primitive }>({});
   const cameraByStepRef = useRef(new Map<StepId, { destination: Cesium.Cartesian3; orientation: { heading: number; pitch: number; roll: number } }>());
   const previousStepRef = useRef<StepId>(props.step);
+  const previousIntroActiveRef = useRef(true);
   const [ready, setReady] = useState(false);
 
   useEffect(() => { projectRef.current = props.project; }, [props.project]);
@@ -328,8 +329,15 @@ export default function CesiumScene(props: Props) {
 
   useEffect(() => {
     const viewer = viewerRef.current;
-    if (!viewer || !ready || props.introActive) return;
+    if (!viewer || !ready) return;
+    if (props.introActive) {
+      previousIntroActiveRef.current = true;
+      return;
+    }
     const oldStep = previousStepRef.current;
+    const cameOutOfIntro = previousIntroActiveRef.current;
+    previousIntroActiveRef.current = false;
+    if (!cameOutOfIntro && oldStep === props.step) return;
     cameraByStepRef.current.set(oldStep, {
       destination: Cesium.Cartesian3.clone(viewer.camera.positionWC),
       orientation: { heading: viewer.camera.heading, pitch: viewer.camera.pitch, roll: viewer.camera.roll },
@@ -358,15 +366,17 @@ export default function CesiumScene(props: Props) {
     if (!site) return;
 
     const [lon, lat] = centroid(site.polygon);
-    const height = props.step === 1 ? 18_000 : 9_000;
+    const height = props.step === 1 ? 6_200 : 4_800;
+    viewer.camera.cancelFlight();
+    viewer.scene.screenSpaceCameraController.enableInputs = true;
     viewer.camera.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(lon, lat, height),
       orientation: {
-        heading: Cesium.Math.toRadians(20),
-        pitch: Cesium.Math.toRadians(props.step === 1 ? -52 : -38),
+        heading: Cesium.Math.toRadians(12),
+        pitch: Cesium.Math.toRadians(props.step === 1 ? -68 : -48),
         roll: 0,
       },
-      duration: 1.35,
+      duration: 1.2,
       easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
     });
   }, [props.focusCandidateId, props.focusRequestId, props.introActive, props.step, ready]);
