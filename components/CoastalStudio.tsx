@@ -4,9 +4,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, MapPinned, Mountain, PanelTop, Save, Ship, SlidersHorizontal,
-  Sparkles, Undo2, Waves, X,
+  Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 import { candidates, initialProject } from "@/lib/demoData";
 import { centroid, distanceKm, polygonAreaMeters } from "@/lib/geo";
 import type { CandidateKind, CompareMode, ProjectState, StepId } from "@/lib/types";
@@ -138,22 +144,22 @@ export default function CoastalStudio() {
           </video>
           <div className="brand-copy">
             <span className="brand-mark">silt<span>DA</span></span>
-            <span className="brand-subtitle">COASTAL DIGITAL TWIN</span>
+            <span className="brand-subtitle">Coastal studio</span>
           </div>
         </div>
         <div className="project-identity">
-          <span className="project-kicker">진행 중인 프로젝트</span>
+          <span className="project-kicker">프로젝트</span>
           <strong>부산 연안 퇴적물 순환 실증</strong>
           <span className="project-id">SDA-BUSAN-2607</span>
         </div>
         <div className="header-status">
-          <span className="data-badge"><Database size={14} /> {mapStatus}</span>
-          <button className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</button>
-          <button className="icon-button" title="도움말"><CircleHelp size={18} /></button>
-          <button className={`save-button ${saved ? "saved" : ""}`} onClick={saveProject}>
+          <Badge variant="secondary" className="data-badge"><Database size={14} /> {mapStatus}</Badge>
+          <Button variant="outline" size="sm" className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</Button>
+          <Button variant="ghost" size="icon" className="icon-button" title="도움말"><CircleHelp size={18} /></Button>
+          <Button size="sm" className={`save-button ${saved ? "saved" : ""}`} onClick={saveProject}>
             {saved ? <Check size={16} /> : <Save size={16} />}
             {saved ? "저장됨" : "프로젝트 저장"}
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -163,63 +169,61 @@ export default function CoastalStudio() {
             <span>설계 과정</span>
             <strong>{completion}%</strong>
           </div>
-          <div className="workflow-progress"><span style={{ width: `${completion}%` }} /></div>
+          <Progress value={completion} className="workflow-progress" />
 
           <nav className="step-nav" aria-label="설계 단계">
             {steps.map(({ id, eyebrow, title, icon: Icon }) => (
-              <button key={id} className={step === id ? "active" : ""} onClick={() => changeStep(id)}>
+              <Button key={id} variant="ghost" className={step === id ? "active" : ""} onClick={() => changeStep(id)}>
                 <span className="step-icon"><Icon size={17} /></span>
                 <span><small>{eyebrow}</small><strong>{title}</strong></span>
                 <ChevronRight size={15} />
-              </button>
+              </Button>
             ))}
           </nav>
 
+          <Separator className="panel-separator" />
           <section className="tool-section">
             <div className="section-label"><Layers3 size={14} /> 지도 레이어</div>
-            <label className="toggle-row">
+            <div className="toggle-row">
               <span><Eye size={14} /> 위성영상</span>
-              <input type="checkbox" checked={satelliteVisible} onChange={(event) => setSatelliteVisible(event.target.checked)} />
-              <i />
-            </label>
-            <label className="toggle-row">
+              <Switch checked={satelliteVisible} onCheckedChange={setSatelliteVisible} aria-label="위성영상 표시" />
+            </div>
+            <div className="toggle-row">
               <span><BoxSelect size={14} /> 후보지 경계</span>
-              <input type="checkbox" checked={candidatesVisible} onChange={(event) => setCandidatesVisible(event.target.checked)} />
-              <i />
-            </label>
-            <label className="toggle-row muted-toggle">
+              <Switch checked={candidatesVisible} onCheckedChange={setCandidatesVisible} aria-label="후보지 경계 표시" />
+            </div>
+            <div className="toggle-row muted-toggle">
               <span><Mountain size={14} /> 가상 수심 DEM</span>
-              <input type="checkbox" checked readOnly />
-              <i />
-            </label>
+              <Switch checked disabled aria-label="가상 수심 DEM 표시" />
+            </div>
           </section>
 
           {step === 1 ? (
             <section className="candidate-list">
-            <div className="section-label"><Sparkles size={14} /> 추천 후보지</div>
+            <div className="section-label"><MapPinned size={14} /> 후보지</div>
               {candidates.map((candidate) => {
                 const selected = candidate.id === project.selectedDepositId || candidate.id === project.selectedErosionId;
                 return (
-                  <button key={candidate.id} className={`candidate-item ${selected ? "selected" : ""}`} onClick={() => selectCandidate(candidate.kind, candidate.id)}>
+                  <Button key={candidate.id} variant="ghost" className={`candidate-item ${selected ? "selected" : ""}`} onClick={() => selectCandidate(candidate.kind, candidate.id)}>
                     <span className={`site-dot ${candidate.kind}`} />
                     <span className="candidate-copy">
                       <strong>{candidate.name}</strong>
                       <small>{candidate.subtitle}</small>
                     </span>
                     <span className="score">{candidate.matchScore}</span>
-                  </button>
+                  </Button>
                 );
               })}
             </section>
           ) : (
             <section className="draw-tools">
               <div className="section-label"><SlidersHorizontal size={14} /> 구역 편집</div>
-              <button className={`primary-tool ${drawTarget ? "active" : ""}`} onClick={() => setDrawTarget(drawTarget ? null : (step === 2 ? "dredge" : "restore"))}>
+              <Button className={`primary-tool ${drawTarget ? "active" : ""}`} onClick={() => setDrawTarget(drawTarget ? null : (step === 2 ? "dredge" : "restore"))}>
                 <BoxSelect size={16} /> {drawTarget ? "입력 완료" : `${step === 2 ? "준설" : "복원"} 폴리곤 그리기`}
-              </button>
+              </Button>
               <div className="tool-button-grid">
-                <button onClick={undoVertex} disabled={!activePolygon.length}><Undo2 size={15} /> 실행 취소</button>
-                <button onClick={clearPolygon}><X size={15} /> 다시 그리기</button>
+                <Button variant="outline" size="sm" onClick={undoVertex} disabled={!activePolygon.length}><Undo2 size={15} /> 실행 취소</Button>
+                <Button variant="outline" size="sm" onClick={clearPolygon}><X size={15} /> 다시 그리기</Button>
               </div>
               <p className="microcopy">꼭짓점 {activePolygon.length}개 · 흰색 핸들을 드래그하면 경계가 즉시 갱신됩니다.</p>
             </section>
@@ -264,15 +268,15 @@ export default function CoastalStudio() {
           {!introActive && step > 1 && (
             <div className="comparison-switch" role="group" aria-label="지형 비교 모드">
               {(["before", "after", "compare", "section"] as CompareMode[]).map((mode) => (
-                <button key={mode} className={compareMode === mode ? "active" : ""} onClick={() => setCompareMode(mode)}>
+                <Button key={mode} variant="ghost" size="sm" className={compareMode === mode ? "active" : ""} onClick={() => setCompareMode(mode)}>
                   {{ before: "작업 전", after: "작업 후", compare: "전후 비교", section: "단면도" }[mode]}
-                </button>
+                </Button>
               ))}
             </div>
           )}
 
           {!introActive && compareMode === "section" && step > 1 && (
-            <div className="section-chart glass-panel">
+            <Card className="section-chart glass-panel">
               <div className="section-chart-head">
                 <span>{step === 2 ? "준설 횡단면 A—A′" : "복원 횡단면 B—B′"}</span>
                 <small>수직 배율 4× · 가상 수심 DEM</small>
@@ -287,30 +291,30 @@ export default function CoastalStudio() {
                 <text x="12" y="102" fill="#94a3b8" fontSize="12">작업 전</text>
                 <text x="620" y="112" fill={step === 2 ? "#22d3ee" : "#fbbf24"} fontSize="12">작업 후</text>
               </svg>
-            </div>
+            </Card>
           )}
         </section>
 
         <aside className="right-panel glass-panel">
           <div className="inspector-heading">
             <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "복원 설계"}</span>
-            <span className="quality-chip"><span /> 입력 데이터 확인</span>
+            <Badge variant="success" className="quality-chip"><span /> 데이터 확인됨</Badge>
           </div>
 
           {step === 1 ? (
             <>
-              <section className="selection-card deposit-card">
+              <Card className="selection-card deposit-card">
                 <span className="card-eyebrow">퇴적지 · 공급원</span>
                 <h2>{deposit.name}</h2>
                 <p>{deposit.subtitle}</p>
                 <div className="property-grid">
                   <div><small>가용 물량</small><strong>{compact.format(deposit.volume)} m³</strong></div>
-                  <div><small>AI 적합도</small><strong>{deposit.matchScore}<i>/100</i></strong></div>
+                  <div><small>적합도</small><strong>{deposit.matchScore}<i>/100</i></strong></div>
                 </div>
                 <dl><div><dt>토질</dt><dd>{deposit.soil}</dd></div><div><dt>입도 분포</dt><dd>{deposit.grain}</dd></div></dl>
-              </section>
+              </Card>
               <div className="match-connector"><span /><strong>{routeDistance.toFixed(1)} km</strong><span /></div>
-              <section className="selection-card erosion-card">
+              <Card className="selection-card erosion-card">
                 <span className="card-eyebrow">침식지 · 복원 대상</span>
                 <h2>{erosion.name}</h2>
                 <p>{erosion.subtitle}</p>
@@ -319,11 +323,11 @@ export default function CoastalStudio() {
                   <div><small>연간 침식률</small><strong>{erosion.erosionRate} m</strong></div>
                 </div>
                 <dl><div><dt>토질</dt><dd>{erosion.soil}</dd></div><div><dt>요구 입도</dt><dd>{erosion.grain}</dd></div></dl>
-              </section>
-              <div className="recommendation-box">
-                <Sparkles size={16} />
-                <div><strong>추천 연결</strong><p>입도 조건과 공급 시기가 일치하며 해상 운송 거리가 짧습니다.</p></div>
-              </div>
+              </Card>
+              <Card className="recommendation-box">
+                <Check size={16} />
+                <div><strong>연결 검토 결과</strong><p>입도 조건과 공급 시기가 일치하고 운송 거리가 비교적 짧습니다.</p></div>
+              </Card>
             </>
           ) : (
             <>
@@ -334,17 +338,17 @@ export default function CoastalStudio() {
               </section>
 
               <section className="metric-stack">
-                <div className="large-metric">
+                <Card className="large-metric">
                   <small>선택 면적</small>
                   <strong>{integer.format(step === 2 ? dredgeArea : restorationArea)} <i>m²</i></strong>
-                </div>
-                <div className="large-metric accent">
+                </Card>
+                <Card className="large-metric accent">
                   <small>{step === 2 ? "예상 준설량" : "복원 필요량"}</small>
                   <strong>{integer.format(step === 2 ? dredgeVolume : restorationVolume)} <i>m³</i></strong>
-                </div>
+                </Card>
               </section>
 
-              <section className="slider-panel">
+              <Card className="slider-panel">
                 <div className="slider-heading">
                   <span>{step === 2 ? "굴착 깊이" : "성토 두께"}</span>
                   <strong>{step === 2 ? project.dredgeDepth.toFixed(1) : project.fillThickness.toFixed(1)} m</strong>
@@ -361,7 +365,7 @@ export default function CoastalStudio() {
                   }))}
                 />
                 <div className="range-labels"><span>{step === 2 ? "0.5 m" : "0.2 m"}</span><span>{step === 2 ? "8.0 m" : "4.0 m"}</span></div>
-              </section>
+              </Card>
 
               <section className="calculation-card">
                 <div><span>평면 면적</span><strong>{integer.format(step === 2 ? dredgeArea : restorationArea)} m²</strong></div>
@@ -371,11 +375,11 @@ export default function CoastalStudio() {
               </section>
 
               {step === 3 && (
-                <section className={`balance-callout ${balance < 0 ? "shortage" : "surplus"}`}>
+                <Card className={`balance-callout ${balance < 0 ? "shortage" : "surplus"}`}>
                   <span>{balance < 0 ? "공급 부족" : "잔여 준설토"}</span>
                   <strong>{integer.format(Math.abs(balance))} m³</strong>
                   <p>{balance < 0 ? "복원 설계를 축소하거나 추가 공급원을 연결하세요." : "잔여량은 인근 후보지에 재배분할 수 있습니다."}</p>
-                </section>
+                </Card>
               )}
             </>
           )}
