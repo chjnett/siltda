@@ -300,23 +300,23 @@ export default function CesiumScene(props: Props) {
       viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(127.7, 36.1, 2_250_000),
         orientation: { heading: Cesium.Math.toRadians(4), pitch: Cesium.Math.toRadians(-78), roll: 0 },
-        duration: 1.25,
+        duration: 1.55,
         easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
         complete: () => {
           busanTimer = window.setTimeout(() => {
             viewer.camera.flyTo({
               destination: Cesium.Cartesian3.fromDegrees(129.02, 35.12, 82_000),
               orientation: { heading: Cesium.Math.toRadians(14), pitch: Cesium.Math.toRadians(-56), roll: 0 },
-              duration: 1.25,
+              duration: 1.55,
               easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
               complete: () => {
-                finishTimer = window.setTimeout(props.onIntroComplete, 250);
+                finishTimer = window.setTimeout(props.onIntroComplete, 300);
               },
             });
-          }, 120);
+          }, 160);
         },
       });
-    }, 350);
+    }, 400);
 
     return () => {
       if (koreaTimer) window.clearTimeout(koreaTimer);

@@ -294,7 +294,7 @@ button { color: inherit; }
   overflow: hidden;
   background: #03121a;
   opacity: 1;
-  transition: opacity 1.1s cubic-bezier(.4, 0, .2, 1);
+  transition: opacity 1.6s cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
 }
 .ocean-splash.leaving { opacity: 0; }

@@ -96,7 +96,7 @@ export default function CoastalStudio() {
   }, []);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 4200);
+    const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 3900);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -127,7 +127,7 @@ export default function CoastalStudio() {
     const timer = window.setTimeout(() => {
       setSplashPhase("hidden");
       setIntroRunId((current) => current + 1);
-    }, 1100);
+    }, 1600);
     return () => window.clearTimeout(timer);
   }, [splashPhase]);
 
@@ -183,7 +183,7 @@ export default function CoastalStudio() {
 
   useEffect(() => {
     if (splashPhase !== "hidden" || !introActive) return;
-    const timer = window.setTimeout(finishIntro, 3800);
+    const timer = window.setTimeout(finishIntro, 4500);
     return () => window.clearTimeout(timer);
   }, [finishIntro, introActive, introRunId, splashPhase]);
 
