@@ -12,6 +12,7 @@ interface Props {
   project: ProjectState;
   step: StepId;
   introActive: boolean;
+  introPlaying: boolean;
   introRunId: number;
   compareMode: CompareMode;
   drawTarget: DrawTarget;
@@ -20,7 +21,7 @@ interface Props {
   onProjectChange: (next: ProjectState) => void;
   onSelectCandidate: (kind: CandidateKind, id: string) => void;
   onMapReady: (status: string) => void;
-  onIntroPhase: (phase: 0 | 1 | 2) => void;
+  onSceneReady: () => void;
   onIntroComplete: () => void;
 }
 
@@ -98,7 +99,11 @@ export default function CesiumScene(props: Props) {
       if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true;
       viewer.scene.fog.enabled = true;
       viewer.scene.highDynamicRange = true;
-      viewer.resolutionScale = Math.min(window.devicePixelRatio, 1.5);
+      viewer.scene.globe.maximumScreenSpaceError = 1.25;
+      viewer.scene.globe.tileCacheSize = 512;
+      viewer.scene.globe.preloadAncestors = true;
+      viewer.scene.globe.preloadSiblings = true;
+      viewer.resolutionScale = Math.min(window.devicePixelRatio, 2);
       viewer.camera.percentageChanged = 0.01;
 
       try {
@@ -233,13 +238,26 @@ export default function CesiumScene(props: Props) {
       }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
 
       viewer.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(128.98, 35.10, 72000),
-        orientation: { heading: Cesium.Math.toRadians(12), pitch: Cesium.Math.toRadians(-55), roll: 0 },
+        destination: Cesium.Cartesian3.fromDegrees(127.6, 35.3, 19_000_000),
+        orientation: { heading: 0, pitch: Cesium.Math.toRadians(-90), roll: 0 },
       });
+
+      let sceneReadyReported = false;
+      const reportSceneReady = () => {
+        if (sceneReadyReported || viewer.isDestroyed()) return;
+        sceneReadyReported = true;
+        props.onSceneReady();
+      };
+      const removeTileListener = viewer.scene.globe.tileLoadProgressEvent.addEventListener((pending) => {
+        if (pending === 0) window.requestAnimationFrame(reportSceneReady);
+      });
+      const readinessFallback = window.setTimeout(reportSceneReady, 3500);
       setReady(true);
       props.onMapReady("3D 지구본 준비 완료 · Esri 위성영상 연결 중");
 
       return () => {
+        removeTileListener();
+        window.clearTimeout(readinessFallback);
         handler.destroy();
         viewer.destroy();
         viewerRef.current = null;
@@ -263,21 +281,19 @@ export default function CesiumScene(props: Props) {
 
   useEffect(() => {
     const viewer = viewerRef.current;
-    if (!viewer || !ready || !props.introActive) return;
+    if (!viewer || !ready || !props.introPlaying) return;
 
     let koreaTimer: number | undefined;
     let busanTimer: number | undefined;
     let finishTimer: number | undefined;
     viewer.camera.cancelFlight();
     viewer.scene.screenSpaceCameraController.enableInputs = false;
-    props.onIntroPhase(0);
     viewer.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(127.6, 35.3, 19_000_000),
       orientation: { heading: 0, pitch: Cesium.Math.toRadians(-90), roll: 0 },
     });
 
     koreaTimer = window.setTimeout(() => {
-      props.onIntroPhase(1);
       viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(127.7, 36.1, 2_250_000),
         orientation: { heading: Cesium.Math.toRadians(4), pitch: Cesium.Math.toRadians(-78), roll: 0 },
@@ -285,7 +301,6 @@ export default function CesiumScene(props: Props) {
         easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
         complete: () => {
           busanTimer = window.setTimeout(() => {
-            props.onIntroPhase(2);
             viewer.camera.flyTo({
               destination: Cesium.Cartesian3.fromDegrees(129.02, 35.12, 82_000),
               orientation: { heading: Cesium.Math.toRadians(14), pitch: Cesium.Math.toRadians(-56), roll: 0 },
@@ -307,7 +322,7 @@ export default function CesiumScene(props: Props) {
       viewer.camera.cancelFlight();
       viewer.scene.screenSpaceCameraController.enableInputs = true;
     };
-  }, [props.introActive, props.introRunId, props.onIntroComplete, props.onIntroPhase, ready]);
+  }, [props.introPlaying, props.introRunId, props.onIntroComplete, ready]);
 
   useEffect(() => {
     const viewer = viewerRef.current;

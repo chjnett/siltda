@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  Anchor, ArrowRight, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
+  Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, MapPinned, Mountain, PanelTop, Save, Ship, SlidersHorizontal,
   Sparkles, Undo2, Waves, X,
 } from "lucide-react";
@@ -31,8 +31,10 @@ export default function CoastalStudio() {
   const [saved, setSaved] = useState(false);
   const [notice, setNotice] = useState("가상 수심 DEM · 실제 측량 자료가 아닙니다");
   const [introActive, setIntroActive] = useState(true);
-  const [introPhase, setIntroPhase] = useState<0 | 1 | 2>(0);
   const [introRunId, setIntroRunId] = useState(0);
+  const [sceneReady, setSceneReady] = useState(false);
+  const [minimumSplashElapsed, setMinimumSplashElapsed] = useState(false);
+  const [splashPhase, setSplashPhase] = useState<"visible" | "leaving" | "hidden">("visible");
 
   useEffect(() => {
     const stored = localStorage.getItem("siltda-project-v1");
@@ -40,6 +42,21 @@ export default function CoastalStudio() {
       try { setProject({ ...initialProject, ...JSON.parse(stored) }); } catch { /* ignore corrupt demo state */ }
     }
   }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 4200);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!sceneReady || !minimumSplashElapsed || splashPhase !== "visible") return;
+    setSplashPhase("leaving");
+    const timer = window.setTimeout(() => {
+      setSplashPhase("hidden");
+      setIntroRunId((current) => current + 1);
+    }, 1100);
+    return () => window.clearTimeout(timer);
+  }, [minimumSplashElapsed, sceneReady, splashPhase]);
 
   const deposit = candidates.find((candidate) => candidate.id === project.selectedDepositId) ?? candidates[0];
   const erosion = candidates.find((candidate) => candidate.id === project.selectedErosionId) ?? candidates[2];
@@ -72,11 +89,9 @@ export default function CoastalStudio() {
 
   const finishIntro = useCallback(() => {
     setIntroActive(false);
-    setIntroPhase(2);
   }, []);
 
   const replayIntro = useCallback(() => {
-    setIntroPhase(0);
     setIntroRunId((current) => current + 1);
     setIntroActive(true);
   }, []);
@@ -211,6 +226,7 @@ export default function CoastalStudio() {
             project={project}
             step={step}
             introActive={introActive}
+            introPlaying={introActive && splashPhase === "hidden"}
             introRunId={introRunId}
             compareMode={compareMode}
             drawTarget={drawTarget}
@@ -219,35 +235,17 @@ export default function CoastalStudio() {
             onProjectChange={setProject}
             onSelectCandidate={selectCandidate}
             onMapReady={setMapStatus}
-            onIntroPhase={setIntroPhase}
+            onSceneReady={() => setSceneReady(true)}
             onIntroComplete={finishIntro}
           />
 
-          {introActive && (
-            <section className="globe-intro" aria-label="siltDA 서비스 소개">
-              <div className="intro-topbar">
-                <div className="intro-brand"><span>silt</span>DA <small>COASTAL DIGITAL TWIN</small></div>
-                <button onClick={finishIntro}>건너뛰기</button>
-              </div>
-              <div className="intro-story">
-                <span className="intro-eyebrow">SEDIMENT CIRCULATION PLATFORM</span>
-                <h1>버려지는 흙을<br /><em>해안의 미래로.</em></h1>
-                <p>항만에서 발생한 준설토와 침식되는 연안을 연결해<br />선정부터 설계, 복원까지 하나의 3D 공간에서 검토합니다.</p>
-                <button className="intro-cta" onClick={finishIntro}>부산 실증 지역 열기 <ArrowRight size={17} /></button>
-              </div>
-              <div className="intro-journey" aria-label="카메라 이동 단계">
-                {[
-                  [0, "01", "지구", "전 지구 연안 관측"],
-                  [1, "02", "대한민국", "연안 침식 현황"],
-                  [2, "03", "부산", "퇴적물 순환 실증"],
-                ].map(([phase, number, title, copy]) => (
-                  <div key={number} className={introPhase >= Number(phase) ? "active" : ""}>
-                    <span>{number}</span><strong>{title}</strong><small>{copy}</small>
-                  </div>
-                ))}
-              </div>
-              <div className="intro-data-note"><Database size={14} /> WGS84 · 시각화용 가상 수심 데이터 포함</div>
-            </section>
+          {splashPhase !== "hidden" && (
+            <div className={`ocean-splash ${splashPhase === "leaving" ? "leaving" : ""}`} aria-label="3D 지도 준비 중">
+              <video autoPlay muted loop playsInline aria-hidden="true">
+                <source src="/media/ocean-loop.mp4" type="video/mp4" />
+              </video>
+              <div aria-hidden="true" />
+            </div>
           )}
 
           {!introActive && step > 1 && (
