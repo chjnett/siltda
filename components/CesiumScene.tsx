@@ -18,6 +18,8 @@ interface Props {
   drawTarget: DrawTarget;
   satelliteVisible: boolean;
   candidatesVisible: boolean;
+  focusCandidateId: string | null;
+  focusRequestId: number;
   onProjectChange: (next: ProjectState) => void;
   onSelectCandidate: (kind: CandidateKind, id: string) => void;
   onMapReady: (status: string) => void;
@@ -348,6 +350,26 @@ export default function CesiumScene(props: Props) {
       easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
     });
   }, [props.step, ready, props.introActive, props.project.selectedDepositId, props.project.selectedErosionId]);
+
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer || !ready || props.introActive || !props.focusCandidateId) return;
+    const site = candidates.find((candidate) => candidate.id === props.focusCandidateId);
+    if (!site) return;
+
+    const [lon, lat] = centroid(site.polygon);
+    const height = props.step === 1 ? 18_000 : 9_000;
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+      orientation: {
+        heading: Cesium.Math.toRadians(20),
+        pitch: Cesium.Math.toRadians(props.step === 1 ? -52 : -38),
+        roll: 0,
+      },
+      duration: 1.35,
+      easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
+    });
+  }, [props.focusCandidateId, props.focusRequestId, props.introActive, props.step, ready]);
 
   useEffect(() => {
     const viewer = viewerRef.current;

@@ -36,6 +36,7 @@ export default function CoastalStudio() {
   const [mapStatus, setMapStatus] = useState("3D 엔진 초기화 중");
   const [saved, setSaved] = useState(false);
   const [notice, setNotice] = useState("가상 수심 DEM · 실제 측량 자료가 아닙니다");
+  const [candidateFocus, setCandidateFocus] = useState<{ id: string | null; requestId: number }>({ id: null, requestId: 0 });
   const [introActive, setIntroActive] = useState(true);
   const [introRunId, setIntroRunId] = useState(0);
   const [sceneReady, setSceneReady] = useState(false);
@@ -85,6 +86,7 @@ export default function CoastalStudio() {
       ...current,
       [kind === "deposit" ? "selectedDepositId" : "selectedErosionId"]: id,
     }));
+    setCandidateFocus((current) => ({ id, requestId: current.requestId + 1 }));
     setNotice(kind === "deposit" ? "퇴적지 후보를 프로젝트에 연결했습니다" : "침식지 후보를 프로젝트에 연결했습니다");
   };
 
@@ -246,6 +248,8 @@ export default function CoastalStudio() {
             drawTarget={drawTarget}
             satelliteVisible={satelliteVisible}
             candidatesVisible={candidatesVisible}
+            focusCandidateId={candidateFocus.id}
+            focusRequestId={candidateFocus.requestId}
             onProjectChange={setProject}
             onSelectCandidate={selectCandidate}
             onMapReady={setMapStatus}
