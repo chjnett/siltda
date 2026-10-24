@@ -326,6 +326,22 @@ button { color: inherit; }
     ocean-type 1.45s steps(6, end) .72s forwards,
     ocean-caret .68s step-end .42s infinite;
 }
+.ocean-fullscreen-button.ui-button {
+  position: absolute;
+  left: 50%;
+  bottom: max(34px, env(safe-area-inset-bottom));
+  z-index: 3;
+  height: 40px;
+  padding: 0 16px;
+  border-color: rgba(255,255,255,.42);
+  background: rgba(3,12,18,.42);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,.24);
+  backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+.ocean-fullscreen-button.ui-button:hover { background: rgba(3,12,18,.64); }
 
 .workspace-active .app-header,
 .workspace-active .left-panel,
@@ -642,7 +658,7 @@ button { color: inherit; }
   .brand-subtitle { font-size: 8px; letter-spacing: 0; }
   .project-identity, .data-badge, .icon-button { display: none; }
   .header-status { gap: 5px; padding-right: 8px; }
-  .globe-button.ui-button, .save-button.ui-button { width: 34px; height: 34px; padding: 0; font-size: 0; gap: 0; }
+  .globe-button.ui-button, .fullscreen-button.ui-button, .save-button.ui-button { width: 34px; height: 34px; padding: 0; font-size: 0; gap: 0; }
 
   .workspace-grid,
   .workspace-grid.left-panel-collapsed,

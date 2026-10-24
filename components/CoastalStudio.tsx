@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
-  Globe2, Layers3, MapPinned, Mountain, PanelLeftClose, PanelLeftOpen,
+  Globe2, Layers3, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
   PanelRightClose, PanelRightOpen, PanelTop, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
 } from "lucide-react";
@@ -17,6 +17,15 @@ import { Switch } from "@/components/ui/switch";
 import { candidates, initialProject } from "@/lib/demoData";
 import { centroid, distanceKm, polygonAreaMeters } from "@/lib/geo";
 import type { CandidateKind, CompareMode, ProjectState, StepId } from "@/lib/types";
+
+type SafariFullscreenDocument = Document & {
+  webkitExitFullscreen?: () => Promise<void> | void;
+  webkitFullscreenElement?: Element | null;
+};
+
+type SafariFullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+};
 
 const steps = [
   { id: 1 as StepId, eyebrow: "STEP 01", title: "후보지 선정", icon: MapPinned },
@@ -45,6 +54,8 @@ export default function CoastalStudio() {
   const [sceneReady, setSceneReady] = useState(false);
   const [minimumSplashElapsed, setMinimumSplashElapsed] = useState(false);
   const [splashPhase, setSplashPhase] = useState<"visible" | "leaving" | "hidden">("visible");
+  const [fullscreenSupported, setFullscreenSupported] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const splashVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -52,6 +63,20 @@ export default function CoastalStudio() {
     if (stored) {
       try { setProject({ ...initialProject, ...JSON.parse(stored) }); } catch { /* ignore corrupt demo state */ }
     }
+  }, []);
+
+  useEffect(() => {
+    const doc = document as SafariFullscreenDocument;
+    const root = document.documentElement as SafariFullscreenElement;
+    setFullscreenSupported(Boolean(root.requestFullscreen || root.webkitRequestFullscreen));
+    const syncFullscreen = () => setIsFullscreen(Boolean(document.fullscreenElement || doc.webkitFullscreenElement));
+    syncFullscreen();
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    document.addEventListener("webkitfullscreenchange", syncFullscreen);
+    return () => {
+      document.removeEventListener("fullscreenchange", syncFullscreen);
+      document.removeEventListener("webkitfullscreenchange", syncFullscreen);
+    };
   }, []);
 
   useEffect(() => {
@@ -167,6 +192,23 @@ export default function CoastalStudio() {
     setIntroActive(true);
   }, []);
 
+  const toggleFullscreen = async () => {
+    const doc = document as SafariFullscreenDocument;
+    const root = document.documentElement as SafariFullscreenElement;
+    try {
+      if (document.fullscreenElement || doc.webkitFullscreenElement) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else await doc.webkitExitFullscreen?.();
+      } else if (root.requestFullscreen) {
+        await root.requestFullscreen({ navigationUI: "hide" });
+      } else {
+        await root.webkitRequestFullscreen?.();
+      }
+    } catch {
+      setNotice("이 브라우저에서는 메뉴의 홈 화면 추가 후 전체 화면으로 사용할 수 있습니다");
+    }
+  };
+
   const changeStep = (next: StepId) => {
     setStep(next);
     setDrawTarget(null);
@@ -207,6 +249,12 @@ export default function CoastalStudio() {
         <div className="header-status">
           <Badge variant="secondary" className="data-badge"><Database size={14} /> {mapStatus}</Badge>
           <Button variant="outline" size="sm" className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</Button>
+          {fullscreenSupported && (
+            <Button variant="outline" size="sm" className="fullscreen-button" onClick={toggleFullscreen}>
+              {isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+              {isFullscreen ? "전체 화면 종료" : "전체 화면"}
+            </Button>
+          )}
           <Button variant="ghost" size="icon" className="icon-button" title="도움말"><CircleHelp size={18} /></Button>
           <Button size="sm" className={`save-button ${saved ? "saved" : ""}`} onClick={saveProject}>
             {saved ? <Check size={16} /> : <Save size={16} />}
@@ -353,6 +401,11 @@ export default function CoastalStudio() {
               <div className="ocean-splash-wordmark" aria-label="siltDA">
                 <span aria-hidden="true">siltDA</span>
               </div>
+              {fullscreenSupported && !isFullscreen && (
+                <Button type="button" variant="outline" className="ocean-fullscreen-button" onClick={toggleFullscreen}>
+                  <Maximize2 size={16} /> 전체 화면으로 시작
+                </Button>
+              )}
             </div>
           )}
 
