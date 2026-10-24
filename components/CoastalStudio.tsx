@@ -49,14 +49,18 @@ export default function CoastalStudio() {
   }, []);
 
   useEffect(() => {
-    if (!sceneReady || !minimumSplashElapsed || splashPhase !== "visible") return;
-    setSplashPhase("leaving");
+    if (!sceneReady || !minimumSplashElapsed) return;
+    setSplashPhase((current) => current === "visible" ? "leaving" : current);
+  }, [minimumSplashElapsed, sceneReady]);
+
+  useEffect(() => {
+    if (splashPhase !== "leaving") return;
     const timer = window.setTimeout(() => {
       setSplashPhase("hidden");
       setIntroRunId((current) => current + 1);
     }, 1100);
     return () => window.clearTimeout(timer);
-  }, [minimumSplashElapsed, sceneReady, splashPhase]);
+  }, [splashPhase]);
 
   const deposit = candidates.find((candidate) => candidate.id === project.selectedDepositId) ?? candidates[0];
   const erosion = candidates.find((candidate) => candidate.id === project.selectedErosionId) ?? candidates[2];
