@@ -250,7 +250,10 @@ export default function CoastalStudio() {
               <video autoPlay muted loop playsInline aria-hidden="true">
                 <source src="/media/ocean-loop.mp4" type="video/mp4" />
               </video>
-              <div aria-hidden="true" />
+              <div className="ocean-splash-shade" aria-hidden="true" />
+              <div className="ocean-splash-wordmark" aria-label="siltDA">
+                <span aria-hidden="true">siltDA</span>
+              </div>
             </div>
           )}
 
