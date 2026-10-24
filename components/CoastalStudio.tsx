@@ -91,6 +91,12 @@ export default function CoastalStudio() {
     setIntroActive(false);
   }, []);
 
+  useEffect(() => {
+    if (splashPhase !== "hidden" || !introActive) return;
+    const timer = window.setTimeout(finishIntro, 7600);
+    return () => window.clearTimeout(timer);
+  }, [finishIntro, introActive, introRunId, splashPhase]);
+
   const replayIntro = useCallback(() => {
     setIntroRunId((current) => current + 1);
     setIntroActive(true);
