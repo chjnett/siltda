@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, MapPinned, Mountain, PanelLeftClose, PanelLeftOpen,
@@ -45,6 +45,7 @@ export default function CoastalStudio() {
   const [sceneReady, setSceneReady] = useState(false);
   const [minimumSplashElapsed, setMinimumSplashElapsed] = useState(false);
   const [splashPhase, setSplashPhase] = useState<"visible" | "leaving" | "hidden">("visible");
+  const splashVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("siltda-project-v1");
@@ -73,6 +74,23 @@ export default function CoastalStudio() {
     const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 4200);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (splashPhase === "hidden") return;
+    const video = splashVideoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+    const resume = () => void video.play().catch(() => undefined);
+    resume();
+    window.addEventListener("pointerdown", resume, { once: true });
+    window.addEventListener("touchstart", resume, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("touchstart", resume);
+    };
+  }, [splashPhase]);
 
   useEffect(() => {
     if (!sceneReady || !minimumSplashElapsed) return;
@@ -176,9 +194,6 @@ export default function CoastalStudio() {
     <main className={`studio-shell step-${step} ${introActive ? "intro-active" : "workspace-active"}`}>
       <header className="app-header">
         <div className="brand-block">
-          <video className="brand-video" autoPlay muted loop playsInline preload="auto" aria-hidden="true">
-            <source src="/media/ocean-loop.mp4" type="video/mp4" />
-          </video>
           <div className="brand-copy">
             <span className="brand-mark">silt<span>DA</span></span>
             <span className="brand-subtitle">Coastal studio</span>
@@ -331,7 +346,7 @@ export default function CoastalStudio() {
 
           {splashPhase !== "hidden" && (
             <div className={`ocean-splash ${splashPhase === "leaving" ? "leaving" : ""}`} aria-label="3D 지도 준비 중">
-              <video autoPlay muted loop playsInline preload="auto" poster="/media/ocean-poster.jpg" aria-hidden="true">
+              <video ref={splashVideoRef} autoPlay muted loop playsInline preload="auto" poster="/media/ocean-poster.jpg" aria-hidden="true">
                 <source src="/media/ocean-loop.mp4" type="video/mp4" />
               </video>
               <div className="ocean-splash-shade" aria-hidden="true" />

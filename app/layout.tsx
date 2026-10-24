@@ -11,9 +11,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko">
       <body>
-        <video className="ambient-video" autoPlay muted loop playsInline aria-hidden="true">
-          <source src="/media/ocean-loop.mp4" type="video/mp4" />
-        </video>
         <div className="ambient-shade" aria-hidden="true" />
         {children}
       </body>
