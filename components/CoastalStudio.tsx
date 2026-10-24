@@ -331,7 +331,7 @@ export default function CoastalStudio() {
 
           {splashPhase !== "hidden" && (
             <div className={`ocean-splash ${splashPhase === "leaving" ? "leaving" : ""}`} aria-label="3D 지도 준비 중">
-              <video autoPlay muted loop playsInline preload="auto" aria-hidden="true">
+              <video autoPlay muted loop playsInline preload="auto" poster="/media/ocean-poster.jpg" aria-hidden="true">
                 <source src="/media/ocean-loop.mp4" type="video/mp4" />
               </video>
               <div className="ocean-splash-shade" aria-hidden="true" />
