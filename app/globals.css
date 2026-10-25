@@ -741,3 +741,10 @@ button { color: inherit; }
   .left-panel, .right-panel { padding: 12px; }
   .candidate-item { padding: 7px; }
 }
+
+.risk-card::before { background: var(--rose, #fb7185); }
+.risk-card .risk-error { color: #fca5a5; }
+.risk-card .risk-note { margin-top: 10px; color: #7c939e; font-size: 9px; line-height: 1.55; }
+.risk-card dd { min-width: 0; overflow-wrap: anywhere; }
+.risk-card .risk-subtitle { margin: 14px 0 6px; font-size: 11px; color: #bdcdd4; display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.risk-card .risk-subtitle small { color: #6d8490; font-size: 9px; font-weight: 400; text-align: right; }

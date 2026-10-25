@@ -8,6 +8,7 @@ import {
   Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
+import ErosionRiskCard from "./ErosionRiskCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -471,6 +472,7 @@ export default function CoastalStudio() {
                 </div>
                 <dl><div><dt>토질</dt><dd>{erosion.soil}</dd></div><div><dt>요구 입도</dt><dd>{erosion.grain}</dd></div></dl>
               </Card>
+              <ErosionRiskCard candidateId={erosion.id} />
               <Card className="recommendation-box">
                 <Check size={16} />
                 <div><strong>연결 검토 결과</strong><p>입도 조건과 공급 시기가 일치하고 운송 거리가 비교적 짧습니다.</p></div>
