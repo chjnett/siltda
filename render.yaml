@@ -1,0 +1,15 @@
+# Render Blueprint: builds the FastAPI erosion-risk service from ./backend (Dockerfile).
+# Dashboard: New + > Blueprint > pick this repo/branch.
+services:
+  - type: web
+    name: siltda-ml-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Browser origins allowed to call the API (comma separated, exact origins, no trailing slash)
+      - key: SILTDA_CORS_ORIGINS
+        value: https://siltda.pages.dev,http://localhost:3000

@@ -92,3 +92,18 @@ observation, or `area_before_m2` + `start_year` (+ optional features). Response 
 
 KMA/KHOA observed waves and ASOS rainfall time-matched per interval (needs coordinates per site, which the public
 files do not contain), beach-profile slope, and nourishment / structure records.
+
+## Deploy on Render (Docker)
+
+`render.yaml` (repo root) + `backend/Dockerfile`. Image contains only `siltda_ml/` and `artifacts/erosion_model.joblib`;
+`requirements-serve.txt` pins the versions the model was pickled with (do not loosen them, or retrain and re-pin).
+
+1. Render dashboard -> New -> Blueprint -> select this repo and branch (uses `render.yaml`, rootDir `backend`).
+2. Wait for the deploy; check `https://<service>.onrender.com/health` returns `"model_loaded": true`.
+3. Cloudflare Pages -> Settings -> Environment variables: `NEXT_PUBLIC_SILTDA_ML_API_URL=https://<service>.onrender.com`,
+   then redeploy the frontend (the value is baked in at build time).
+4. CORS: edit `SILTDA_CORS_ORIGINS` on Render if the frontend lives on another origin.
+
+Free plan sleeps when idle, so the first request after a pause can take about a minute; open `/health` before a demo.
+After retraining, commit the new `artifacts/erosion_model.joblib` and redeploy.
+Local image test: `docker build -t siltda-ml backend && docker run -p 8000:8000 siltda-ml`.

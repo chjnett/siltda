@@ -1,0 +1,11 @@
+# Runtime-only pins for the API image. Versions match the environment that produced
+# artifacts/erosion_model.joblib (pickles must be loaded with the same scikit-learn / lightgbm / numpy).
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.14.0
+scikit-learn==1.5.2
+lightgbm==4.5.0
+joblib==1.4.2
+fastapi==0.146.0
+uvicorn==0.52.3
+pydantic==2.13.4
