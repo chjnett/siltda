@@ -1,0 +1,302 @@
+{
+  "model_version": "0.1.0",
+  "synthetic": false,
+  "data_origin": [
+    "MOF_BEACH_AREA_CHANGE_15126857",
+    "MOF_SEDIMENT_COMPOSITION_15126862"
+  ],
+  "warning": "Small real dataset (see n_rows / n_sites). Exploratory model; not a validated erosion forecast.",
+  "target": "annual beach-area loss (%/yr), annualised over multi-year intervals; accretion clipped to 0",
+  "risk_rule_note": "Provisional hackathon rule (LOW <1 %/yr, MEDIUM 1-3 %/yr, HIGH >=3 %/yr of beach-area loss). Not an official coastal-erosion assessment criterion.",
+  "n_rows": 279,
+  "n_sites": 55,
+  "features": [
+    "area_before_m2",
+    "start_year",
+    "span_years",
+    "historical_erosion_pct_per_year",
+    "hist_mean_erosion_pct_per_year",
+    "n_prev_intervals",
+    "mean_grain_mm",
+    "sand_pct",
+    "gravel_pct",
+    "silt_pct",
+    "region_code"
+  ],
+  "features_not_available": {
+    "mean_wave_height_m": "no wave data downloaded (KMA / KHOA API or file needed, matched by site coordinates)",
+    "max_wave_height_m": "same as above",
+    "mean_wave_period_s": "same as above",
+    "coastal_slope_deg": "no beach-profile / slope data in the public files",
+    "rainfall_mm": "no rainfall data downloaded (KMA ASOS needed, matched by station-to-site mapping)"
+  },
+  "evaluation": {
+    "site_grouped_holdout": {
+      "n_train_sites": 44,
+      "n_test_sites": 11,
+      "models": {
+        "baseline_median": {
+          "n": 62,
+          "mae": 2.125776792483169,
+          "rmse": 3.9690958982443143,
+          "r2": -0.2496722980464221,
+          "macro_f1": 0.23611111111111113
+        },
+        "baseline_mean": {
+          "n": 62,
+          "mae": 2.4101749486352992,
+          "rmse": 3.552802958728629,
+          "r2": -0.0012792178011158395,
+          "macro_f1": 0.10810810810810811
+        },
+        "random_forest": {
+          "n": 62,
+          "mae": 2.2048724009498226,
+          "rmse": 3.4038934011569295,
+          "r2": 0.08089556783673157,
+          "macro_f1": 0.31152534113060426
+        },
+        "lightgbm": {
+          "n": 62,
+          "mae": 2.192104280355574,
+          "rmse": 3.419143921836451,
+          "r2": 0.07264136043765057,
+          "macro_f1": 0.4014515593005929
+        }
+      }
+    },
+    "site_grouped_cv_5fold_x3": {
+      "baseline_median": {
+        "mae": {
+          "mean": 2.074023987875489,
+          "std": 0.001647574621344494
+        },
+        "rmse": {
+          "mean": 4.140169235413732,
+          "std": 0.0022167104597945564
+        },
+        "r2": {
+          "mean": -0.1881767613595872,
+          "std": 0.001272573682918873
+        },
+        "macro_f1": {
+          "mean": 0.2448979591836735,
+          "std": 0.0
+        },
+        "n": 279
+      },
+      "baseline_mean": {
+        "mae": {
+          "mean": 2.4617674962431937,
+          "std": 0.0026752725130346996
+        },
+        "rmse": {
+          "mean": 3.815429807512551,
+          "std": 0.009529834242671495
+        },
+        "r2": {
+          "mean": -0.009100421650450516,
+          "std": 0.005038128903431852
+        },
+        "macro_f1": {
+          "mean": 0.10642570281124497,
+          "std": 0.0
+        },
+        "n": 279
+      },
+      "random_forest": {
+        "mae": {
+          "mean": 2.322485803310379,
+          "std": 0.025990282077685452
+        },
+        "rmse": {
+          "mean": 3.6765959196880957,
+          "std": 0.05483076454612791
+        },
+        "r2": {
+          "mean": 0.06279817677008637,
+          "std": 0.02802527755203936
+        },
+        "macro_f1": {
+          "mean": 0.3227557554023019,
+          "std": 0.009352525571706084
+        },
+        "n": 279
+      },
+      "lightgbm": {
+        "mae": {
+          "mean": 2.379384433976399,
+          "std": 0.054592585014202305
+        },
+        "rmse": {
+          "mean": 3.7504463762833162,
+          "std": 0.09293519651314831
+        },
+        "r2": {
+          "mean": 0.024387730482251586,
+          "std": 0.048599627470008844
+        },
+        "macro_f1": {
+          "mean": 0.3679193269665375,
+          "std": 0.005581683659443092
+        },
+        "n": 279
+      }
+    },
+    "temporal_split": {
+      "cutoff_year": 2015,
+      "n_train": 200,
+      "n_test": 75,
+      "models": {
+        "baseline_median": {
+          "n": 75,
+          "mae": 3.2288024778157443,
+          "rmse": 5.668013963039887,
+          "r2": -0.3191455885610279,
+          "macro_f1": 0.2280701754385965
+        },
+        "baseline_mean": {
+          "n": 75,
+          "mae": 3.2852359636379003,
+          "rmse": 5.1721104229212935,
+          "r2": -0.09841507144260997,
+          "macro_f1": 0.08527131782945736
+        },
+        "random_forest": {
+          "n": 75,
+          "mae": 3.5250049073289325,
+          "rmse": 4.860564498230433,
+          "r2": 0.02992720010428207,
+          "macro_f1": 0.1806012727671714
+        },
+        "lightgbm": {
+          "n": 75,
+          "mae": 3.6933486558696957,
+          "rmse": 5.088488554233443,
+          "r2": -0.06318419161212319,
+          "macro_f1": 0.29341123654849144
+        }
+      },
+      "note": "train: intervals ended <= cutoff; test: intervals started >= cutoff (same sites may appear on both sides)"
+    }
+  },
+  "selected_model": "random_forest",
+  "selection_criterion": "lowest mean MAE in repeated site-grouped 5-fold CV",
+  "mae_improvement_vs_median_baseline_cv": {
+    "random_forest": -0.11979698252641713,
+    "lightgbm": -0.1472309133770935
+  },
+  "selected_beats_baseline": false,
+  "feature_importance_builtin": {
+    "num__area_before_m2": 0.1135850664934906,
+    "num__start_year": 0.14072818024370706,
+    "num__span_years": 0.08675271065322984,
+    "num__historical_erosion_pct_per_year": 0.19347583230874602,
+    "num__hist_mean_erosion_pct_per_year": 0.17781060816606872,
+    "num__n_prev_intervals": 0.12358169048052198,
+    "num__mean_grain_mm": 0.034424812883764214,
+    "num__sand_pct": 0.024835917772752857,
+    "num__gravel_pct": 0.02343751643100846,
+    "num__silt_pct": 0.0201353761305412,
+    "num__missingindicator_historical_erosion_pct_per_year": 0.00021391036670030068,
+    "num__missingindicator_hist_mean_erosion_pct_per_year": 0.00038511283389100107,
+    "num__missingindicator_mean_grain_mm": 0.008743107199910224,
+    "num__missingindicator_sand_pct": 0.008933388544081008,
+    "num__missingindicator_gravel_pct": 0.008940731890463693,
+    "num__missingindicator_silt_pct": 0.011343923525283451,
+    "cat__region_code_26": 0.014961332828072224,
+    "cat__region_code_31": 0.0004245116074467227,
+    "cat__region_code_47": 0.007286269640320468
+  },
+  "permutation_importance_holdout_mae": {
+    "area_before_m2": {
+      "mean": -0.009535370969825086,
+      "std": 0.018876765980871447
+    },
+    "start_year": {
+      "mean": 0.15278921056442896,
+      "std": 0.06072323231195655
+    },
+    "span_years": {
+      "mean": 0.07730740886756889,
+      "std": 0.041602635456440745
+    },
+    "historical_erosion_pct_per_year": {
+      "mean": 0.009115762212741463,
+      "std": 0.04500223196664449
+    },
+    "hist_mean_erosion_pct_per_year": {
+      "mean": -0.015274658902436511,
+      "std": 0.03644425678995239
+    },
+    "n_prev_intervals": {
+      "mean": 0.08006796923227144,
+      "std": 0.029727110179455743
+    },
+    "mean_grain_mm": {
+      "mean": -0.00857151656941999,
+      "std": 0.010723244544615216
+    },
+    "sand_pct": {
+      "mean": 0.004570728229753418,
+      "std": 0.004623335480585147
+    },
+    "gravel_pct": {
+      "mean": 0.00893822854674442,
+      "std": 0.005267901743684339
+    },
+    "silt_pct": {
+      "mean": 0.010671781461089113,
+      "std": 0.010481818915430586
+    },
+    "region_code": {
+      "mean": 0.012874759963652505,
+      "std": 0.009783416528779754
+    }
+  },
+  "hyperparameters": {
+    "random_forest": {
+      "bootstrap": true,
+      "ccp_alpha": 0.0,
+      "criterion": "squared_error",
+      "max_depth": null,
+      "max_features": 0.6,
+      "max_leaf_nodes": null,
+      "max_samples": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 5,
+      "min_samples_split": 2,
+      "min_weight_fraction_leaf": 0.0,
+      "monotonic_cst": null,
+      "n_estimators": 400,
+      "n_jobs": -1,
+      "oob_score": false,
+      "random_state": 42,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "lightgbm": {
+      "boosting_type": "gbdt",
+      "class_weight": null,
+      "colsample_bytree": 0.8,
+      "importance_type": "split",
+      "learning_rate": 0.03,
+      "max_depth": -1,
+      "min_child_samples": 12,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 250,
+      "n_jobs": 1,
+      "num_leaves": 8,
+      "objective": null,
+      "random_state": 42,
+      "reg_alpha": 0.0,
+      "reg_lambda": 2.0,
+      "subsample": 0.8,
+      "subsample_for_bin": 200000,
+      "subsample_freq": 1,
+      "verbose": -1
+    }
+  },
+  "hyperparameter_note": "fixed, conservative settings; no extensive tuning because the dataset is small"
+}

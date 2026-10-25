@@ -741,3 +741,8 @@ button { color: inherit; }
   .left-panel, .right-panel { padding: 12px; }
   .candidate-item { padding: 7px; }
 }
+
+.risk-card::before { background: var(--rose, #fb7185); }
+.risk-card .risk-error { color: #fca5a5; }
+.risk-card .risk-note { margin-top: 10px; color: #7c939e; font-size: 9px; line-height: 1.55; }
+.risk-card dd { min-width: 0; overflow-wrap: anywhere; }

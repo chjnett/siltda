@@ -1,0 +1,73 @@
+{
+  "data_origin": [
+    "MOF_BEACH_AREA_CHANGE_15126857",
+    "MOF_SEDIMENT_COMPOSITION_15126862"
+  ],
+  "sources": {
+    "area_change": {
+      "title": "해양수산부_연안정비_연안침식백사장면적변화정보",
+      "page": "https://www.data.go.kr/data/15126857/fileData.do",
+      "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002882681&fileDetailSn=1&insertDataPrcus=N",
+      "file": "area_change.csv"
+    },
+    "sediment": {
+      "title": "해양수산부_연안정비_연안침식퇴적물조성정보",
+      "page": "https://www.data.go.kr/data/15126862/fileData.do",
+      "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002883022&fileDetailSn=1&insertDataPrcus=N",
+      "file": "sediment.csv"
+    }
+  },
+  "area_rows_raw": 6190,
+  "area_rows_missing_before_or_after": 5202,
+  "area_rows_invalid_values": 0,
+  "area_rows_exact_duplicates_removed": 500,
+  "area_rows_conflicting_duplicates_removed": 38,
+  "area_rows_cumulative_spans_removed": 171,
+  "sediment_rows_raw": 47316,
+  "sediment_rows_invalid": 1793,
+  "rows": 279,
+  "sites": 55,
+  "year_range": [
+    1967,
+    2021
+  ],
+  "target_summary": {
+    "count": 279.0,
+    "mean": 2.113362537940001,
+    "std": 3.8050234075175946,
+    "min": 0.0,
+    "25%": 0.0,
+    "50%": 0.4801751398686451,
+    "75%": 2.5695875721565975,
+    "max": 28.302996747179737
+  },
+  "target_share_zero": 0.4014336917562724,
+  "target_p99": 17.91055666577398,
+  "target_rows_gt_p99": 3,
+  "missing_rate": {
+    "historical_erosion_pct_per_year": 0.2007,
+    "hist_mean_erosion_pct_per_year": 0.2007,
+    "mean_grain_mm": 0.6667,
+    "sand_pct": 0.6667,
+    "gravel_pct": 0.6667,
+    "silt_pct": 0.6667,
+    "mean_wave_height_m": 1.0,
+    "max_wave_height_m": 1.0,
+    "mean_wave_period_s": 1.0,
+    "coastal_slope_deg": 1.0,
+    "rainfall_mm": 1.0
+  },
+  "unavailable_features": {
+    "mean_wave_height_m": "no wave data downloaded (KMA / KHOA API or file needed, matched by site coordinates)",
+    "max_wave_height_m": "same as above",
+    "mean_wave_period_s": "same as above",
+    "coastal_slope_deg": "no beach-profile / slope data in the public files",
+    "rainfall_mm": "no rainfall data downloaded (KMA ASOS needed, matched by station-to-site mapping)"
+  },
+  "leakage_rules": [
+    "area_after_m2 only builds the target",
+    "history features use intervals with end_year <= start_year of the sample",
+    "sediment features use surveys with survey_year <= start_year of the sample",
+    "joins use site code, never row order"
+  ]
+}
