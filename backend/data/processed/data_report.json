@@ -1,7 +1,9 @@
 {
   "data_origin": [
     "MOF_BEACH_AREA_CHANGE_15126857",
-    "MOF_SEDIMENT_COMPOSITION_15126862"
+    "MOF_SEDIMENT_COMPOSITION_15126862",
+    "MOF_WAVE_DIRECTION_HEIGHT_PERIOD_15126863",
+    "MOF_RIVER_STATUS_15126866"
   ],
   "sources": {
     "area_change": {
@@ -15,6 +17,24 @@
       "page": "https://www.data.go.kr/data/15126862/fileData.do",
       "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002883022&fileDetailSn=1&insertDataPrcus=N",
       "file": "sediment.csv"
+    },
+    "wave": {
+      "title": "해양수산부_연안정비_연안침식파향파고주기정보",
+      "page": "https://www.data.go.kr/data/15126863/fileData.do",
+      "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517624&fileDetailSn=1&insertDataPrcus=N",
+      "file": "wave.csv"
+    },
+    "river": {
+      "title": "해양수산부_연안정비_연안침식하천현황정보",
+      "page": "https://www.data.go.kr/data/15126866/fileData.do",
+      "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517615&fileDetailSn=1&insertDataPrcus=N",
+      "file": "river.csv"
+    },
+    "site_names": {
+      "title": "해양수산부_연안정비_연안침식조사현황정보",
+      "page": "https://www.data.go.kr/data/15126860/fileData.do",
+      "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002883032&fileDetailSn=1&insertDataPrcus=N",
+      "file": "site_names.csv"
     }
   },
   "area_rows_raw": 6190,
@@ -25,6 +45,13 @@
   "area_rows_cumulative_spans_removed": 171,
   "sediment_rows_raw": 47316,
   "sediment_rows_invalid": 1793,
+  "wave_rows_raw": 19368,
+  "wave_height_outliers_dropped": 2,
+  "wave_period_outliers_dropped": 5,
+  "wave_sites": 405,
+  "river_sites": 128,
+  "sites_with_wave_features": 55,
+  "sites_with_river_features": 29,
   "rows": 279,
   "sites": 55,
   "year_range": [
@@ -51,16 +78,12 @@
     "sand_pct": 0.6667,
     "gravel_pct": 0.6667,
     "silt_pct": 0.6667,
-    "mean_wave_height_m": 1.0,
-    "max_wave_height_m": 1.0,
-    "mean_wave_period_s": 1.0,
+    "river_inflow": 0.4659,
+    "river_basin_area": 0.4194,
     "coastal_slope_deg": 1.0,
     "rainfall_mm": 1.0
   },
   "unavailable_features": {
-    "mean_wave_height_m": "no wave data downloaded (KMA / KHOA API or file needed, matched by site coordinates)",
-    "max_wave_height_m": "same as above",
-    "mean_wave_period_s": "same as above",
     "coastal_slope_deg": "no beach-profile / slope data in the public files",
     "rainfall_mm": "no rainfall data downloaded (KMA ASOS needed, matched by station-to-site mapping)"
   },
@@ -68,6 +91,7 @@
     "area_after_m2 only builds the target",
     "history features use intervals with end_year <= start_year of the sample",
     "sediment features use surveys with survey_year <= start_year of the sample",
-    "joins use site code, never row order"
+    "joins use site code, never row order",
+    "wave / river features are static site attributes (surveyed 2004-2022) treated as exogenous forcing; they are NOT time-matched to each interval (documented limitation, see ablation in metrics.json)"
   ]
 }

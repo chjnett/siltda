@@ -73,9 +73,17 @@ def model_zoo() -> dict[str, Pipeline]:
         "baseline_mean": make_pipeline(DummyRegressor(strategy="mean")),
         "random_forest": make_pipeline(RandomForestRegressor(
             n_estimators=400, min_samples_leaf=5, max_features=0.6, random_state=SEED, n_jobs=-1)),
+        # MAE-criterion variants: the target is skewed and 40 % zeros, so squared-error fits chase outliers
+        "random_forest_mae": make_pipeline(RandomForestRegressor(
+            n_estimators=250, min_samples_leaf=5, max_features=0.6, criterion="absolute_error",
+            random_state=SEED, n_jobs=-1)),
         "lightgbm": make_pipeline(lgb.LGBMRegressor(
             n_estimators=250, learning_rate=0.03, num_leaves=8, min_child_samples=12,
             subsample=0.8, subsample_freq=1, colsample_bytree=0.8, reg_lambda=2.0,
+            random_state=SEED, verbose=-1, n_jobs=1)),
+        "lightgbm_huber": make_pipeline(lgb.LGBMRegressor(
+            objective="huber", alpha=2.0, n_estimators=250, learning_rate=0.03, num_leaves=8,
+            min_child_samples=12, subsample=0.8, subsample_freq=1, colsample_bytree=0.8,
             random_state=SEED, verbose=-1, n_jobs=1)),
     }
 
@@ -116,6 +124,49 @@ def grouped_folds(groups: np.ndarray, n_splits: int, seed: int):
         yield np.where(fold != k)[0], np.where(fold == k)[0]
 
 
+def cv_metrics(pipe: Pipeline, X: pd.DataFrame, y: np.ndarray, groups: np.ndarray, reps: int = 3) -> dict:
+    from sklearn.base import clone
+
+    runs = []
+    for rep in range(reps):
+        oof = np.zeros(len(y))
+        for tr_i, te_i in grouped_folds(groups, 5, SEED + rep):
+            oof[te_i] = clone(pipe).fit(X.iloc[tr_i], y[tr_i]).predict(X.iloc[te_i])
+        runs.append(evaluate(y, oof))
+    return {k: round(float(np.mean([r[k] for r in runs])), 4) for k in ("mae", "rmse", "r2", "macro_f1")} | {"n": runs[0]["n"]}
+
+
+def run_diagnostics(df: pd.DataFrame, X: pd.DataFrame, y: np.ndarray, groups: np.ndarray, best: str) -> dict:
+    """Why is the signal weak, and does any feature group or interval length matter? (all site-grouped CV)"""
+    spans = pd.cut(df["span_years"], [0, 2, 5, 10, 200], labels=["1-2y", "3-5y", "6-10y", ">10y"])
+    by_span = df.groupby(spans, observed=True)[TARGET].agg(["size", "mean", "median", "std"]).round(3)
+    site_mean = df.groupby("site_id")[TARGET].transform("mean")
+    groups_to_drop = {
+        "without_wave_and_river": ["mean_wave_height_m", "max_wave_height_m", "mean_wave_period_s", "river_inflow", "river_basin_area"],
+        "without_history": ["historical_erosion_pct_per_year", "hist_mean_erosion_pct_per_year", "n_prev_intervals"],
+        "without_sediment": ["mean_grain_mm", "sand_pct", "gravel_pct", "silt_pct"],
+    }
+    ablation = {"all_features": cv_metrics(model_zoo()[best], X, y, groups)}
+    for name, cols in groups_to_drop.items():
+        Xa = X.copy()
+        Xa[cols] = np.nan
+        ablation[name] = cv_metrics(model_zoo()[best], Xa, y, groups)
+    keep = (df["span_years"] >= 3).to_numpy()
+    long_only = {
+        "n": int(keep.sum()), "n_sites": int(df.loc[keep, "site_id"].nunique()),
+        "baseline_median": cv_metrics(model_zoo()["baseline_median"], X[keep].reset_index(drop=True), y[keep], groups[keep]),
+        best: cv_metrics(model_zoo()[best], X[keep].reset_index(drop=True), y[keep], groups[keep]),
+    }
+    return {
+        "target_by_interval_length": {str(k): v for k, v in by_span.to_dict("index").items()},
+        "share_of_target_variance_between_sites": float(1 - ((y - site_mean) ** 2).sum() / ((y - y.mean()) ** 2).sum()),
+        "feature_group_ablation_cv": ablation,
+        "intervals_3y_or_longer_cv": long_only,
+        "reading": ("Short intervals (1-2 y) are dominated by survey/seasonal noise; restricting to >=3 y or adding wave/river "
+                    "attributes did not give a model that clearly beats the median baseline."),
+    }
+
+
 def temporal_cutoff(df: pd.DataFrame) -> int:
     """Cutoff year: latest year such that >= 20 % of rows start on/after it."""
     for year in sorted(df["start_year"].unique(), reverse=True):
@@ -130,7 +181,7 @@ def run_training(df: pd.DataFrame, out_dir: Path, data_origin: list[str], synthe
     df = df.dropna(subset=[TARGET]).reset_index(drop=True)
     X, y, groups = prepare_X(df), df[TARGET].to_numpy(), df["site_id"].astype(str).to_numpy()
     zoo = model_zoo()
-    learned = ["random_forest", "lightgbm"]
+    learned = ["random_forest", "random_forest_mae", "lightgbm", "lightgbm_huber"]
 
     # 1) site-grouped holdout
     gss = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=SEED)
@@ -197,11 +248,14 @@ def run_training(df: pd.DataFrame, out_dir: Path, data_origin: list[str], synthe
                                   n_repeats=20, random_state=SEED)
     imp_perm = {f: {"mean": float(m), "std": float(s)} for f, m, s in zip(FEATURES, perm.importances_mean, perm.importances_std)}
 
+    diagnostics = run_diagnostics(df, X, y, groups, best)
+    names_path = PROCESSED_DIR / "site_names.json"
+    site_names = json.loads(names_path.read_text(encoding="utf-8")) if (names_path.exists() and not synthetic) else {}
     profiles_path = PROCESSED_DIR / "site_profiles.json"
     profiles = json.loads(profiles_path.read_text(encoding="utf-8")) if (profiles_path.exists() and not synthetic) else {}
     bundle = {
         "pipeline": final,
-        "model_name": "lightgbm" if best == "lightgbm" else "random_forest",
+        "model_name": best,
         "model_version": MODEL_VERSION,
         "features": FEATURES,
         "numeric_features": NUMERIC_FEATURES,
@@ -214,6 +268,7 @@ def run_training(df: pd.DataFrame, out_dir: Path, data_origin: list[str], synthe
         "feature_medians": {c: (None if X[c].isna().all() else float(X[c].median())) for c in NUMERIC_FEATURES},
         "known_region_codes": sorted(df["region_code"].astype(str).unique().tolist()),
         "site_profiles": profiles,
+        "site_names": site_names,
         "unavailable_features": UNAVAILABLE_FEATURES,
         "beats_baseline": beats_baseline,
         "trained_at": datetime.now(timezone.utc).isoformat(),
@@ -244,6 +299,7 @@ def run_training(df: pd.DataFrame, out_dir: Path, data_origin: list[str], synthe
         "selection_criterion": "lowest mean MAE in repeated site-grouped 5-fold CV",
         "mae_improvement_vs_median_baseline_cv": improvement,
         "selected_beats_baseline": beats_baseline,
+        "diagnostics": diagnostics,
         "feature_importance_builtin": imp_builtin,
         "permutation_importance_holdout_mae": imp_perm,
         "hyperparameters": {n: {k: v for k, v in zoo[n].named_steps["model"].get_params().items()
@@ -264,11 +320,12 @@ def _plots(out_dir, y, cvp, cv, ho_df, best, imp_perm, synthetic):
     ax.set(xlabel="actual annual area loss (%/yr)", ylabel="predicted (%/yr)", title=f"{best}: site-grouped CV{tag}")
     fig.tight_layout(); fig.savefig(out_dir / "figures" / "actual_vs_predicted_cv.png", dpi=140); plt.close(fig)
 
-    names = ["baseline_median", "baseline_mean", "random_forest", "lightgbm"]
-    fig, ax = plt.subplots(figsize=(6.5, 4))
-    ax.bar(names, [cv[n]["mae"]["mean"] for n in names], yerr=[cv[n]["mae"]["std"] for n in names], color=["#999", "#bbb", "#2a9d8f", "#e76f51"])
+    names = list(cv)
+    fig, ax = plt.subplots(figsize=(8, 4.2))
+    ax.bar(names, [cv[n]["mae"]["mean"] for n in names], yerr=[cv[n]["mae"]["std"] for n in names],
+           color=["#999", "#bbb"] + ["#2a9d8f", "#5bc0b0", "#e76f51", "#f4a58a"][: len(names) - 2])
     ax.set(ylabel="MAE (%/yr), grouped CV", title=f"Model comparison{tag}")
-    plt.setp(ax.get_xticklabels(), rotation=15)
+    plt.setp(ax.get_xticklabels(), rotation=20, ha='right')
     fig.tight_layout(); fig.savefig(out_dir / "figures" / "model_comparison_mae.png", dpi=140); plt.close(fig)
 
     items = sorted(imp_perm.items(), key=lambda kv: kv[1]["mean"])

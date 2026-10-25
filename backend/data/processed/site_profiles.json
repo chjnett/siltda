@@ -9,7 +9,29 @@
   "mean_grain_mm": 0.38235294117647056,
   "sand_pct": 99.67279411764706,
   "gravel_pct": 0.2426470588235294,
-  "silt_pct": 0.025735294117647058
+  "silt_pct": 0.025735294117647058,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1987,
+   "last_year": 2017,
+   "long_term_loss_pct_per_year": -21.613,
+   "recent_loss_pct_per_year": -4.439,
+   "recent_period": [
+    2008,
+    2017
+   ],
+   "last_interval": {
+    "start_year": 2015,
+    "end_year": 2017,
+    "loss_pct_per_year": -4.79
+   },
+   "latest_area_m2": 41394.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.916666666666666,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 12.583333333333334,
+  "site_name": "송도 해수욕장"
  },
  "26200001": {
   "area_before_m2": 10543.0,
@@ -17,7 +39,29 @@
   "historical_erosion_pct_per_year": -13.078856048821347,
   "hist_mean_erosion_pct_per_year": -1.9012164283221011,
   "n_prev_intervals": 4,
-  "region_code": "26"
+  "region_code": "26",
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1975,
+   "last_year": 2017,
+   "long_term_loss_pct_per_year": 0.756,
+   "recent_loss_pct_per_year": -2.211,
+   "recent_period": [
+    2010,
+    2017
+   ],
+   "last_interval": {
+    "start_year": 2015,
+    "end_year": 2017,
+    "loss_pct_per_year": -13.079
+   },
+   "latest_area_m2": 10543.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.333333333333334,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 12.444444444444445,
+  "site_name": "감지해변"
  },
  "26200002": {
   "area_before_m2": 2885.0,
@@ -29,7 +73,29 @@
   "mean_grain_mm": 1.3157894736842106,
   "sand_pct": 63.36842105263158,
   "gravel_pct": 36.63157894736842,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 2010,
+   "last_year": 2019,
+   "long_term_loss_pct_per_year": 5.331,
+   "recent_loss_pct_per_year": 6.992,
+   "recent_period": [
+    2013,
+    2019
+   ],
+   "last_interval": {
+    "start_year": 2017,
+    "end_year": 2019,
+    "loss_pct_per_year": 24.768
+   },
+   "latest_area_m2": 2885.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.333333333333334,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 12.444444444444445,
+  "site_name": "영도구 중리"
  },
  "26350001": {
   "area_before_m2": 92256.0,
@@ -41,7 +107,30 @@
   "mean_grain_mm": 0.4618544600938967,
   "sand_pct": 99.49530516431925,
   "gravel_pct": 0.4694835680751174,
-  "silt_pct": 0.011737089201877934
+  "silt_pct": 0.011737089201877934,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1987,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -2.659,
+   "recent_loss_pct_per_year": -2.054,
+   "recent_period": [
+    2011,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 5.088
+   },
+   "latest_area_m2": 92256.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 10.444444444444445,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 13.333333333333334,
+  "river_inflow": 1710.0,
+  "site_name": "해운대 해수욕장"
  },
  "26380002": {
   "area_before_m2": 894.0,
@@ -53,7 +142,29 @@
   "mean_grain_mm": 0.19010416666666666,
   "sand_pct": 96.33333333333333,
   "gravel_pct": 0.3333333333333333,
-  "silt_pct": 3.3333333333333335
+  "silt_pct": 3.3333333333333335,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1967,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.559,
+   "recent_loss_pct_per_year": 11.727,
+   "recent_period": [
+    2013,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -24.252
+   },
+   "latest_area_m2": 894.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 10.222222222222221,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 14.11111111111111,
+  "site_name": "다대포 해수욕장 동측지구"
  },
  "26500001": {
   "area_before_m2": 56478.0,
@@ -65,7 +176,31 @@
   "mean_grain_mm": 0.3762975778546713,
   "sand_pct": 97.84429065743944,
   "gravel_pct": 1.9515570934256055,
-  "silt_pct": 0.09342560553633218
+  "silt_pct": 0.09342560553633218,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1987,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -0.092,
+   "recent_loss_pct_per_year": 0.109,
+   "recent_period": [
+    2011,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 5.801
+   },
+   "latest_area_m2": 56478.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 10.5,
+  "max_wave_height_m": 13.0,
+  "mean_wave_period_s": 13.333333333333334,
+  "river_inflow": 899.5,
+  "river_basin_area": 3.1,
+  "site_name": "광안리 해수욕장"
  },
  "26710001": {
   "area_before_m2": 18244.0,
@@ -77,7 +212,31 @@
   "mean_grain_mm": 0.38762626262626265,
   "sand_pct": 98.84848484848484,
   "gravel_pct": 1.0,
-  "silt_pct": 0.10606060606060606
+  "silt_pct": 0.10606060606060606,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1975,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.949,
+   "recent_loss_pct_per_year": 3.175,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 5.768
+   },
+   "latest_area_m2": 18244.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 9.333333333333334,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 12.333333333333334,
+  "river_inflow": 350.0,
+  "river_basin_area": 19.05,
+  "site_name": "일광 해수욕장"
  },
  "26710002": {
   "area_before_m2": 14468.0,
@@ -89,7 +248,31 @@
   "mean_grain_mm": 0.5597345132743363,
   "sand_pct": 97.60619469026548,
   "gravel_pct": 2.2964601769911503,
-  "silt_pct": 0.022123893805309734
+  "silt_pct": 0.022123893805309734,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1967,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.883,
+   "recent_loss_pct_per_year": 4.08,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.449
+   },
+   "latest_area_m2": 14468.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 9.333333333333334,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 510.0,
+  "river_basin_area": 36.4875,
+  "site_name": "임랑 해수욕장"
  },
  "31170001": {
   "area_before_m2": 51398.0,
@@ -101,7 +284,31 @@
   "mean_grain_mm": 1.6938775510204083,
   "sand_pct": 48.95918367346939,
   "gravel_pct": 51.02040816326531,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1982,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.662,
+   "recent_loss_pct_per_year": 0.919,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.728
+   },
+   "latest_area_m2": 51398.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.416666666666666,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 11.916666666666666,
+  "river_inflow": 105.5,
+  "river_basin_area": 6.475,
+  "site_name": "주전 해수욕장"
  },
  "31170003": {
   "area_before_m2": 49205.0,
@@ -113,7 +320,31 @@
   "mean_grain_mm": 0.43813775510204084,
   "sand_pct": 97.1734693877551,
   "gravel_pct": 2.510204081632653,
-  "silt_pct": 0.23469387755102042
+  "silt_pct": 0.23469387755102042,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1967,
+   "last_year": 2015,
+   "long_term_loss_pct_per_year": -0.946,
+   "recent_loss_pct_per_year": 0.218,
+   "recent_period": [
+    1987,
+    2015
+   ],
+   "last_interval": {
+    "start_year": 2013,
+    "end_year": 2015,
+    "loss_pct_per_year": -1.923
+   },
+   "latest_area_m2": 49205.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.125,
+  "max_wave_height_m": 9.7,
+  "mean_wave_period_s": 11.833333333333332,
+  "river_inflow": 36.0,
+  "river_basin_area": 2.9,
+  "site_name": "일산 해수욕장"
  },
  "31200001": {
   "area_before_m2": 83797.0,
@@ -125,7 +356,31 @@
   "mean_grain_mm": 1.8238636363636365,
   "sand_pct": 51.97727272727273,
   "gravel_pct": 48.02272727272727,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1982,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.492,
+   "recent_loss_pct_per_year": 1.615,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 6.235
+   },
+   "latest_area_m2": 83797.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.916666666666666,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 12.25,
+  "river_inflow": 178.0,
+  "river_basin_area": 10.9875,
+  "site_name": "정자 해수욕장"
  },
  "31710001": {
   "area_before_m2": 45547.0,
@@ -137,7 +392,31 @@
   "mean_grain_mm": 0.425,
   "sand_pct": 99.47058823529412,
   "gravel_pct": 0.4,
-  "silt_pct": 0.08470588235294117
+  "silt_pct": 0.08470588235294117,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1967,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.398,
+   "recent_loss_pct_per_year": -0.532,
+   "recent_period": [
+    2011,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2017,
+    "end_year": 2021,
+    "loss_pct_per_year": 1.628
+   },
+   "latest_area_m2": 45547.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.916666666666666,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 647.0,
+  "river_basin_area": 1.95,
+  "site_name": "진하 해수욕장"
  },
  "31710002": {
   "area_before_m2": 21382.0,
@@ -149,7 +428,29 @@
   "mean_grain_mm": 0.4541015625,
   "sand_pct": 97.9140625,
   "gravel_pct": 1.96484375,
-  "silt_pct": 0.05078125
+  "silt_pct": 0.05078125,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1967,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.247,
+   "recent_loss_pct_per_year": 0.728,
+   "recent_period": [
+    2013,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 6.931
+   },
+   "latest_area_m2": 21382.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 9.181818181818182,
+  "max_wave_height_m": 11.0,
+  "mean_wave_period_s": 12.363636363636363,
+  "site_name": "나사 해수욕장"
  },
  "47111001": {
   "area_before_m2": 62038.0,
@@ -161,7 +462,31 @@
   "mean_grain_mm": 0.2782499767221586,
   "sand_pct": 99.85173112338857,
   "gravel_pct": 0.12760589318600368,
-  "silt_pct": 0.0114548802946593
+  "silt_pct": 0.0114548802946593,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.765,
+   "recent_loss_pct_per_year": 0.458,
+   "recent_period": [
+    1987,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2011,
+    "end_year": 2021,
+    "loss_pct_per_year": -51.748
+   },
+   "latest_area_m2": 62038.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.555555555555555,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "river_inflow": 5630.0,
+  "river_basin_area": 514.9766666666667,
+  "site_name": "포항시 송도"
  },
  "47111003": {
   "area_before_m2": 96573.0,
@@ -173,7 +498,31 @@
   "mean_grain_mm": 0.32959073760889923,
   "sand_pct": 99.3504243281471,
   "gravel_pct": 0.6178076379066478,
-  "silt_pct": 0.023281471004243284
+  "silt_pct": 0.023281471004243284,
+  "observed": {
+   "n_intervals": 2,
+   "first_year": 1977,
+   "last_year": 2003,
+   "long_term_loss_pct_per_year": 1.986,
+   "recent_loss_pct_per_year": 1.986,
+   "recent_period": [
+    1977,
+    2003
+   ],
+   "last_interval": {
+    "start_year": 1987,
+    "end_year": 2003,
+    "loss_pct_per_year": 2.669
+   },
+   "latest_area_m2": 96573.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.555555555555555,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "river_inflow": 2065.714285714286,
+  "river_basin_area": 381.48285714285714,
+  "site_name": "포항시 도구"
  },
  "47111004": {
   "area_before_m2": 10633.0,
@@ -185,7 +534,29 @@
   "mean_grain_mm": 0.3804205669132935,
   "sand_pct": 98.73561224489796,
   "gravel_pct": 1.2620408163265306,
-  "silt_pct": 0.0022448979591836735
+  "silt_pct": 0.0022448979591836735,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1982,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.89,
+   "recent_loss_pct_per_year": 3.558,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.421
+   },
+   "latest_area_m2": 10633.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.25,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.0,
+  "site_name": "구룡포읍 구룡포 해수욕장"
  },
  "47111005": {
   "area_before_m2": 47193.0,
@@ -197,7 +568,31 @@
   "mean_grain_mm": 0.6407057790757197,
   "sand_pct": 91.78687242798354,
   "gravel_pct": 8.207448559670782,
-  "silt_pct": 0.005679012345679012
+  "silt_pct": 0.005679012345679012,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1968,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -0.464,
+   "recent_loss_pct_per_year": 0.59,
+   "recent_period": [
+    2004,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -3.546
+   },
+   "latest_area_m2": 47193.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.444444444444445,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "river_inflow": 1212.0,
+  "river_basin_area": 211.385,
+  "site_name": "장기면 모포지구"
  },
  "47113001": {
   "area_before_m2": 96809.0,
@@ -209,7 +604,31 @@
   "mean_grain_mm": 0.3631905231168715,
   "sand_pct": 99.48245569620254,
   "gravel_pct": 0.45346835443037975,
-  "silt_pct": 0.056481012658227844
+  "silt_pct": 0.056481012658227844,
+  "observed": {
+   "n_intervals": 9,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.233,
+   "recent_loss_pct_per_year": 1.188,
+   "recent_period": [
+    2013,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 0.028
+   },
+   "latest_area_m2": 96809.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.833333333333333,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 264.0,
+  "river_basin_area": 14.0,
+  "site_name": "송라면 화진 해수욕장"
  },
  "47113002": {
   "area_before_m2": 73335.0,
@@ -221,7 +640,29 @@
   "mean_grain_mm": 0.28694861130005733,
   "sand_pct": 99.25930722891565,
   "gravel_pct": 0.7127710843373494,
-  "silt_pct": 0.018885542168674697
+  "silt_pct": 0.018885542168674697,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.728,
+   "recent_loss_pct_per_year": 0.48,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 0.343
+   },
+   "latest_area_m2": 73335.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.625,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "site_name": "포항시 영일대"
  },
  "47113003": {
   "area_before_m2": 101030.0,
@@ -233,7 +674,31 @@
   "mean_grain_mm": 0.6468188380692533,
   "sand_pct": 90.75601918465229,
   "gravel_pct": 9.230287769784173,
-  "silt_pct": 0.00407673860911271
+  "silt_pct": 0.00407673860911271,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.322,
+   "recent_loss_pct_per_year": -0.815,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -2.151
+   },
+   "latest_area_m2": 101030.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.833333333333333,
+  "max_wave_height_m": 9.5,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 467.0,
+  "river_basin_area": 28.0,
+  "site_name": "청하면 월포 해수욕장"
  },
  "47113004": {
   "area_before_m2": 148373.0,
@@ -245,7 +710,31 @@
   "mean_grain_mm": 0.4612561730801451,
   "sand_pct": 99.77510934393638,
   "gravel_pct": 0.21783300198807157,
-  "silt_pct": 0.005069582504970179
+  "silt_pct": 0.005069582504970179,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1977,
+   "last_year": 2019,
+   "long_term_loss_pct_per_year": 1.121,
+   "recent_loss_pct_per_year": 1.807,
+   "recent_period": [
+    1987,
+    2019
+   ],
+   "last_interval": {
+    "start_year": 2017,
+    "end_year": 2019,
+    "loss_pct_per_year": -0.677
+   },
+   "latest_area_m2": 148373.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.666666666666667,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "river_inflow": 1300.0,
+  "river_basin_area": 165.075,
+  "site_name": "흥해읍 칠포 해수욕장"
  },
  "47130001": {
   "area_before_m2": 38410.0,
@@ -257,7 +746,29 @@
   "mean_grain_mm": 1.5858214385648943,
   "sand_pct": 56.64344827586206,
   "gravel_pct": 43.36282131661442,
-  "silt_pct": 0.006269592476489028
+  "silt_pct": 0.006269592476489028,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1968,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.65,
+   "recent_loss_pct_per_year": 0.08,
+   "recent_period": [
+    2004,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.04
+   },
+   "latest_area_m2": 38410.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.222222222222222,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 10.833333333333334,
+  "site_name": "감포읍 오류 해수욕장"
  },
  "47130005": {
   "area_before_m2": 65611.0,
@@ -269,7 +780,30 @@
   "mean_grain_mm": 2.1231617647058822,
   "sand_pct": 35.86029411764706,
   "gravel_pct": 64.15441176470588,
-  "silt_pct": 0.007352941176470588
+  "silt_pct": 0.007352941176470588,
+  "observed": {
+   "n_intervals": 2,
+   "first_year": 1977,
+   "last_year": 2003,
+   "long_term_loss_pct_per_year": 0.582,
+   "recent_loss_pct_per_year": 0.582,
+   "recent_period": [
+    1977,
+    2003
+   ],
+   "last_interval": {
+    "start_year": 1982,
+    "end_year": 2003,
+    "loss_pct_per_year": 0.2
+   },
+   "latest_area_m2": 65611.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.888888888888889,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.555555555555555,
+  "river_basin_area": 14.024000000000001,
+  "site_name": "양남면 나아 해수욕장"
  },
  "47130006": {
   "area_before_m2": 61618.0,
@@ -281,7 +815,31 @@
   "mean_grain_mm": 1.7156255171392476,
   "sand_pct": 50.80855123674912,
   "gravel_pct": 49.20911660777385,
-  "silt_pct": 0.0035335689045936395
+  "silt_pct": 0.0035335689045936395,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1977,
+   "last_year": 2011,
+   "long_term_loss_pct_per_year": 1.053,
+   "recent_loss_pct_per_year": 1.537,
+   "recent_period": [
+    1992,
+    2011
+   ],
+   "last_interval": {
+    "start_year": 2009,
+    "end_year": 2011,
+    "loss_pct_per_year": 0.293
+   },
+   "latest_area_m2": 61618.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.38888888888889,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.833333333333332,
+  "river_inflow": 1190.0,
+  "river_basin_area": 115.0,
+  "site_name": "감포읍 전촌·나정 해수욕장"
  },
  "47130007": {
   "area_before_m2": 50345.0,
@@ -293,7 +851,30 @@
   "mean_grain_mm": 1.1258503401360545,
   "sand_pct": 69.15646258503402,
   "gravel_pct": 30.85034013605442,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.855,
+   "recent_loss_pct_per_year": 3.427,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 11.08
+   },
+   "latest_area_m2": 50345.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.777777777777779,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.222222222222221,
+  "river_basin_area": 42.917500000000004,
+  "site_name": "양남면 하서1리"
  },
  "47130008": {
   "area_before_m2": 48860.0,
@@ -305,7 +886,30 @@
   "mean_grain_mm": 1.0535741549298614,
   "sand_pct": 76.35321138211381,
   "gravel_pct": 23.666341463414636,
-  "silt_pct": 0.0007723577235772358
+  "silt_pct": 0.0007723577235772358,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1977,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -0.051,
+   "recent_loss_pct_per_year": 1.904,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 7.349
+   },
+   "latest_area_m2": 48860.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.222222222222222,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 10.88888888888889,
+  "river_basin_area": 21.9725,
+  "site_name": "양남면 관성 해수욕장"
  },
  "47130009": {
   "area_before_m2": 15148.0,
@@ -317,7 +921,29 @@
   "mean_grain_mm": 2.0635338824210883,
   "sand_pct": 44.93606557377049,
   "gravel_pct": 55.06393442622951,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 3,
+   "first_year": 1977,
+   "last_year": 2011,
+   "long_term_loss_pct_per_year": 1.36,
+   "recent_loss_pct_per_year": 1.36,
+   "recent_period": [
+    1977,
+    2011
+   ],
+   "last_interval": {
+    "start_year": 2009,
+    "end_year": 2011,
+    "loss_pct_per_year": -2.803
+   },
+   "latest_area_m2": 15148.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.666666666666666,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.0,
+  "site_name": "감포읍 감포 해수욕장"
  },
  "47130010": {
   "area_before_m2": 13198.0,
@@ -329,7 +955,29 @@
   "mean_grain_mm": 1.728502455989268,
   "sand_pct": 53.096333333333334,
   "gravel_pct": 46.903777777777776,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1968,
+   "last_year": 2013,
+   "long_term_loss_pct_per_year": 1.011,
+   "recent_loss_pct_per_year": 1.377,
+   "recent_period": [
+    1977,
+    2013
+   ],
+   "last_interval": {
+    "start_year": 2004,
+    "end_year": 2013,
+    "loss_pct_per_year": 3.45
+   },
+   "latest_area_m2": 13198.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.333333333333334,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.88888888888889,
+  "site_name": "감포읍 대본지구"
  },
  "47130011": {
   "area_before_m2": 60897.0,
@@ -341,7 +989,31 @@
   "mean_grain_mm": 1.2616881172859762,
   "sand_pct": 68.99365591397849,
   "gravel_pct": 31.021666666666665,
-  "silt_pct": 0.0008602150537634409
+  "silt_pct": 0.0008602150537634409,
+  "observed": {
+   "n_intervals": 3,
+   "first_year": 1968,
+   "last_year": 2004,
+   "long_term_loss_pct_per_year": -0.378,
+   "recent_loss_pct_per_year": -0.378,
+   "recent_period": [
+    1968,
+    2004
+   ],
+   "last_interval": {
+    "start_year": 1987,
+    "end_year": 2004,
+    "loss_pct_per_year": 0.105
+   },
+   "latest_area_m2": 60897.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.11111111111111,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "river_inflow": 1190.0,
+  "river_basin_area": 115.08800000000001,
+  "site_name": "양북면 봉길대왕암 해변"
  },
  "47130012": {
   "area_before_m2": 5098.0,
@@ -353,7 +1025,29 @@
   "mean_grain_mm": 2.0,
   "sand_pct": 75.0,
   "gravel_pct": 25.0,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1968,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.707,
+   "recent_loss_pct_per_year": 5.629,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 18.324
+   },
+   "latest_area_m2": 5098.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.222222222222222,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 10.88888888888889,
+  "site_name": "양남면 읍천2리"
  },
  "47770001": {
   "area_before_m2": 309101.0,
@@ -365,7 +1059,31 @@
   "mean_grain_mm": 0.5090541613473067,
   "sand_pct": 99.58271626297578,
   "gravel_pct": 0.4221107266435986,
-  "silt_pct": 0.00036332179930795847
+  "silt_pct": 0.00036332179930795847,
+  "observed": {
+   "n_intervals": 7,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.142,
+   "recent_loss_pct_per_year": 4.751,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 8.802
+   },
+   "latest_area_m2": 309101.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.111111111111111,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "river_inflow": 717.6666666666666,
+  "river_basin_area": 63.481500000000004,
+  "site_name": "병곡면 고래불 해수욕장"
  },
  "47770003": {
   "area_before_m2": 10217.0,
@@ -377,7 +1095,29 @@
   "mean_grain_mm": 1.1146189034193186,
   "sand_pct": 88.75497674418604,
   "gravel_pct": 11.20813953488372,
-  "silt_pct": 0.041534883720930234
+  "silt_pct": 0.041534883720930234,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.391,
+   "recent_loss_pct_per_year": -0.641,
+   "recent_period": [
+    2005,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.848
+   },
+   "latest_area_m2": 10217.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.909090909090909,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.181818181818182,
+  "site_name": "영덕읍 대탄리"
  },
  "47770005": {
   "area_before_m2": 17385.0,
@@ -389,7 +1129,29 @@
   "mean_grain_mm": 0.8300975992054483,
   "sand_pct": 92.90301369863013,
   "gravel_pct": 7.099623287671234,
-  "silt_pct": 0.0007876712328767124
+  "silt_pct": 0.0007876712328767124,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.622,
+   "recent_loss_pct_per_year": -0.984,
+   "recent_period": [
+    2005,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -1.812
+   },
+   "latest_area_m2": 17385.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.916666666666667,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.0,
+  "site_name": "강구면 금진∼하저리"
  },
  "47770006": {
   "area_before_m2": 11257.0,
@@ -401,7 +1163,31 @@
   "mean_grain_mm": 0.6223744453902518,
   "sand_pct": 91.54722222222222,
   "gravel_pct": 8.452777777777778,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1977,
+   "last_year": 2013,
+   "long_term_loss_pct_per_year": -0.352,
+   "recent_loss_pct_per_year": 0.938,
+   "recent_period": [
+    2005,
+    2013
+   ],
+   "last_interval": {
+    "start_year": 2011,
+    "end_year": 2013,
+    "loss_pct_per_year": 0.08
+   },
+   "latest_area_m2": 11257.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.25,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.25,
+  "river_inflow": 264.0,
+  "river_basin_area": 13.946666666666667,
+  "site_name": "남정면 부경리"
  },
  "47770007": {
   "area_before_m2": 15718.0,
@@ -413,7 +1199,29 @@
   "mean_grain_mm": 0.8731640075924888,
   "sand_pct": 87.63815498154982,
   "gravel_pct": 12.36169741697417,
-  "silt_pct": 0.00014760147601476016
+  "silt_pct": 0.00014760147601476016,
+  "observed": {
+   "n_intervals": 3,
+   "first_year": 1971,
+   "last_year": 2011,
+   "long_term_loss_pct_per_year": 1.312,
+   "recent_loss_pct_per_year": 1.312,
+   "recent_period": [
+    1971,
+    2011
+   ],
+   "last_interval": {
+    "start_year": 2005,
+    "end_year": 2011,
+    "loss_pct_per_year": 5.271
+   },
+   "latest_area_m2": 15718.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.75,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.25,
+  "site_name": "남정면 남호 해수욕장"
  },
  "47770008": {
   "area_before_m2": 24469.0,
@@ -425,7 +1233,31 @@
   "mean_grain_mm": 0.7321428571428571,
   "sand_pct": 92.21428571428571,
   "gravel_pct": 7.857142857142857,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1991,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.847,
+   "recent_loss_pct_per_year": -1.16,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -0.319
+   },
+   "latest_area_m2": 24469.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.222222222222222,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "river_inflow": 153.0,
+  "river_basin_area": 16.0,
+  "site_name": "병곡면 금곡∼백석지구"
  },
  "47770009": {
   "area_before_m2": 5653.0,
@@ -437,7 +1269,31 @@
   "mean_grain_mm": 0.5949787350545536,
   "sand_pct": 98.56033333333333,
   "gravel_pct": 1.450111111111111,
-  "silt_pct": 0.0006666666666666666
+  "silt_pct": 0.0006666666666666666,
+  "observed": {
+   "n_intervals": 7,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -0.256,
+   "recent_loss_pct_per_year": -0.104,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 7.958
+   },
+   "latest_area_m2": 5653.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 8.333333333333334,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.11111111111111,
+  "river_inflow": 153.0,
+  "river_basin_area": 16.0,
+  "site_name": "축산면 경정 해수욕장"
  },
  "47770010": {
   "area_before_m2": 5935.0,
@@ -449,7 +1305,29 @@
   "mean_grain_mm": 1.0621989654719395,
   "sand_pct": 93.01162790697674,
   "gravel_pct": 7.005813953488372,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1971,
+   "last_year": 2019,
+   "long_term_loss_pct_per_year": 0.744,
+   "recent_loss_pct_per_year": 1.079,
+   "recent_period": [
+    1991,
+    2019
+   ],
+   "last_interval": {
+    "start_year": 2013,
+    "end_year": 2019,
+    "loss_pct_per_year": -1.951
+   },
+   "latest_area_m2": 5935.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.888888888888889,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "site_name": "남정면 원척∼부흥리"
  },
  "47770011": {
   "area_before_m2": 54451.0,
@@ -461,7 +1339,31 @@
   "mean_grain_mm": 0.7209654589364668,
   "sand_pct": 93.69377682403434,
   "gravel_pct": 6.306094420600858,
-  "silt_pct": 0.00012875536480686693
+  "silt_pct": 0.00012875536480686693,
+  "observed": {
+   "n_intervals": 2,
+   "first_year": 1991,
+   "last_year": 2010,
+   "long_term_loss_pct_per_year": -0.925,
+   "recent_loss_pct_per_year": -0.925,
+   "recent_period": [
+    1991,
+    2010
+   ],
+   "last_interval": {
+    "start_year": 2005,
+    "end_year": 2010,
+    "loss_pct_per_year": -0.533
+   },
+   "latest_area_m2": 54451.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.888888888888889,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "river_inflow": 244.0,
+  "river_basin_area": 34.918,
+  "site_name": "남정면 장사 해수욕장"
  },
  "47930001": {
   "area_before_m2": 48588.0,
@@ -473,7 +1375,29 @@
   "mean_grain_mm": 0.7924606920017558,
   "sand_pct": 96.56511182108626,
   "gravel_pct": 3.4343130990415336,
-  "silt_pct": 0.0006070287539936102
+  "silt_pct": 0.0006070287539936102,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1980,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.41,
+   "recent_loss_pct_per_year": 1.097,
+   "recent_period": [
+    2005,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -0.773
+   },
+   "latest_area_m2": 48588.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.5,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "site_name": "원남면 덕신리"
  },
  "47930002": {
   "area_before_m2": 209105.0,
@@ -485,7 +1409,31 @@
   "mean_grain_mm": 0.7663665087356551,
   "sand_pct": 93.81265912305517,
   "gravel_pct": 6.164625176803395,
-  "silt_pct": 0.021301272984441302
+  "silt_pct": 0.021301272984441302,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1971,
+   "last_year": 2011,
+   "long_term_loss_pct_per_year": 0.773,
+   "recent_loss_pct_per_year": 0.153,
+   "recent_period": [
+    1991,
+    2011
+   ],
+   "last_interval": {
+    "start_year": 2009,
+    "end_year": 2011,
+    "loss_pct_per_year": 5.434
+   },
+   "latest_area_m2": 209105.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.25,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.083333333333334,
+  "river_inflow": 737.5,
+  "river_basin_area": 89.002,
+  "site_name": "기성면 구산∼월송리"
  },
  "47930003": {
   "area_before_m2": 51377.0,
@@ -497,7 +1445,31 @@
   "mean_grain_mm": 0.5455910538272557,
   "sand_pct": 98.58876315789475,
   "gravel_pct": 1.4127894736842106,
-  "silt_pct": 0.0010817941952506597
+  "silt_pct": 0.0010817941952506597,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.042,
+   "recent_loss_pct_per_year": 2.599,
+   "recent_period": [
+    2005,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -1.64
+   },
+   "latest_area_m2": 51377.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.222222222222222,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.222222222222221,
+  "river_inflow": 139.0,
+  "river_basin_area": 13.0,
+  "site_name": "후포면 금음리"
  },
  "47930004": {
   "area_before_m2": 62557.0,
@@ -509,7 +1481,31 @@
   "mean_grain_mm": 0.6660159451128925,
   "sand_pct": 96.36947075208913,
   "gravel_pct": 3.636100278551532,
-  "silt_pct": 0.002785515320334262
+  "silt_pct": 0.002785515320334262,
+  "observed": {
+   "n_intervals": 3,
+   "first_year": 1971,
+   "last_year": 2009,
+   "long_term_loss_pct_per_year": 0.272,
+   "recent_loss_pct_per_year": 0.272,
+   "recent_period": [
+    1971,
+    2009
+   ],
+   "last_interval": {
+    "start_year": 2005,
+    "end_year": 2009,
+    "loss_pct_per_year": 6.085
+   },
+   "latest_area_m2": 62557.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.3,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.0,
+  "river_inflow": 57.0,
+  "river_basin_area": 4.0,
+  "site_name": "죽변면 죽변항∼봉평리"
  },
  "47930005": {
   "area_before_m2": 84175.0,
@@ -521,7 +1517,31 @@
   "mean_grain_mm": 1.0273632662799195,
   "sand_pct": 95.49407766990291,
   "gravel_pct": 4.471165048543689,
-  "silt_pct": 0.03475728155339806
+  "silt_pct": 0.03475728155339806,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1971,
+   "last_year": 2013,
+   "long_term_loss_pct_per_year": 0.544,
+   "recent_loss_pct_per_year": 1.144,
+   "recent_period": [
+    1995,
+    2013
+   ],
+   "last_interval": {
+    "start_year": 2011,
+    "end_year": 2013,
+    "loss_pct_per_year": 3.981
+   },
+   "latest_area_m2": 84175.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.166666666666667,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.083333333333334,
+  "river_inflow": 505.0,
+  "river_basin_area": 63.0,
+  "site_name": "기성면 망양리"
  },
  "47930007": {
   "area_before_m2": 146631.0,
@@ -533,7 +1553,29 @@
   "mean_grain_mm": 0.8826121333690974,
   "sand_pct": 96.61495107632093,
   "gravel_pct": 3.218571428571429,
-  "silt_pct": 0.1762426614481409
+  "silt_pct": 0.1762426614481409,
+  "observed": {
+   "n_intervals": 2,
+   "first_year": 1971,
+   "last_year": 2005,
+   "long_term_loss_pct_per_year": -0.43,
+   "recent_loss_pct_per_year": -0.43,
+   "recent_period": [
+    1971,
+    2005
+   ],
+   "last_interval": {
+    "start_year": 1995,
+    "end_year": 2005,
+    "loss_pct_per_year": -0.51
+   },
+   "latest_area_m2": 146631.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.0,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 11.777777777777779,
+  "site_name": "죽변면 후정 해수욕장"
  },
  "47930009": {
   "area_before_m2": 91141.0,
@@ -545,7 +1587,31 @@
   "mean_grain_mm": 0.7887971971433044,
   "sand_pct": 94.5829552715655,
   "gravel_pct": 5.414680511182109,
-  "silt_pct": 0.002348242811501597
+  "silt_pct": 0.002348242811501597,
+  "observed": {
+   "n_intervals": 6,
+   "first_year": 1971,
+   "last_year": 2015,
+   "long_term_loss_pct_per_year": -0.148,
+   "recent_loss_pct_per_year": 0.454,
+   "recent_period": [
+    2009,
+    2015
+   ],
+   "last_interval": {
+    "start_year": 2013,
+    "end_year": 2015,
+    "loss_pct_per_year": -4.084
+   },
+   "latest_area_m2": 91141.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.166666666666667,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.0,
+  "river_inflow": 1840.0,
+  "river_basin_area": 319.992,
+  "site_name": "근남면 산포리"
  },
  "47930010": {
   "area_before_m2": 35992.0,
@@ -557,7 +1623,31 @@
   "mean_grain_mm": 1.379755023724202,
   "sand_pct": 80.73126245847176,
   "gravel_pct": 19.27707641196013,
-  "silt_pct": 0.0015946843853820597
+  "silt_pct": 0.0015946843853820597,
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 1988,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.348,
+   "recent_loss_pct_per_year": 1.767,
+   "recent_period": [
+    2005,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -0.846
+   },
+   "latest_area_m2": 35992.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.5,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 35.0,
+  "river_basin_area": 3.0,
+  "site_name": "원남면 오산리"
  },
  "47930011": {
   "area_before_m2": 94350.0,
@@ -569,7 +1659,31 @@
   "mean_grain_mm": 1.5414428623579552,
   "sand_pct": 72.83795871559633,
   "gravel_pct": 27.177545871559634,
-  "silt_pct": 0.0005504587155963302
+  "silt_pct": 0.0005504587155963302,
+  "observed": {
+   "n_intervals": 1,
+   "first_year": 1971,
+   "last_year": 1991,
+   "long_term_loss_pct_per_year": 0.656,
+   "recent_loss_pct_per_year": 0.656,
+   "recent_period": [
+    1971,
+    1991
+   ],
+   "last_interval": {
+    "start_year": 1971,
+    "end_year": 1991,
+    "loss_pct_per_year": 0.656
+   },
+   "latest_area_m2": 94350.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.5,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "river_inflow": 505.0,
+  "river_basin_area": 63.09400000000001,
+  "site_name": "기성면 봉산리"
  },
  "47930012": {
   "area_before_m2": 47644.0,
@@ -581,7 +1695,31 @@
   "mean_grain_mm": 1.0056686044068248,
   "sand_pct": 93.29905660377358,
   "gravel_pct": 6.703638814016173,
-  "silt_pct": 0.0
+  "silt_pct": 0.0,
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.59,
+   "recent_loss_pct_per_year": 0.525,
+   "recent_period": [
+    1991,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 9.989
+   },
+   "latest_area_m2": 47644.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.666666666666667,
+  "max_wave_height_m": 10.0,
+  "mean_wave_period_s": 12.333333333333334,
+  "river_inflow": 1220.0,
+  "river_basin_area": 146.0,
+  "site_name": "평해면 직산리"
  },
  "47930013": {
   "area_before_m2": 33243.0,
@@ -593,7 +1731,29 @@
   "mean_grain_mm": 0.8410079917279666,
   "sand_pct": 94.54050898203593,
   "gravel_pct": 5.462215568862276,
-  "silt_pct": 0.0002694610778443114
+  "silt_pct": 0.0002694610778443114,
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1971,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.758,
+   "recent_loss_pct_per_year": -2.875,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 2.284
+   },
+   "latest_area_m2": 33243.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.3,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.0,
+  "site_name": "울진읍 온양리"
  },
  "47940001": {
   "area_before_m2": 13736.0,
@@ -601,7 +1761,30 @@
   "historical_erosion_pct_per_year": -0.11309740970448742,
   "hist_mean_erosion_pct_per_year": 1.1046247423246203,
   "n_prev_intervals": 5,
-  "region_code": "47"
+  "region_code": "47",
+  "observed": {
+   "n_intervals": 5,
+   "first_year": 2011,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.233,
+   "recent_loss_pct_per_year": -0.585,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -0.113
+   },
+   "latest_area_m2": 13736.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.0,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 10.0,
+  "river_basin_area": 7.090000000000001,
+  "site_name": "울릉군 태하1리"
  },
  "47940002": {
   "area_before_m2": 3511.0,
@@ -609,7 +1792,29 @@
   "historical_erosion_pct_per_year": 6.410551338087571,
   "hist_mean_erosion_pct_per_year": -1.3942611715798472,
   "n_prev_intervals": 4,
-  "region_code": "47"
+  "region_code": "47",
+  "observed": {
+   "n_intervals": 4,
+   "first_year": 1980,
+   "last_year": 2013,
+   "long_term_loss_pct_per_year": 1.305,
+   "recent_loss_pct_per_year": 1.99,
+   "recent_period": [
+    1997,
+    2013
+   ],
+   "last_interval": {
+    "start_year": 2010,
+    "end_year": 2013,
+    "loss_pct_per_year": 6.411
+   },
+   "latest_area_m2": 3511.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.5,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 10.666666666666666,
+  "site_name": "울릉읍 사동1리"
  },
  "47940003": {
   "area_before_m2": 12617.0,
@@ -617,7 +1822,29 @@
   "historical_erosion_pct_per_year": 17.79405758627731,
   "hist_mean_erosion_pct_per_year": 3.4227980024334124,
   "n_prev_intervals": 8,
-  "region_code": "47"
+  "region_code": "47",
+  "observed": {
+   "n_intervals": 8,
+   "first_year": 1980,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 1.119,
+   "recent_loss_pct_per_year": 7.759,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": 17.794
+   },
+   "latest_area_m2": 12617.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 6.666666666666666,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 10.666666666666666,
+  "site_name": "울릉군 남양1리"
  },
  "47940004": {
   "area_before_m2": 809.0,
@@ -625,7 +1852,29 @@
   "historical_erosion_pct_per_year": -10.735735735735735,
   "hist_mean_erosion_pct_per_year": 1.0744629397874454,
   "n_prev_intervals": 7,
-  "region_code": "47"
+  "region_code": "47",
+  "observed": {
+   "n_intervals": 7,
+   "first_year": 1997,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": 0.99,
+   "recent_loss_pct_per_year": 4.756,
+   "recent_period": [
+    2015,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2019,
+    "end_year": 2021,
+    "loss_pct_per_year": -10.736
+   },
+   "latest_area_m2": 809.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.0,
+  "max_wave_height_m": 8.0,
+  "mean_wave_period_s": 10.666666666666666,
+  "site_name": "울릉군 남양3리"
  },
  "47940005": {
   "area_before_m2": 1940.0,
@@ -633,6 +1882,28 @@
   "historical_erosion_pct_per_year": -2.231892195395845,
   "hist_mean_erosion_pct_per_year": -1.691430622897182,
   "n_prev_intervals": 3,
-  "region_code": "47"
+  "region_code": "47",
+  "observed": {
+   "n_intervals": 3,
+   "first_year": 2009,
+   "last_year": 2021,
+   "long_term_loss_pct_per_year": -1.689,
+   "recent_loss_pct_per_year": -1.689,
+   "recent_period": [
+    2009,
+    2021
+   ],
+   "last_interval": {
+    "start_year": 2017,
+    "end_year": 2021,
+    "loss_pct_per_year": -2.232
+   },
+   "latest_area_m2": 1940.0,
+   "note": "Chain of consecutive measured intervals; gaps between surveys are not interpolated."
+  },
+  "mean_wave_height_m": 7.333333333333333,
+  "max_wave_height_m": 9.0,
+  "mean_wave_period_s": 12.166666666666666,
+  "site_name": "울릉군 학포"
  }
 }

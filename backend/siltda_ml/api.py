@@ -7,7 +7,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 
-from .inference import InsufficientData, ModelUnavailable, load_bundle, model_path, predict_one
+from .inference import InsufficientData, ModelUnavailable, NoAreaHistory, load_bundle, model_path, predict_one
 
 DEFAULT_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", "https://siltda.pages.dev"]
 origins = [o.strip() for o in os.environ.get("SILTDA_CORS_ORIGINS", ",".join(DEFAULT_ORIGINS)).split(",") if o.strip()]
@@ -57,5 +57,7 @@ def erosion_risk(req: ErosionRiskRequest) -> dict:
         return predict_one(req.model_dump())
     except ModelUnavailable as exc:
         raise HTTPException(status_code=503, detail={"code": "MODEL_UNAVAILABLE", "message": str(exc)})
+    except NoAreaHistory as exc:
+        raise HTTPException(status_code=422, detail={"code": "NO_AREA_HISTORY", "message": str(exc)})
     except InsufficientData as exc:
         raise HTTPException(status_code=422, detail={"code": "INSUFFICIENT_DATA", "message": str(exc)})

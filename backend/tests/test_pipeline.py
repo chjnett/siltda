@@ -82,7 +82,10 @@ def test_inference_roundtrip_and_errors(synthetic_dir):
                                  "historical_erosion_pct_per_year": 2.3, "mean_wave_height_m": 1.9}, bundle)
     assert res["synthetic_model"] is True and res["data_origin"] == DATA_ORIGIN_SYNTHETIC
     assert res["erosion_risk"] in ("low", "medium", "high") and res["outside_training_year_range"] is True
-    assert "mean_wave_height_m" in res["ignored_inputs"] and "mean_grain_mm" in res["missing_features_imputed"]
+    assert "rainfall_mm" not in res["ignored_inputs"] and "mean_grain_mm" in res["missing_features_imputed"]
+    assert res["observed_history"] is None and res["observed_risk"] is None  # unknown site -> no measured history
+    ignored = inference.predict_one({"site_id": "NEW", "area_before_m2": 1000, "start_year": 2150, "rainfall_mm": 900}, bundle)
+    assert ignored["ignored_inputs"] == ["rainfall_mm"]
     with pytest.raises(inference.InsufficientData):
         inference.predict_one({"site_id": "NEW"}, bundle)
     with pytest.raises(inference.ModelUnavailable):
@@ -120,6 +123,10 @@ def test_real_model_is_not_synthetic_and_knows_sites():
     inference.clear_cache()
     b = inference.load_bundle(ARTIFACTS_DIR / "erosion_model.joblib")
     assert b["synthetic"] is False and "SYNTHETIC_DEMO_ONLY" not in b["data_origin"]
-    site = next(iter(b["site_profiles"]))
-    res = inference.predict_one({"site_id": site}, b)
+    res = inference.predict_one({"site_id": "26380002"}, b)
     assert res["input_source"] == "site_profile+request" and res["inputs_from_site_profile"]
+    assert "다대포" in res["site_name"] and res["observed_history"]["n_intervals"] >= 3
+    assert res["observed_risk"] in ("low", "medium", "high") and res["model_beats_baseline"] is False
+    # Songjeong is a known surveyed beach but has no beach-area record in the public data
+    with pytest.raises(inference.NoAreaHistory):
+        inference.predict_one({"site_id": "26350002"}, b)

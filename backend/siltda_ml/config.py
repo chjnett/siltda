@@ -25,8 +25,31 @@ DATA_SOURCES = {
         "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002883022&fileDetailSn=1&insertDataPrcus=N",
         "file": "sediment.csv",
     },
+    "wave": {
+        "title": "해양수산부_연안정비_연안침식파향파고주기정보",
+        "page": "https://www.data.go.kr/data/15126863/fileData.do",
+        "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517624&fileDetailSn=1&insertDataPrcus=N",
+        "file": "wave.csv",
+    },
+    "river": {
+        "title": "해양수산부_연안정비_연안침식하천현황정보",
+        "page": "https://www.data.go.kr/data/15126866/fileData.do",
+        "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517615&fileDetailSn=1&insertDataPrcus=N",
+        "file": "river.csv",
+    },
+    "site_names": {
+        "title": "해양수산부_연안정비_연안침식조사현황정보",
+        "page": "https://www.data.go.kr/data/15126860/fileData.do",
+        "download": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002883032&fileDetailSn=1&insertDataPrcus=N",
+        "file": "site_names.csv",
+    },
 }
-DATA_ORIGIN_REAL = ["MOF_BEACH_AREA_CHANGE_15126857", "MOF_SEDIMENT_COMPOSITION_15126862"]
+DATA_ORIGIN_REAL = [
+    "MOF_BEACH_AREA_CHANGE_15126857",
+    "MOF_SEDIMENT_COMPOSITION_15126862",
+    "MOF_WAVE_DIRECTION_HEIGHT_PERIOD_15126863",
+    "MOF_RIVER_STATUS_15126866",
+]
 DATA_ORIGIN_SYNTHETIC = ["SYNTHETIC_DEMO_ONLY"]
 
 # --- Target / risk classes ---
@@ -50,15 +73,17 @@ NUMERIC_FEATURES = [
     "sand_pct",
     "gravel_pct",
     "silt_pct",
+    "mean_wave_height_m",
+    "max_wave_height_m",
+    "mean_wave_period_s",
+    "river_inflow",
+    "river_basin_area",
 ]
 CATEGORICAL_FEATURES = ["region_code"]
 FEATURES = NUMERIC_FEATURES + CATEGORICAL_FEATURES
 
 # Variables requested for the project but NOT available in the downloaded public files.
 UNAVAILABLE_FEATURES = {
-    "mean_wave_height_m": "no wave data downloaded (KMA / KHOA API or file needed, matched by site coordinates)",
-    "max_wave_height_m": "same as above",
-    "mean_wave_period_s": "same as above",
     "coastal_slope_deg": "no beach-profile / slope data in the public files",
     "rainfall_mm": "no rainfall data downloaded (KMA ASOS needed, matched by station-to-site mapping)",
 }

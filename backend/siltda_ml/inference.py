@@ -14,7 +14,7 @@ from .config import ARTIFACTS_DIR, FEATURES, NUMERIC_FEATURES, RISK_RULE_NOTE
 from .risk import risk_class
 
 DEFAULT_MODEL_PATH = ARTIFACTS_DIR / "erosion_model.joblib"
-IGNORED_INPUTS = ["mean_wave_height_m", "max_wave_height_m", "mean_wave_period_s", "coastal_slope_deg", "rainfall_mm"]
+IGNORED_INPUTS = ["coastal_slope_deg", "rainfall_mm"]
 
 
 class ModelUnavailable(RuntimeError):
@@ -23,6 +23,10 @@ class ModelUnavailable(RuntimeError):
 
 class InsufficientData(ValueError):
     """The request (plus any known site profile) lacks the minimum inputs."""
+
+
+class NoAreaHistory(InsufficientData):
+    """Known beach, but the public data has no before/after beach-area record for it."""
 
 
 def model_path() -> Path:
@@ -85,6 +89,12 @@ def predict_one(req: dict, bundle: dict | None = None) -> dict:
     bundle = bundle or load_bundle()
     values, from_profile, source = _resolve_features(req, bundle)
     if values["area_before_m2"] is None or values["start_year"] is None:
+        known = bundle.get("site_names", {}).get(str(req.get("site_id") or ""))
+        if known:
+            raise NoAreaHistory(
+                f"{known['name']} ({req.get('site_id')}) is a surveyed beach but has no beach-area before/after "
+                "record in the public data; send area_before_m2 and start_year to get an experimental estimate."
+            )
         raise InsufficientData(
             "area_before_m2 and start_year are required (send them, or use a site_id that exists in the training data)."
         )
@@ -97,7 +107,13 @@ def predict_one(req: dict, bundle: dict | None = None) -> dict:
     missing = [f for f in bundle["features"] if values[f] is None]
     ignored = [k for k in IGNORED_INPUTS if req.get(k) is not None]
     synthetic = bool(bundle["synthetic"])
+    profile = bundle.get("site_profiles", {}).get(str(req.get("site_id") or ""), {})
+    observed = profile.get("observed")
     return {
+        "site_name": profile.get("site_name"),
+        "observed_history": observed,
+        "observed_risk": risk_class(max(0.0, observed["long_term_loss_pct_per_year"])) if observed else None,
+        "observed_risk_basis": "long-term measured area change; provisional heuristic classes" if observed else None,
         "site_id": req.get("site_id"),
         "predicted_annual_area_loss_pct": round(pred, 3),
         "erosion_risk": risk_class(pred),
