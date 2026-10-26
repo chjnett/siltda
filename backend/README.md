@@ -3,7 +3,7 @@
 > **결론부터:** 공공 관측 이력은 서비스에 사용할 수 있지만, 현재 ML 모델은 중앙값 기준선을 이기지 못합니다. API와 프론트엔드는 이 둘을 분리해 제공하며 ML 값에는 실험적 추정치라는 경고를 유지합니다.
 
 <p align="center">
-  <a href="../docs/architecture/erosion-ml-pipeline.html">
+  <a href="../docs/architecture/erosion-ml-pipeline.html?theme=light">
     <img src="../docs/architecture/erosion-ml-pipeline.png" alt="siltDA 침식 위험 분석 데이터 흐름" width="100%" />
   </a>
   <br />

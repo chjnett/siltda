@@ -55,7 +55,7 @@ siltDA는 항만에서 발생하는 준설토를 해안 복원의 자원으로 �
 PR #1에는 해양수산부 공공데이터를 정제해 관측 이력과 실험적 침식 위험 추정치를 제공하는 독립 FastAPI 모듈이 포함되어 있습니다. 프론트엔드는 두 값을 같은 카드 안에서도 명확히 구분하며, ML 결과를 공식 위험 판정처럼 사용하지 않습니다.
 
 <div align="center">
-  <a href="./docs/architecture/erosion-ml-pipeline.html">
+  <a href="./docs/architecture/erosion-ml-pipeline.html?theme=light">
     <img src="./docs/architecture/erosion-ml-pipeline.png" alt="siltDA 침식 위험 분석 데이터 흐름" width="100%" />
   </a>
   <br />
@@ -157,7 +157,7 @@ scripts/                 Cesium 자산 복사 스크립트
 현재 구조에는 **프론트엔드 Cloudflare Pages + ML API Docker 배포**의 혼합 구성이 가장 안전합니다. Next.js는 정적 산출물 `out/`을 만들 수 있어 Pages와 잘 맞지만, 커밋된 joblib 모델은 정확한 scikit-learn 버전에 의존하므로 Python Worker로 바로 옮기기보다 컨테이너 경로를 유지하는 편이 재현성이 높습니다.
 
 <div align="center">
-  <a href="./docs/architecture/cloudflare-cicd-proposal.html">
+  <a href="./docs/architecture/cloudflare-cicd-proposal.html?theme=light">
     <img src="./docs/architecture/cloudflare-cicd-proposal.png" alt="siltDA Cloudflare 중심 CI/CD 제안" width="100%" />
   </a>
   <br />
