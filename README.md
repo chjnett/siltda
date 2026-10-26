@@ -102,6 +102,19 @@ npm run build
 
 Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`과 `build` 단계에서 `public/cesium`으로 복사됩니다.
 
+### 백엔드 검증
+
+```bash
+cd backend
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip check
+python -m pytest -q
+```
+
+`requirements.txt`는 커밋된 joblib 모델을 만든 `requirements-serve.txt`의 정확한 NumPy·scikit-learn·LightGBM 버전을 상속합니다. 이 핵심 버전을 바꿀 때는 모델을 다시 학습하고 실제 모델 테스트를 통과한 새 아티팩트를 함께 커밋해야 합니다.
+
 ## 🗺 지도 공급자와 대체 경로
 
 기본 실행에는 API 키가 필요하지 않습니다.
@@ -154,23 +167,24 @@ scripts/                 Cesium 자산 복사 스크립트
 
 ## ☁️ CI/CD 검토 결과
 
-현재 구조에는 **프론트엔드 Cloudflare Pages + ML API Docker 배포**의 혼합 구성이 가장 안전합니다. Next.js는 정적 산출물 `out/`을 만들 수 있어 Pages와 잘 맞지만, 커밋된 joblib 모델은 정확한 scikit-learn 버전에 의존하므로 Python Worker로 바로 옮기기보다 컨테이너 경로를 유지하는 편이 재현성이 높습니다.
+현재 구조에는 **프론트엔드 Cloudflare Pages + ML API Docker 배포**의 혼합 구성을 적용했습니다. Next.js는 정적 산출물 `out/`을 만들 수 있어 Pages와 잘 맞지만, 커밋된 joblib 모델은 정확한 scikit-learn 버전에 의존하므로 Python Worker로 바로 옮기기보다 컨테이너 경로를 유지하는 편이 재현성이 높습니다.
 
 <div align="center">
   <a href="./docs/architecture/cloudflare-cicd-proposal.html?theme=light">
     <img src="./docs/architecture/cloudflare-cicd-proposal.png" alt="siltDA Cloudflare 중심 CI/CD 제안" width="100%" />
   </a>
   <br />
-  <sub>제안안이며 아직 배포 워크플로를 설치한 상태는 아닙니다.</sub>
+  <sub>현재 저장소에 반영된 CI/CD 구조입니다. Cloudflare 계정 값 등록 후 운영 배포가 활성화됩니다.</sub>
 </div>
 
-권장 적용 순서는 다음과 같습니다.
+구축된 흐름은 다음과 같습니다.
 
-1. `requirements.txt`와 모델 아티팩트의 scikit-learn 버전을 먼저 일치시킵니다.
-2. GitHub 필수 체크에 프론트 `typecheck/build`, 백엔드 `pytest`, 실제 joblib 로드와 `/health` 스모크 테스트를 추가합니다.
-3. Cloudflare Pages Git 연동으로 PR 미리보기와 `main` 운영 배포를 구성합니다.
-4. ML API는 당분간 `render.yaml`과 Docker 이미지를 유지합니다.
-5. 완전한 Cloudflare 구성이 필요하면 동일 이미지를 Cloudflare Containers에서 PoC한 뒤 비용·콜드 스타트·모델 메모리를 비교합니다.
+1. PR과 `main`에서 프론트 `typecheck/build`, 백엔드 `pytest`와 실제 joblib 로드, Docker 이미지 빌드를 실행합니다.
+2. 세 검사를 통과한 `main`의 동일한 `out/` 아티팩트만 Cloudflare Pages에 배포합니다.
+3. ML API는 `render.yaml`과 Docker 이미지를 유지합니다.
+4. 완전한 Cloudflare 구성이 필요하면 동일 이미지를 Cloudflare Containers에서 PoC한 뒤 비용·콜드 스타트·모델 메모리를 비교합니다.
+
+Cloudflare 프로젝트 생성, GitHub 환경 비밀 값, 브랜치 보호 설정은 [배포 설정 가이드](./docs/deployment/cloudflare-pages.md)를 따릅니다.
 
 ## 🙌 참고
 

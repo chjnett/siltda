@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="archify 3.2.0">
   <meta name="archify-reader-contract" content="declared-wide-v1">
-  <title>제안: siltDA Cloudflare 중심 CI/CD 다이어그램</title>
+  <title>siltDA Cloudflare 중심 CI/CD 다이어그램</title>
   <script>
     // Resolve the theme before first paint so light-preference users don't
     // see a dark flash. The toolbar script below re-applies with UI state.
@@ -5193,9 +5193,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
            data-preset-badge-blueprint="블루프린트 / 개정 01"
            data-preset-badge-editorial="에디토리얼 / 현장 노트">
         <div class="pulse-dot"></div>
-        <h1>제안: siltDA Cloudflare 중심 CI/CD</h1>
+        <h1>siltDA Cloudflare 중심 CI/CD</h1>
       </div>
-      <p class="subtitle">정적 프론트는 Pages, Python ML API는 검증 후 단계적으로 이전</p>
+      <p class="subtitle">PR 품질 게이트를 통과한 main 정적 산출물만 Pages에 배포</p>
     </div>
 
 
@@ -5204,8 +5204,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / 도판 04">
       <svg viewBox="0 0 853 720" data-reader-fit="intrinsic-height" role="img" lang="ko" aria-labelledby="archify-diagram-title archify-diagram-description" data-animation="trace" data-preset="classic" data-quality-profile="showcase" data-motion-choreography="stream">
-        <title id="archify-diagram-title">제안: siltDA Cloudflare 중심 CI/CD</title>
-        <desc id="archify-diagram-description">정적 프론트는 Pages, Python ML API는 검증 후 단계적으로 이전</desc>
+        <title id="archify-diagram-title">siltDA Cloudflare 중심 CI/CD</title>
+        <desc id="archify-diagram-description">PR 품질 게이트를 통과한 main 정적 산출물만 Pages에 배포</desc>
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -5230,13 +5230,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
         <!-- Data Stages -->
         <rect data-graph-role="structural-frame" data-composition-frame-kind="stage" data-composition-frame-id="0" x="16" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="100" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">01 / GitHub</text>
+        <text x="100" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">01 / GitHub 변경</text>
 
         <rect data-graph-role="structural-frame" data-composition-frame-kind="stage" data-composition-frame-id="1" x="231" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="315" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">02 / 필수 품질 게이트</text>
+        <text x="315" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">02 / 필수 CI 게이트</text>
 
         <rect data-graph-role="structural-frame" data-composition-frame-kind="stage" data-composition-frame-id="2" x="446" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="530" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">03 / 현재 배포</text>
+        <text x="530" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">03 / 검증된 배포</text>
 
         <rect data-graph-role="structural-frame" data-composition-frame-kind="stage" data-composition-frame-id="3" x="661" y="46" width="168" height="600" rx="10" class="c-lane" stroke-width="1"/>
         <text x="745" y="68" class="t-dim" font-size="9" font-weight="600" text-anchor="middle">04 / 선택적 이전</text>
@@ -5249,8 +5249,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <path data-edge-from="render" data-edge-to="containers" data-edge-label="비용·호환성 검증 후" data-edge-key="4" data-edge-id="future" data-composition-points="586,385;674,385" d="M 586 385 L 674 385" class="a-dashed" data-animate="edge" style="--step:4" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
 
         <!-- Nodes -->
-        <g id="node-pull_request" data-node-id="pull_request" data-node-label="Pull Request" tabindex="0" role="button" aria-label="Pull Request 포커스, 코드·문서·모델 변경, 01 / GitHub" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="코드·문서·모델 변경" data-node-tag="review" data-node-context="01 / GitHub">
-          <title>Pull Request · 코드·문서·모델 변경 · 01 / GitHub · review</title>
+        <g id="node-pull_request" data-node-id="pull_request" data-node-label="Pull Request" tabindex="0" role="button" aria-label="Pull Request 포커스, 코드·문서·모델 변경, 01 / GitHub 변경" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="코드·문서·모델 변경" data-node-tag="review" data-node-context="01 / GitHub 변경">
+          <title>Pull Request · 코드·문서·모델 변경 · 01 / GitHub 변경 · review</title>
           <rect x="44" y="128" width="112" height="58" rx="6" class="c-mask"/>
           <rect x="44" y="128" width="112" height="58" rx="6" class="c-frontend" data-animate="node" style="--step:0" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(50 134) scale(0.6875)">
@@ -5264,8 +5264,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="fine" x="100" y="175" class="t-frontend" font-size="7" text-anchor="middle">review</text>
         </g>
 
-        <g id="node-frontend_ci" data-node-id="frontend_ci" data-node-label="Frontend CI" tabindex="0" role="button" aria-label="Frontend CI 포커스, typecheck + static build, 02 / 필수 품질 게이트" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="typecheck + static build" data-node-tag="Node 20" data-node-context="02 / 필수 품질 게이트">
-          <title>Frontend CI · typecheck + static build · 02 / 필수 품질 게이트 · Node 20</title>
+        <g id="node-frontend_ci" data-node-id="frontend_ci" data-node-label="Frontend CI" tabindex="0" role="button" aria-label="Frontend CI 포커스, typecheck + static build, 02 / 필수 CI 게이트" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="typecheck + static build" data-node-tag="Node 20" data-node-context="02 / 필수 CI 게이트">
+          <title>Frontend CI · typecheck + static build · 02 / 필수 CI 게이트 · Node 20</title>
           <rect x="259" y="128" width="112" height="58" rx="6" class="c-mask"/>
           <rect x="259" y="128" width="112" height="58" rx="6" class="c-frontend" data-animate="node" style="--step:1" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(265 134) scale(0.6875)">
@@ -5279,8 +5279,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="fine" x="315" y="175" class="t-frontend" font-size="7" text-anchor="middle">Node 20</text>
         </g>
 
-        <g id="node-backend_ci" data-node-id="backend_ci" data-node-label="Backend + Model CI" tabindex="0" role="button" aria-label="Backend + Model CI 포커스, pytest · joblib · /health, 02 / 필수 품질 게이트" aria-pressed="false" data-node-kind="backend" data-node-sublabel="pytest · joblib · /health" data-node-tag="Python 3.12" data-node-context="02 / 필수 품질 게이트">
-          <title>Backend + Model CI · pytest · joblib · /health · 02 / 필수 품질 게이트 · Python 3.12</title>
+        <g id="node-backend_ci" data-node-id="backend_ci" data-node-label="Backend + Model CI" tabindex="0" role="button" aria-label="Backend + Model CI 포커스, pytest · joblib · /health, 02 / 필수 CI 게이트" aria-pressed="false" data-node-kind="backend" data-node-sublabel="pytest · joblib · /health" data-node-tag="Python 3.12" data-node-context="02 / 필수 CI 게이트">
+          <title>Backend + Model CI · pytest · joblib · /health · 02 / 필수 CI 게이트 · Python 3.12</title>
           <rect x="244" y="356" width="142" height="58" rx="6" class="c-mask"/>
           <rect x="244" y="356" width="142" height="58" rx="6" class="c-backend" data-animate="node" style="--step:2" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(250 362) scale(0.6875)">
@@ -5291,8 +5291,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="fine" x="315" y="403" class="t-backend" font-size="7" text-anchor="middle">Python 3.12</text>
         </g>
 
-        <g id="node-pages" data-node-id="pages" data-node-label="Cloudflare Pages" tabindex="0" role="button" aria-label="Cloudflare Pages 포커스, PR preview + production, 03 / 현재 배포" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="PR preview + production" data-node-tag="권장" data-node-context="03 / 현재 배포">
-          <title>Cloudflare Pages · PR preview + production · 03 / 현재 배포 · 권장</title>
+        <g id="node-pages" data-node-id="pages" data-node-label="Cloudflare Pages" tabindex="0" role="button" aria-label="Cloudflare Pages 포커스, PR preview + production, 03 / 검증된 배포" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="PR preview + production" data-node-tag="권장" data-node-context="03 / 검증된 배포">
+          <title>Cloudflare Pages · PR preview + production · 03 / 검증된 배포 · 권장</title>
           <rect x="468" y="128" width="124" height="58" rx="6" class="c-mask"/>
           <rect x="468" y="128" width="124" height="58" rx="6" class="c-cloud" data-animate="node" style="--step:3" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(474 134) scale(0.6875)">
@@ -5303,8 +5303,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="fine" x="530" y="175" class="t-cloud" font-size="7" text-anchor="middle">권장</text>
         </g>
 
-        <g id="node-render" data-node-id="render" data-node-label="Render API" tabindex="0" role="button" aria-label="Render API 포커스, 현재 Docker 이미지 유지, 03 / 현재 배포" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="현재 Docker 이미지 유지" data-node-tag="1단계" data-node-context="03 / 현재 배포">
-          <title>Render API · 현재 Docker 이미지 유지 · 03 / 현재 배포 · 1단계</title>
+        <g id="node-render" data-node-id="render" data-node-label="Render API" tabindex="0" role="button" aria-label="Render API 포커스, 현재 Docker 이미지 유지, 03 / 검증된 배포" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="현재 Docker 이미지 유지" data-node-tag="1단계" data-node-context="03 / 검증된 배포">
+          <title>Render API · 현재 Docker 이미지 유지 · 03 / 검증된 배포 · 1단계</title>
           <rect x="474" y="356" width="112" height="58" rx="6" class="c-mask"/>
           <rect x="474" y="356" width="112" height="58" rx="6" class="c-cloud" data-animate="node" style="--step:4" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(480 362) scale(0.6875)">
@@ -5550,24 +5550,25 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>지금 권장하는 조합</h3>
+          <h3>구축된 배포 경로</h3>
         </div>
         <ul>
-          <li>Next.js 정적 산출물은 Cloudflare Pages에서 PR 미리보기와 운영 배포</li>
+          <li>PR과 main에서 프론트·백엔드·컨테이너 검증을 모두 수행한다</li>
+          <li>검증된 main의 동일한 out 아티팩트만 Cloudflare Pages에 배포한다</li>
           <li>FastAPI·scikit-learn·LightGBM은 현재 Docker/Render 경로 유지</li>
-          <li>브랜치 보호 규칙으로 프론트·백엔드·모델 호환성 검사를 필수화</li>
+          <li>브랜치 보호 규칙으로 세 CI 작업을 병합 조건으로 지정한다</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-dot amber"></div>
-          <h3>먼저 해결할 항목</h3>
+          <div class="card-dot rose"></div>
+          <h3>자동 차단 조건</h3>
         </div>
         <ul>
-          <li>개발 requirements와 커밋된 joblib 모델의 scikit-learn 버전을 일치시킨다</li>
-          <li>Python 3.12에서 실제 모델 로드와 API 스모크 테스트를 수행한다</li>
-          <li>Pages 환경변수와 API CORS 허용 도메인을 분리 관리한다</li>
+          <li>개발 환경은 모델 생성 버전과 동일한 scikit-learn 1.5.2를 상속한다</li>
+          <li>실제 joblib 로드·API 테스트·Docker 빌드 실패 시 병합과 배포를 중단한다</li>
+          <li>ML API 주소가 비었거나 HTTPS가 아니면 운영 배포를 중단한다</li>
         </ul>
       </div>
 

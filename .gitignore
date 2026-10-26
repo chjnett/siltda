@@ -25,6 +25,7 @@ __pycache__/
 
 # Local Archify validation evidence (published HTML/PNG assets remain tracked)
 docs/architecture/*-visual-check/
+docs/architecture/*-review-*/
 docs/architecture/*.browser-check.json
 docs/architecture/*.delivery.json
 docs/architecture/*.finalize.json

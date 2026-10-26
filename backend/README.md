@@ -28,6 +28,8 @@ python -m pytest -q                     # tests (synthetic data in a temp dir)
 uvicorn siltda_ml.api:app --port 8000   # Swagger: http://localhost:8000/docs
 ```
 
+`requirements.txt`는 아래의 학습·테스트 도구에 더해 `requirements-serve.txt`를 그대로 포함합니다. 따라서 로컬 테스트, CI, 프로덕션 이미지가 커밋된 joblib 모델과 동일한 NumPy·scikit-learn·LightGBM 버전을 사용합니다. 핵심 핀을 변경할 때는 모델을 재학습하고 아티팩트도 함께 갱신해야 합니다.
+
 Env: `SILTDA_MODEL_PATH` (default `artifacts/erosion_model.joblib`), `SILTDA_CORS_ORIGINS`
 (default `localhost:3000`, `127.0.0.1:3000`, `https://siltda.pages.dev`).
 Frontend: `NEXT_PUBLIC_SILTDA_ML_API_URL` (must be HTTPS in production).
