@@ -1,5 +1,15 @@
 # siltDA erosion-risk ML backend
 
+> **결론부터:** 공공 관측 이력은 서비스에 사용할 수 있지만, 현재 ML 모델은 중앙값 기준선을 이기지 못합니다. API와 프론트엔드는 이 둘을 분리해 제공하며 ML 값에는 실험적 추정치라는 경고를 유지합니다.
+
+<p align="center">
+  <a href="../docs/architecture/erosion-ml-pipeline.html">
+    <img src="../docs/architecture/erosion-ml-pipeline.png" alt="siltDA 침식 위험 분석 데이터 흐름" width="100%" />
+  </a>
+  <br />
+  <sub>Archify 원본 HTML에는 코드 근거와 단계별 탐색이 포함되어 있습니다.</sub>
+</p>
+
 Independent module (no dredge-optimisation logic). For a coast site it returns
 
 1. **measured history** from public data (long-term / last-interval beach-area change) and a provisional class, and
@@ -51,6 +61,23 @@ surveys with `survey_year <= start_year` (about two thirds of rows therefore hav
 joined by site code; every evaluation split is grouped by `site_id`.
 
 ## Results (`artifacts/metrics.json`, `artifacts/figures/`)
+
+<table>
+  <tr>
+    <td width="50%"><img src="./artifacts/figures/model_comparison_mae.png" alt="모델별 MAE 비교" /></td>
+    <td width="50%"><img src="./artifacts/figures/actual_vs_predicted_cv.png" alt="교차검증 실제값과 예측값 비교" /></td>
+  </tr>
+  <tr>
+    <td align="center">모델별 교차검증 MAE</td>
+    <td align="center">실제값과 OOF 예측값</td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="./artifacts/figures/feature_importance.png" alt="선정 모델 특성 중요도" /></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">선정 모델의 특성 중요도</td>
+  </tr>
+</table>
 
 Site-grouped 5-fold CV x3 (mean). Target = annual beach-area loss, %/yr.
 

@@ -47,13 +47,32 @@ siltDA는 항만에서 발생하는 준설토를 해안 복원의 자원으로 �
 | 시뮬레이션 | 굴착 깊이·성토 두께 변경, 사용자 정의 삼각형 메시 실시간 재생성 |
 | 결과 비교 | 작업 전·작업 후·전후 비교·단면도 모드 |
 | 물량 계산 | 준설량·복원량·잔여량 또는 부족량 실시간 계산 |
+| 침식 위험 분석 | 공공 관측 이력과 실험적 ML 추정치를 분리해 표시 |
 | 프로젝트 관리 | 브라우저 로컬 저장, 인트로 다시 보기, 전 단계 해양 영상 배경 |
+
+## 🧭 침식 위험 분석 흐름
+
+PR #1에는 해양수산부 공공데이터를 정제해 관측 이력과 실험적 침식 위험 추정치를 제공하는 독립 FastAPI 모듈이 포함되어 있습니다. 프론트엔드는 두 값을 같은 카드 안에서도 명확히 구분하며, ML 결과를 공식 위험 판정처럼 사용하지 않습니다.
+
+<div align="center">
+  <a href="./docs/architecture/erosion-ml-pipeline.html">
+    <img src="./docs/architecture/erosion-ml-pipeline.png" alt="siltDA 침식 위험 분석 데이터 흐름" width="100%" />
+  </a>
+  <br />
+  <sub>Archify 원본 HTML은 코드 근거, 테마 전환, 단계별 탐색을 지원합니다.</sub>
+</div>
+
+- 정제 후 데이터는 55개 지점의 279개 관측 구간입니다.
+- 선정된 `lightgbm_huber` 모델의 교차검증 MAE는 2.15%p/년이며, 중앙값 기준선 2.07%p/년보다 우수하지 않습니다.
+- 따라서 관측 이력이 주 정보이고 ML 예측은 탐색적 참고값입니다.
+- 데이터 출처, 누수 방지 규칙, 재현 방법은 [백엔드 문서](./backend/README.md)에 정리되어 있습니다.
 
 ## 🛠 기술 스택
 
-- **Framework** — Next.js 16, React 19, TypeScript
+- **Frontend** — Next.js 16, React 19, TypeScript
 - **3D/GIS** — CesiumJS, Esri World Imagery, GeoJSON 호환 좌표
 - **Geometry** — Earcut 기반 삼각분할 및 사용자 정의 변형 메시
+- **ML API** — FastAPI, scikit-learn, LightGBM, joblib
 - **Styling** — 반응형 해양 연구·공공 GIS 콘솔 UI
 
 ## 🚀 시작하기
@@ -110,8 +129,10 @@ Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`�
 app/                    Next.js 앱과 전역 스타일
 components/             3D 장면 및 설계 워크플로 UI
 lib/                    공간 계산, 타입, 부산 연안 데모 데이터
+backend/                공공데이터 전처리, ML 학습·추론, FastAPI
 public/                 Cesium 런타임 자산과 해양 영상
 docs/demo/              프로젝트 데모 영상과 대표 이미지
+docs/architecture/      Archify 기반 데이터·배포 설명 자료
 scripts/                 Cesium 자산 복사 스크립트
 ```
 
@@ -130,6 +151,26 @@ scripts/                 Cesium 자산 복사 스크립트
 3. 폴리곤 내부 셀을 클리핑해 실제 굴착·성토 메시를 생성합니다.
 4. 경사면, 다짐계수, 작업 허용 오차를 프로젝트 규칙으로 전달합니다.
 5. 시뮬레이션 결과와 원본 측량 데이터를 별도 버전으로 보관합니다.
+
+## ☁️ CI/CD 검토 결과
+
+현재 구조에는 **프론트엔드 Cloudflare Pages + ML API Docker 배포**의 혼합 구성이 가장 안전합니다. Next.js는 정적 산출물 `out/`을 만들 수 있어 Pages와 잘 맞지만, 커밋된 joblib 모델은 정확한 scikit-learn 버전에 의존하므로 Python Worker로 바로 옮기기보다 컨테이너 경로를 유지하는 편이 재현성이 높습니다.
+
+<div align="center">
+  <a href="./docs/architecture/cloudflare-cicd-proposal.html">
+    <img src="./docs/architecture/cloudflare-cicd-proposal.png" alt="siltDA Cloudflare 중심 CI/CD 제안" width="100%" />
+  </a>
+  <br />
+  <sub>제안안이며 아직 배포 워크플로를 설치한 상태는 아닙니다.</sub>
+</div>
+
+권장 적용 순서는 다음과 같습니다.
+
+1. `requirements.txt`와 모델 아티팩트의 scikit-learn 버전을 먼저 일치시킵니다.
+2. GitHub 필수 체크에 프론트 `typecheck/build`, 백엔드 `pytest`, 실제 joblib 로드와 `/health` 스모크 테스트를 추가합니다.
+3. Cloudflare Pages Git 연동으로 PR 미리보기와 `main` 운영 배포를 구성합니다.
+4. ML API는 당분간 `render.yaml`과 Docker 이미지를 유지합니다.
+5. 완전한 Cloudflare 구성이 필요하면 동일 이미지를 Cloudflare Containers에서 PoC한 뒤 비용·콜드 스타트·모델 메모리를 비교합니다.
 
 ## 🙌 참고
 

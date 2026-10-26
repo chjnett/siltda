@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "제안: siltDA Cloudflare 중심 CI/CD",
+    "subtitle": "정적 프론트는 Pages, Python ML API는 검증 후 단계적으로 이전",
+    "output": "docs/architecture/cloudflare-cicd-proposal.html",
+    "locale": "ko",
+    "animation": "trace",
+    "quality_profile": "showcase"
+  },
+  "stages": [
+    { "label": "GitHub" },
+    { "label": "필수 품질 게이트" },
+    { "label": "현재 배포" },
+    { "label": "선택적 이전" }
+  ],
+  "nodes": [
+    { "id": "pull_request", "type": "frontend", "label": "Pull Request", "sublabel": "코드·문서·모델 변경", "stage": 0, "row": 0, "tag": "review" },
+    { "id": "frontend_ci", "type": "frontend", "label": "Frontend CI", "sublabel": "typecheck + static build", "stage": 1, "row": 0, "tag": "Node 20" },
+    { "id": "backend_ci", "type": "backend", "label": "Backend + Model CI", "sublabel": "pytest · joblib · /health", "stage": 1, "row": 2, "width": 142, "tag": "Python 3.12" },
+    { "id": "pages", "type": "cloud", "label": "Cloudflare Pages", "sublabel": "PR preview + production", "stage": 2, "row": 0, "width": 124, "tag": "권장" },
+    { "id": "render", "type": "cloud", "label": "Render API", "sublabel": "현재 Docker 이미지 유지", "stage": 2, "row": 2, "tag": "1단계" },
+    { "id": "containers", "type": "cloud", "label": "Cloudflare Containers", "sublabel": "유료·PoC 후 이전", "stage": 3, "row": 2, "width": 142, "tag": "선택" }
+  ],
+  "flows": [
+    { "id": "pr_frontend", "from": "pull_request", "to": "frontend_ci", "label": "프론트 변경", "classification": "필수 검사", "variant": "emphasis", "route": "straight" },
+    { "id": "pr_backend", "from": "pull_request", "to": "backend_ci", "label": "API·모델 변경", "classification": "필수 검사", "variant": "emphasis", "fromSide": "bottom", "toSide": "left", "via": [[100, 440], [220, 440], [220, 385]], "labelAt": [154, 428] },
+    { "id": "preview", "from": "frontend_ci", "to": "pages", "label": "정적 out/", "classification": "PR 미리보기", "variant": "emphasis", "route": "straight" },
+    { "id": "docker", "from": "backend_ci", "to": "render", "label": "검증된 이미지", "classification": "Docker", "variant": "default", "route": "straight" },
+    { "id": "future", "from": "render", "to": "containers", "label": "비용·호환성 검증 후", "classification": "optional", "variant": "dashed", "route": "straight" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "지금 권장하는 조합",
+      "items": [
+        "Next.js 정적 산출물은 Cloudflare Pages에서 PR 미리보기와 운영 배포",
+        "FastAPI·scikit-learn·LightGBM은 현재 Docker/Render 경로 유지",
+        "브랜치 보호 규칙으로 프론트·백엔드·모델 호환성 검사를 필수화"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "먼저 해결할 항목",
+      "items": [
+        "개발 requirements와 커밋된 joblib 모델의 scikit-learn 버전을 일치시킨다",
+        "Python 3.12에서 실제 모델 로드와 API 스모크 테스트를 수행한다",
+        "Pages 환경변수와 API CORS 허용 도메인을 분리 관리한다"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "완전한 Cloudflare 이전",
+      "items": [
+        "Python Worker는 네이티브 ML 패키지 호환성을 별도 검증해야 한다",
+        "현 Docker 이미지를 유지하려면 Cloudflare Containers가 더 직접적이다",
+        "유료 플랜·콜드 스타트·모델 크기를 PoC에서 측정한 뒤 결정한다"
+      ]
+    }
+  ]
+}
