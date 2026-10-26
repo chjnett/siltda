@@ -1,0 +1,2456 @@
+{
+ "26140001": {
+  "name": "송도 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "서구",
+  "has_area_history": true
+ },
+ "26200001": {
+  "name": "감지해변",
+  "sido": "부산광역시",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "26200002": {
+  "name": "영도구 중리",
+  "sido": "부산광역시",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "26350001": {
+  "name": "해운대 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "해운대구",
+  "has_area_history": true
+ },
+ "26350002": {
+  "name": "송정 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "해운대구",
+  "has_area_history": false
+ },
+ "26380001": {
+  "name": "다대동 다대포 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "사하구",
+  "has_area_history": false
+ },
+ "26380002": {
+  "name": "다대포 해수욕장 동측지구",
+  "sido": "부산광역시",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "26440001": {
+  "name": "명지동 진목지구",
+  "sido": "부산광역시",
+  "sigungu": "강서구",
+  "has_area_history": false
+ },
+ "26440002": {
+  "name": "천성동 천수말지구",
+  "sido": "부산광역시",
+  "sigungu": "강서구",
+  "has_area_history": false
+ },
+ "26440003": {
+  "name": "천성동 동뫼지구",
+  "sido": "부산광역시",
+  "sigungu": "강서구",
+  "has_area_history": false
+ },
+ "26500001": {
+  "name": "광안리 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "수영구",
+  "has_area_history": true
+ },
+ "26710001": {
+  "name": "일광 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "기장군",
+  "has_area_history": true
+ },
+ "26710002": {
+  "name": "임랑 해수욕장",
+  "sido": "부산광역시",
+  "sigungu": "기장군",
+  "has_area_history": true
+ },
+ "28110001": {
+  "name": "왕산 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "중구",
+  "has_area_history": false
+ },
+ "28110002": {
+  "name": "중구 을왕",
+  "sido": "인천광역시",
+  "sigungu": "중구",
+  "has_area_history": false
+ },
+ "28110003": {
+  "name": "선녀바위 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "중구",
+  "has_area_history": false
+ },
+ "28110004": {
+  "name": "실미 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "중구",
+  "has_area_history": false
+ },
+ "28110005": {
+  "name": "하나개 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "중구",
+  "has_area_history": false
+ },
+ "28710001": {
+  "name": "서도면 영뜰 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "강화군",
+  "has_area_history": false
+ },
+ "28710002": {
+  "name": "강화군 동막",
+  "sido": "인천광역시",
+  "sigungu": "강화군",
+  "has_area_history": false
+ },
+ "28710003": {
+  "name": "서도면 뒷장술 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "강화군",
+  "has_area_history": false
+ },
+ "28710004": {
+  "name": "서도면 조개골 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "강화군",
+  "has_area_history": false
+ },
+ "28710005": {
+  "name": "서도면 대빈창 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "강화군",
+  "has_area_history": false
+ },
+ "28720001": {
+  "name": "장골 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720002": {
+  "name": "옹진군 큰풀안",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720003": {
+  "name": "덕적면 서포리 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720004": {
+  "name": "노가리 해변지구",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720005": {
+  "name": "용담리 해변지구",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720006": {
+  "name": "십리포 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720007": {
+  "name": "장경리 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720008": {
+  "name": "진촌 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720009": {
+  "name": "한들 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720010": {
+  "name": "옹암 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720011": {
+  "name": "벌안 해수욕장",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720012": {
+  "name": "옹진군 작은풀안",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720013": {
+  "name": "옹진군 이일레",
+  "sido": "인천광역시",
+  "sigungu": "옹진군",
+  "has_area_history": false
+ },
+ "28720014": {
+  "name": "옹진군 서포리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "28720015": {
+  "name": "옹진군 사탄동",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "31170001": {
+  "name": "주전 해수욕장",
+  "sido": "울산광역시",
+  "sigungu": "동구",
+  "has_area_history": true
+ },
+ "31170002": {
+  "name": "일산동 일산지구",
+  "sido": "울산광역시",
+  "sigungu": "동구",
+  "has_area_history": false
+ },
+ "31170003": {
+  "name": "일산 해수욕장",
+  "sido": "울산광역시",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "31200001": {
+  "name": "정자 해수욕장",
+  "sido": "울산광역시",
+  "sigungu": "북구",
+  "has_area_history": true
+ },
+ "31710001": {
+  "name": "진하 해수욕장",
+  "sido": "울산광역시",
+  "sigungu": "울주군",
+  "has_area_history": true
+ },
+ "31710002": {
+  "name": "나사 해수욕장",
+  "sido": "울산광역시",
+  "sigungu": "울주군",
+  "has_area_history": true
+ },
+ "41273001": {
+  "name": "안산시 방아머리",
+  "sido": "경기도",
+  "sigungu": "안산시 ",
+  "has_area_history": false
+ },
+ "41273002": {
+  "name": "안산시 서위",
+  "sido": "경기도",
+  "sigungu": "안산시 ",
+  "has_area_history": false
+ },
+ "41273003": {
+  "name": "구봉도 남측해안",
+  "sido": "경기도",
+  "sigungu": "안산시 ",
+  "has_area_history": false
+ },
+ "41273004": {
+  "name": "선감지구",
+  "sido": "경기도",
+  "sigungu": "안산시 ",
+  "has_area_history": false
+ },
+ "41273005": {
+  "name": "행낭곡지구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "41590001": {
+  "name": "국화도 해수욕장",
+  "sido": "경기도",
+  "sigungu": "화성시",
+  "has_area_history": false
+ },
+ "41590002": {
+  "name": "화성시 제부리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "41590003": {
+  "name": "화성시 궁평리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150001": {
+  "name": "강문동 경포대 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150002": {
+  "name": "초당동 강문 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150003": {
+  "name": "강동면 정동진 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150004": {
+  "name": "연곡면 영진리",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150005": {
+  "name": "안현동 사근진 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150006": {
+  "name": "사천면 사천진1~2리",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150007": {
+  "name": "성덕동 남항진 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150008": {
+  "name": "연곡면 동덕리",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150009": {
+  "name": "주문진읍 주문진 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "강릉시",
+  "has_area_history": false
+ },
+ "42150010": {
+  "name": "GW24",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150011": {
+  "name": "GW25",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150012": {
+  "name": "GW26",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150013": {
+  "name": "GW27",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150014": {
+  "name": "GW28",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150015": {
+  "name": "GW29",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150016": {
+  "name": "GW30",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42150017": {
+  "name": "GW31",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42170001": {
+  "name": "망상동 망상 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "동해시",
+  "has_area_history": false
+ },
+ "42170002": {
+  "name": "북평동 추암 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "동해시",
+  "has_area_history": false
+ },
+ "42170003": {
+  "name": "GW32",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42170004": {
+  "name": "GW33",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42170005": {
+  "name": "GW34",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42210001": {
+  "name": "영랑동",
+  "sido": "강원특별자치도",
+  "sigungu": "속초시",
+  "has_area_history": false
+ },
+ "42210002": {
+  "name": "청호동",
+  "sido": "강원특별자치도",
+  "sigungu": "속초시",
+  "has_area_history": false
+ },
+ "42210003": {
+  "name": "조양동 속초 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "속초시",
+  "has_area_history": false
+ },
+ "42210004": {
+  "name": "GW14",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42210005": {
+  "name": "GW15",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230001": {
+  "name": "원덕읍 호산 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "삼척시",
+  "has_area_history": false
+ },
+ "42230002": {
+  "name": "근덕면 맹방 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "삼척시",
+  "has_area_history": false
+ },
+ "42230003": {
+  "name": "근덕면 궁촌 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "삼척시",
+  "has_area_history": false
+ },
+ "42230004": {
+  "name": "근덕면 덕산 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "삼척시",
+  "has_area_history": false
+ },
+ "42230005": {
+  "name": "GW35",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230006": {
+  "name": "GW36",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230007": {
+  "name": "GW37",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230008": {
+  "name": "GW38",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230009": {
+  "name": "GW39",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230010": {
+  "name": "GW40",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42230011": {
+  "name": "GW41",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820001": {
+  "name": "토성면 천진 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "42820002": {
+  "name": "현내면 화진포 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "42820003": {
+  "name": "죽왕면 송지호 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "42820004": {
+  "name": "죽왕면 가진리 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "42820006": {
+  "name": "GW01",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820007": {
+  "name": "GW02",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820008": {
+  "name": "GW03",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820009": {
+  "name": "GW04",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820010": {
+  "name": "GW05",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820011": {
+  "name": "GW06",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820012": {
+  "name": "GW07",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820013": {
+  "name": "GW08",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820014": {
+  "name": "GW09",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820015": {
+  "name": "GW10",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820016": {
+  "name": "GW11",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820017": {
+  "name": "GW12",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42820018": {
+  "name": "GW13",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830001": {
+  "name": "강현면 낙산 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830002": {
+  "name": "현북면 기사문리～잔교리",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830003": {
+  "name": "현남면 인구 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830004": {
+  "name": "손양면 오산리",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830005": {
+  "name": "현남면 남애리",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830006": {
+  "name": "강현면 정암리",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830007": {
+  "name": "현북면 하조대 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830008": {
+  "name": "손양면 동호 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830009": {
+  "name": "현남면 인구 해수욕장",
+  "sido": "강원특별자치도",
+  "sigungu": "양양군",
+  "has_area_history": false
+ },
+ "42830010": {
+  "name": "GW16",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830011": {
+  "name": "GW17",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830012": {
+  "name": "GW18",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830013": {
+  "name": "GW19",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830014": {
+  "name": "GW20",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830015": {
+  "name": "GW21",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830016": {
+  "name": "GW22",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "42830017": {
+  "name": "GW23",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44180001": {
+  "name": "대천 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "보령시",
+  "has_area_history": false
+ },
+ "44180002": {
+  "name": "무창포 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "보령시",
+  "has_area_history": false
+ },
+ "44180003": {
+  "name": "웅천읍 독산 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "보령시",
+  "has_area_history": false
+ },
+ "44180004": {
+  "name": "보령시 학성",
+  "sido": "충청남도",
+  "sigungu": "보령시",
+  "has_area_history": false
+ },
+ "44180005": {
+  "name": "보령시 장고도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44180006": {
+  "name": "보령시 호도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44210001": {
+  "name": "서산시 영탑리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44210002": {
+  "name": "서산시 환성리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44270001": {
+  "name": "당진시 장고항",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44770001": {
+  "name": "서천군 송림리",
+  "sido": "충청남도",
+  "sigungu": "서천군",
+  "has_area_history": false
+ },
+ "44770002": {
+  "name": "서천군 다사리",
+  "sido": "충청남도",
+  "sigungu": "서천군",
+  "has_area_history": false
+ },
+ "44770003": {
+  "name": "서천군 도둔리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44770004": {
+  "name": "서천군 유부도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44770005": {
+  "name": "서천군 송석",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44800001": {
+  "name": "홍성군 상황리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44800002": {
+  "name": "홍성군 남당리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44800003": {
+  "name": "홍성군 속동",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44800004": {
+  "name": "홍성군 어사리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44800005": {
+  "name": "홍성군 죽도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "4480001": {
+  "name": "서부면 상황지구",
+  "sido": "충청남도",
+  "sigungu": "홍성군",
+  "has_area_history": false
+ },
+ "44825001": {
+  "name": "학암포 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825002": {
+  "name": "신두리 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825003": {
+  "name": "만리포 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825004": {
+  "name": "남면 양잠리",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825005": {
+  "name": "남면 달산리",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825006": {
+  "name": "남면 원청리",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825007": {
+  "name": "남면 신온리(1)",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825008": {
+  "name": "남면 신온리(2)(3)(4)",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825009": {
+  "name": "안면읍 삼봉 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825010": {
+  "name": "꽃지 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825011": {
+  "name": "고남면 바람아래 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825012": {
+  "name": "운여 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825013": {
+  "name": "백사장 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825014": {
+  "name": "의항 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825015": {
+  "name": "구례포 해수욕장",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825016": {
+  "name": "태안군 병술만",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825017": {
+  "name": "청포대지구",
+  "sido": "충청남도",
+  "sigungu": "태안군",
+  "has_area_history": false
+ },
+ "44825018": {
+  "name": "태안군 어은돌",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44825019": {
+  "name": "태안군 연방죽골",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "44825020": {
+  "name": "태안군 천리포",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "45130001": {
+  "name": "선유도 해수욕장",
+  "sido": "전라북도",
+  "sigungu": "부안군",
+  "has_area_history": false
+ },
+ "45130002": {
+  "name": "군산시 무녀도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "45790001": {
+  "name": "구시포 해수욕장",
+  "sido": "전라북도",
+  "sigungu": "고창군",
+  "has_area_history": false
+ },
+ "45790002": {
+  "name": "고창군 동호",
+  "sido": "전라북도",
+  "sigungu": "고창군",
+  "has_area_history": false
+ },
+ "45790003": {
+  "name": "고창군 명사십리",
+  "sido": "전라북도",
+  "sigungu": "고창군",
+  "has_area_history": false
+ },
+ "45790004": {
+  "name": "해리면 광승리",
+  "sido": "전라북도",
+  "sigungu": "고창군",
+  "has_area_history": false
+ },
+ "45790005": {
+  "name": "고창군 서해안 바람공원",
+  "sido": "전라북도",
+  "sigungu": "고창군",
+  "has_area_history": false
+ },
+ "45800001": {
+  "name": "격포 해수욕장",
+  "sido": "전라북도",
+  "sigungu": "부안군",
+  "has_area_history": false
+ },
+ "45800002": {
+  "name": "변산 해수욕장",
+  "sido": "전라북도",
+  "sigungu": "부안군",
+  "has_area_history": false
+ },
+ "45800003": {
+  "name": "부안군 위도",
+  "sido": "전라북도",
+  "sigungu": "부안군",
+  "has_area_history": false
+ },
+ "45800004": {
+  "name": "부안군 정금",
+  "sido": "전라북도",
+  "sigungu": "부안군",
+  "has_area_history": false
+ },
+ "45800005": {
+  "name": "모항",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46110001": {
+  "name": "충무동 외달도",
+  "sido": "전라남도",
+  "sigungu": "목포시",
+  "has_area_history": false
+ },
+ "46110002": {
+  "name": "목포시 혼불",
+  "sido": "전라남도",
+  "sigungu": "목포시",
+  "has_area_history": false
+ },
+ "46110003": {
+  "name": "목포시 유달유원지",
+  "sido": "전라남도",
+  "sigungu": "목포시",
+  "has_area_history": false
+ },
+ "46110004": {
+  "name": "목포시 방망이섬",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46110005": {
+  "name": "목포시 구)공생재활원",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46110006": {
+  "name": "목포시 장좌도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46110007": {
+  "name": "목포시 쪽박섬",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46110008": {
+  "name": "목포시 외달도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130001": {
+  "name": "여수시 선목도",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130002": {
+  "name": "화양면 안포2지구",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130003": {
+  "name": "화정면 하화지구",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130004": {
+  "name": "화정면 규포지구",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130005": {
+  "name": "여수시 여석",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130006": {
+  "name": "여수시 만성리",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130007": {
+  "name": "무슬목 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130008": {
+  "name": "방죽포 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130009": {
+  "name": "여수시 사도 피서지",
+  "sido": "전라남도",
+  "sigungu": "여수시",
+  "has_area_history": false
+ },
+ "46130010": {
+  "name": "여수시 신덕",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130011": {
+  "name": "여수시 온동",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130012": {
+  "name": "여수시 감도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130013": {
+  "name": "여수시 구미",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130014": {
+  "name": "여수시 소장",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130015": {
+  "name": "여수시 곰상개",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46130016": {
+  "name": "여수시 창촌",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770001": {
+  "name": "고흥군 장사",
+  "sido": "전라남도",
+  "sigungu": "고흥군",
+  "has_area_history": false
+ },
+ "46770002": {
+  "name": "고흥군 덕흥",
+  "sido": "전라남도",
+  "sigungu": "고흥군",
+  "has_area_history": false
+ },
+ "46770003": {
+  "name": "고흥군 익금",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770004": {
+  "name": "고흥군 나로우주",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770005": {
+  "name": "고흥군 연소",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770006": {
+  "name": "고흥군 도야",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770007": {
+  "name": "고흥군 신흥",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770008": {
+  "name": "고흥군 청석",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46770009": {
+  "name": "고흥군 오취",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46780001": {
+  "name": "율포 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "보성군",
+  "has_area_history": false
+ },
+ "46780002": {
+  "name": "보성군 명교",
+  "sido": "전라남도",
+  "sigungu": "보성군",
+  "has_area_history": false
+ },
+ "46780003": {
+  "name": "보성군 군학",
+  "sido": "전라남도",
+  "sigungu": "보성군",
+  "has_area_history": false
+ },
+ "46780005": {
+  "name": "비봉지구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46800001": {
+  "name": "관산읍 돌의도지구",
+  "sido": "전라남도",
+  "sigungu": "장흥군",
+  "has_area_history": false
+ },
+ "46800002": {
+  "name": "장흥군 수문",
+  "sido": "전라남도",
+  "sigungu": "장흥군",
+  "has_area_history": false
+ },
+ "46800003": {
+  "name": "장흥군 사촌(서측)",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46800004": {
+  "name": "장흥군 사촌(동측)",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46810001": {
+  "name": "강진군 만덕 자전거해안도로",
+  "sido": "전라남도",
+  "sigungu": "강진군",
+  "has_area_history": false
+ },
+ "46820001": {
+  "name": "해남군 금호",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820002": {
+  "name": "화산면 송평 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820003": {
+  "name": "송지면 사구미 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820004": {
+  "name": "송호 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820005": {
+  "name": "화원면 월래1지구",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820006": {
+  "name": "해남군 미학",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820007": {
+  "name": "화산면 관동지구",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820008": {
+  "name": "해남군 구성1",
+  "sido": "전라남도",
+  "sigungu": "해남군",
+  "has_area_history": false
+ },
+ "46820009": {
+  "name": "해남군 산정·엄남",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46840001": {
+  "name": "무안군 톱머리",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840002": {
+  "name": "무안군 홀통",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840003": {
+  "name": "무안군 만풍~유월",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840004": {
+  "name": "무안군 마산~용정",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840005": {
+  "name": "무안군 용정",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840006": {
+  "name": "현경면 송정∼현화지구",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840007": {
+  "name": "무안군 곡지",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840008": {
+  "name": "무안군 운남면~망운면 송현",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840009": {
+  "name": "운남면 하묘∼성내지구",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840010": {
+  "name": "무안군 도원",
+  "sido": "전라남도",
+  "sigungu": "무안군",
+  "has_area_history": false
+ },
+ "46840011": {
+  "name": "무안군 해운",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46840012": {
+  "name": "무안군 현화",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46840014": {
+  "name": "무안군 창매",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46840015": {
+  "name": "무안군 신월",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46860001": {
+  "name": "함평군 월천",
+  "sido": "전라남도",
+  "sigungu": "함평군",
+  "has_area_history": false
+ },
+ "46860002": {
+  "name": "함평군 석성",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46870001": {
+  "name": "홍농읍 가마미 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "영광군",
+  "has_area_history": false
+ },
+ "46870002": {
+  "name": "영광군 백바위",
+  "sido": "전라남도",
+  "sigungu": "영광군",
+  "has_area_history": false
+ },
+ "46870003": {
+  "name": "영광군 송이도",
+  "sido": "전라남도",
+  "sigungu": "영광군",
+  "has_area_history": false
+ },
+ "46870004": {
+  "name": "영광군 가마미",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46870005": {
+  "name": "영광군 성산리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46870006": {
+  "name": "영광군 두우리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46890001": {
+  "name": "명사십리 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "완도군",
+  "has_area_history": false
+ },
+ "46890002": {
+  "name": "해당화 해변",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46890003": {
+  "name": "완도군 동고리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46900001": {
+  "name": "가계 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900002": {
+  "name": "진도군 초사",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900003": {
+  "name": "임회면 굴포지구",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900004": {
+  "name": "진도군 거제",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900005": {
+  "name": "서거차지구",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900006": {
+  "name": "금갑 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900007": {
+  "name": "관매 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "진도군",
+  "has_area_history": false
+ },
+ "46900008": {
+  "name": "진도군 가학",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46900009": {
+  "name": "진도군 모사",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910001": {
+  "name": "신안군 대광",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910002": {
+  "name": "자은면 신성2리",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910003": {
+  "name": "임자면 도찬리",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910004": {
+  "name": "신안군 남촌",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910005": {
+  "name": "신안군 읍동",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910006": {
+  "name": "우전 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910007": {
+  "name": "신안군 둔장",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910008": {
+  "name": "고교 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910009": {
+  "name": "신성 해수욕장",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910010": {
+  "name": "신안군 면전",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910011": {
+  "name": "신안군 익금리",
+  "sido": "전라남도",
+  "sigungu": "신안군",
+  "has_area_history": false
+ },
+ "46910012": {
+  "name": "신안군 명사십리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910013": {
+  "name": "신안군 시목",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910014": {
+  "name": "신안군 돈목",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910015": {
+  "name": "신안군 솔치",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910016": {
+  "name": "신안군 수치",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910017": {
+  "name": "신안군 하누넘",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910018": {
+  "name": "신안군 짝지",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910019": {
+  "name": "신안군 백길",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910020": {
+  "name": "고막 해수욕장",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910021": {
+  "name": "오산해변",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910022": {
+  "name": "신안군 내치",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910023": {
+  "name": "신안군 추포",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910024": {
+  "name": "신안군 방축",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910025": {
+  "name": "신안군 매화",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910026": {
+  "name": "신안군 장감",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910027": {
+  "name": "신안군 백산",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910028": {
+  "name": "신안군 자라",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "46910029": {
+  "name": "신안군 메고평",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "47111001": {
+  "name": "포항시 송도",
+  "sido": "경상북도",
+  "sigungu": "포항시",
+  "has_area_history": true
+ },
+ "47111002": {
+  "name": "장기면 신창2리",
+  "sido": "경상북도",
+  "sigungu": "포항시",
+  "has_area_history": false
+ },
+ "47111003": {
+  "name": "포항시 도구",
+  "sido": "경상북도",
+  "sigungu": "포항시",
+  "has_area_history": true
+ },
+ "47111004": {
+  "name": "구룡포읍 구룡포 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "포항시",
+  "has_area_history": true
+ },
+ "47111005": {
+  "name": "장기면 모포지구",
+  "sido": "경상북도",
+  "sigungu": "포항시",
+  "has_area_history": true
+ },
+ "47113001": {
+  "name": "송라면 화진 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47113002": {
+  "name": "포항시 영일대",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47113003": {
+  "name": "청하면 월포 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47113004": {
+  "name": "흥해읍 칠포 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47130001": {
+  "name": "감포읍 오류 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": true
+ },
+ "47130002": {
+  "name": "감포읍 전촌 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": false
+ },
+ "47130003": {
+  "name": "감포읍 나정 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": false
+ },
+ "47130004": {
+  "name": "양북면 봉길 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": false
+ },
+ "47130005": {
+  "name": "양남면 나아 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": true
+ },
+ "47130006": {
+  "name": "감포읍 전촌·나정 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": true
+ },
+ "47130007": {
+  "name": "양남면 하서1리",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": true
+ },
+ "47130008": {
+  "name": "양남면 관성 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "경주시",
+  "has_area_history": true
+ },
+ "47130009": {
+  "name": "감포읍 감포 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47130010": {
+  "name": "감포읍 대본지구",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47130011": {
+  "name": "양북면 봉길대왕암 해변",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47130012": {
+  "name": "양남면 읍천2리",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "4770006": {
+  "name": "영덕군 부경리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "47770001": {
+  "name": "병곡면 고래불 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": true
+ },
+ "47770002": {
+  "name": "영해면 대진 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": false
+ },
+ "47770003": {
+  "name": "영덕읍 대탄리",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": true
+ },
+ "47770004": {
+  "name": "남정면 장사 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": false
+ },
+ "47770005": {
+  "name": "강구면 금진∼하저리",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": true
+ },
+ "47770006": {
+  "name": "남정면 부경리",
+  "sido": "경상북도",
+  "sigungu": "영덕군",
+  "has_area_history": true
+ },
+ "47770007": {
+  "name": "남정면 남호 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47770008": {
+  "name": "병곡면 금곡∼백석지구",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47770009": {
+  "name": "축산면 경정 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47770010": {
+  "name": "남정면 원척∼부흥리",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47770011": {
+  "name": "남정면 장사 해수욕장",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47930001": {
+  "name": "원남면 덕신리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930002": {
+  "name": "기성면 구산∼월송리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930003": {
+  "name": "후포면 금음리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930004": {
+  "name": "죽변면 죽변항∼봉평리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930005": {
+  "name": "기성면 망양리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930006": {
+  "name": "근남면 망양 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": false
+ },
+ "47930007": {
+  "name": "죽변면 후정 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930008": {
+  "name": "기성면 구산 해수욕장",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": false
+ },
+ "47930009": {
+  "name": "근남면 산포리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930010": {
+  "name": "원남면 오산리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930011": {
+  "name": "기성면 봉산리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930012": {
+  "name": "평해면 직산리",
+  "sido": "경상북도",
+  "sigungu": "울진군",
+  "has_area_history": true
+ },
+ "47930013": {
+  "name": "울진읍 온양리",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47930014": {
+  "name": "울진군 나곡",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "47940001": {
+  "name": "울릉군 태하1리",
+  "sido": "경상북도",
+  "sigungu": "울릉군",
+  "has_area_history": true
+ },
+ "47940002": {
+  "name": "울릉읍 사동1리",
+  "sido": "경상북도",
+  "sigungu": "울릉군",
+  "has_area_history": true
+ },
+ "47940003": {
+  "name": "울릉군 남양1리",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47940004": {
+  "name": "울릉군 남양3리",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "47940005": {
+  "name": "울릉군 학포",
+  "sido": "경상북도",
+  "sigungu": null,
+  "has_area_history": true
+ },
+ "48220001": {
+  "name": "광도면 용호지구",
+  "sido": "경상남도",
+  "sigungu": "통영시",
+  "has_area_history": false
+ },
+ "48220002": {
+  "name": "통영시 산양읍 이운",
+  "sido": "경상남도",
+  "sigungu": "통영시",
+  "has_area_history": false
+ },
+ "48220003": {
+  "name": "비진도 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "통영시",
+  "has_area_history": false
+ },
+ "48220004": {
+  "name": "대항 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "통영시",
+  "has_area_history": false
+ },
+ "48220005": {
+  "name": "통영시 통영공설",
+  "sido": "경상남도",
+  "sigungu": "통영시",
+  "has_area_history": false
+ },
+ "48220006": {
+  "name": "통영시 봉암",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48220007": {
+  "name": "통영시 선촌",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48240001": {
+  "name": "서포면 구랑지구",
+  "sido": "경상남도",
+  "sigungu": "사천시",
+  "has_area_history": false
+ },
+ "48240002": {
+  "name": "서포면 선전지구",
+  "sido": "경상남도",
+  "sigungu": "사천시",
+  "has_area_history": false
+ },
+ "48240003": {
+  "name": "사천시 남일대",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48240004": {
+  "name": "사천시 구포",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48240005": {
+  "name": "사천시 송포~실안",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310001": {
+  "name": "구조라 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310002": {
+  "name": "둔덕면 학산∼내평지구",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310003": {
+  "name": "거제시 명사",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310004": {
+  "name": "농소몽돌 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310005": {
+  "name": "거제시 죽림",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310006": {
+  "name": "망치 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310007": {
+  "name": "와현 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310008": {
+  "name": "거제시 구영",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310009": {
+  "name": "황포 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310010": {
+  "name": "거제시 물안",
+  "sido": "경상남도",
+  "sigungu": "거제시",
+  "has_area_history": false
+ },
+ "48310011": {
+  "name": "거제시 흑진주몽돌",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310012": {
+  "name": "거제시 덕원",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310013": {
+  "name": "거제시 덕포",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310014": {
+  "name": "거제시 여차몽돌",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310015": {
+  "name": "거제시 일운면 예구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310016": {
+  "name": "거제시 함목",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310017": {
+  "name": "거제시 흥남",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48310018": {
+  "name": "거제시 지석",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48820001": {
+  "name": "동해면 덕곡지구",
+  "sido": "경상남도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "48820002": {
+  "name": "고성읍 수남지구",
+  "sido": "경상남도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "48820003": {
+  "name": "하일면 가룡지구",
+  "sido": "경상남도",
+  "sigungu": "고성군",
+  "has_area_history": false
+ },
+ "48820004": {
+  "name": "고성군 용태",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840001": {
+  "name": "상주 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840002": {
+  "name": "송정솔바람 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840003": {
+  "name": "남해군 사촌",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840004": {
+  "name": "월포 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840005": {
+  "name": "설리 해수욕장",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840006": {
+  "name": "남해군 서면 염해",
+  "sido": "경상남도",
+  "sigungu": "남해군",
+  "has_area_history": false
+ },
+ "48840007": {
+  "name": "남해군 은점",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840008": {
+  "name": "남해군 선구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840009": {
+  "name": "남해군 장항",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840010": {
+  "name": "남해군 노구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840011": {
+  "name": "남해군 조도",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48840012": {
+  "name": "남해군 화계",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "48850001": {
+  "name": "하동군 중평",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "50110001": {
+  "name": "이호 해수욕장",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110002": {
+  "name": "애월읍 곽지 해수욕장",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110003": {
+  "name": "삼양1동 삼양 해수욕장",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110004": {
+  "name": "함덕 해수욕장",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110005": {
+  "name": "협재 해수욕장",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110006": {
+  "name": "한경면 한장지구",
+  "sido": "제주도",
+  "sigungu": "제주시",
+  "has_area_history": false
+ },
+ "50110007": {
+  "name": "제주시 월정",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "50110008": {
+  "name": "제주시 금능",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "50130001": {
+  "name": "수마포구 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130002": {
+  "name": "신양 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130003": {
+  "name": "표선 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130004": {
+  "name": "중문 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130005": {
+  "name": "안덕면 사계 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130006": {
+  "name": "하모 해수욕장",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130007": {
+  "name": "성산읍 삼달지구",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130008": {
+  "name": "예래동 예래지구",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130009": {
+  "name": "황우치 해변",
+  "sido": "제주도",
+  "sigungu": "서귀포시",
+  "has_area_history": false
+ },
+ "50130010": {
+  "name": "용머리해안∼사계포구",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "50130011": {
+  "name": "서귀포시 사계",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ },
+ "50130012": {
+  "name": "서귀포시 오조리",
+  "sido": null,
+  "sigungu": null,
+  "has_area_history": false
+ }
+}

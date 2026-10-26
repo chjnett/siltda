@@ -1,0 +1,9 @@
+# Keep training, tests, and production inference on the exact ABI/model stack
+# that produced artifacts/erosion_model.joblib. Changing these pins requires
+# retraining the model and committing a newly validated artifact.
+-r requirements-serve.txt
+
+# Training, diagnostics, and test-only dependencies.
+matplotlib>=3.9,<4
+pytest>=8,<9
+httpx>=0.27,<1

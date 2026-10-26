@@ -47,13 +47,32 @@ siltDA는 항만에서 발생하는 준설토를 해안 복원의 자원으로 �
 | 시뮬레이션 | 굴착 깊이·성토 두께 변경, 사용자 정의 삼각형 메시 실시간 재생성 |
 | 결과 비교 | 작업 전·작업 후·전후 비교·단면도 모드 |
 | 물량 계산 | 준설량·복원량·잔여량 또는 부족량 실시간 계산 |
+| 침식 위험 분석 | 공공 관측 이력과 실험적 ML 추정치를 분리해 표시 |
 | 프로젝트 관리 | 브라우저 로컬 저장, 인트로 다시 보기, 전 단계 해양 영상 배경 |
+
+## 🧭 침식 위험 분석 흐름
+
+PR #1에는 해양수산부 공공데이터를 정제해 관측 이력과 실험적 침식 위험 추정치를 제공하는 독립 FastAPI 모듈이 포함되어 있습니다. 프론트엔드는 두 값을 같은 카드 안에서도 명확히 구분하며, ML 결과를 공식 위험 판정처럼 사용하지 않습니다.
+
+<div align="center">
+  <a href="./docs/architecture/erosion-ml-pipeline.html?theme=light">
+    <img src="./docs/architecture/erosion-ml-pipeline.png" alt="siltDA 침식 위험 분석 데이터 흐름" width="100%" />
+  </a>
+  <br />
+  <sub>Archify 원본 HTML은 코드 근거, 테마 전환, 단계별 탐색을 지원합니다.</sub>
+</div>
+
+- 정제 후 데이터는 55개 지점의 279개 관측 구간입니다.
+- 선정된 `lightgbm_huber` 모델의 교차검증 MAE는 2.15%p/년이며, 중앙값 기준선 2.07%p/년보다 우수하지 않습니다.
+- 따라서 관측 이력이 주 정보이고 ML 예측은 탐색적 참고값입니다.
+- 데이터 출처, 누수 방지 규칙, 재현 방법은 [백엔드 문서](./backend/README.md)에 정리되어 있습니다.
 
 ## 🛠 기술 스택
 
-- **Framework** — Next.js 16, React 19, TypeScript
+- **Frontend** — Next.js 16, React 19, TypeScript
 - **3D/GIS** — CesiumJS, Esri World Imagery, GeoJSON 호환 좌표
 - **Geometry** — Earcut 기반 삼각분할 및 사용자 정의 변형 메시
+- **ML API** — FastAPI, scikit-learn, LightGBM, joblib
 - **Styling** — 반응형 해양 연구·공공 GIS 콘솔 UI
 
 ## 🚀 시작하기
@@ -83,6 +102,19 @@ npm run build
 
 Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`과 `build` 단계에서 `public/cesium`으로 복사됩니다.
 
+### 백엔드 검증
+
+```bash
+cd backend
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip check
+python -m pytest -q
+```
+
+`requirements.txt`는 커밋된 joblib 모델을 만든 `requirements-serve.txt`의 정확한 NumPy·scikit-learn·LightGBM 버전을 상속합니다. 이 핵심 버전을 바꿀 때는 모델을 다시 학습하고 실제 모델 테스트를 통과한 새 아티팩트를 함께 커밋해야 합니다.
+
 ## 🗺 지도 공급자와 대체 경로
 
 기본 실행에는 API 키가 필요하지 않습니다.
@@ -110,8 +142,10 @@ Cesium의 Worker, Assets, Widgets, ThirdParty 런타임 파일은 `postinstall`�
 app/                    Next.js 앱과 전역 스타일
 components/             3D 장면 및 설계 워크플로 UI
 lib/                    공간 계산, 타입, 부산 연안 데모 데이터
+backend/                공공데이터 전처리, ML 학습·추론, FastAPI
 public/                 Cesium 런타임 자산과 해양 영상
 docs/demo/              프로젝트 데모 영상과 대표 이미지
+docs/architecture/      Archify 기반 데이터·배포 설명 자료
 scripts/                 Cesium 자산 복사 스크립트
 ```
 
@@ -130,6 +164,59 @@ scripts/                 Cesium 자산 복사 스크립트
 3. 폴리곤 내부 셀을 클리핑해 실제 굴착·성토 메시를 생성합니다.
 4. 경사면, 다짐계수, 작업 허용 오차를 프로젝트 규칙으로 전달합니다.
 5. 시뮬레이션 결과와 원본 측량 데이터를 별도 버전으로 보관합니다.
+
+## ☁️ CI/CD 검토 결과
+
+현재 구조에는 **프론트엔드 Cloudflare Pages + ML API Docker 배포**의 혼합 구성을 적용했습니다. Next.js는 정적 산출물 `out/`을 만들 수 있어 Pages와 잘 맞지만, 커밋된 joblib 모델은 정확한 scikit-learn 버전에 의존하므로 Python Worker로 바로 옮기기보다 컨테이너 경로를 유지하는 편이 재현성이 높습니다.
+
+<div align="center">
+  <a href="./docs/architecture/cloudflare-cicd-proposal.html?theme=light">
+    <img src="./docs/architecture/cloudflare-cicd-proposal.png" alt="siltDA Cloudflare 중심 CI/CD 제안" width="100%" />
+  </a>
+  <br />
+  <sub>현재 저장소에 반영된 CI/CD 구조입니다. Cloudflare 계정 값 등록 후 운영 배포가 활성화됩니다.</sub>
+</div>
+
+구축된 흐름은 다음과 같습니다.
+
+1. PR과 `main`에서 프론트 `typecheck/build`, 백엔드 `pytest`와 실제 joblib 로드, Docker 이미지 빌드를 실행합니다.
+2. 세 검사를 통과한 `main`의 동일한 `out/` 아티팩트만 Cloudflare Pages에 배포합니다.
+3. ML API는 `render.yaml`과 Docker 이미지를 유지합니다.
+4. 완전한 Cloudflare 구성이 필요하면 동일 이미지를 Cloudflare Containers에서 PoC한 뒤 비용·콜드 스타트·모델 메모리를 비교합니다.
+
+Cloudflare 프로젝트 생성, GitHub 환경 비밀 값, 브랜치 보호 설정은 [배포 설정 가이드](./docs/deployment/cloudflare-pages.md)를 따릅니다.
+
+## 🔀 Pull Request 및 병합 규칙
+
+`main`은 항상 배포 가능한 상태를 유지합니다. 직접 푸시는 원칙적으로 금지하며, 모든 변경은 작업 브랜치와 Pull Request를 거쳐 반영합니다. GitHub 저장소 설정에서는 아래 세 CI 작업을 `main`의 필수 상태 검사로 등록합니다.
+
+- `Frontend / typecheck and static build`
+- `Backend / tests and model compatibility`
+- `Backend / production container build`
+
+### 브랜치와 PR 작성
+
+- 브랜치는 목적에 맞게 `feature/`, `fix/`, `docs/`, `ci/` 접두사를 사용합니다. Codex가 만드는 브랜치는 `codex/`를 사용합니다.
+- 하나의 PR에는 하나의 목적만 담고, 기준 브랜치는 `main`으로 설정합니다.
+- PR 본문에는 변경 이유와 요약, 영향 범위, 실행한 검증과 결과를 기록합니다.
+- 화면이 달라지면 스크린샷이나 영상을 첨부합니다.
+- 설정이나 배포가 달라지면 필요한 환경 변수의 **이름만** 기록하고 값과 토큰은 절대 올리지 않습니다.
+
+### 데이터와 ML 모델 변경
+
+- 실제 데이터와 합성·데모 데이터를 명확히 구분하고 출처, 좌표계, 높이 기준면, 한계를 기록합니다.
+- Python 런타임 또는 scikit-learn 등 모델 의존성 버전을 바꾸면 같은 환경에서 모델을 다시 학습하고 새 joblib 아티팩트를 함께 커밋합니다.
+- 모델, 전처리기, 평가 지표, 그래프 및 데이터 보고서는 같은 PR에서 함께 갱신합니다.
+- 커밋된 모델을 실제로 로드해 예측하는 백엔드 테스트가 통과해야 합니다.
+
+### 검토와 병합
+
+- 필수 CI가 실패했거나 실행 중인 PR, 해결되지 않은 리뷰 의견이 있는 PR은 병합하지 않습니다.
+- 마이그레이션, 환경 변수, 배포 영향이 문서화되지 않은 변경은 병합하지 않습니다.
+- 승인 후에는 커밋 이력을 간결하게 유지하도록 **Squash and merge**를 권장하고, 병합된 작업 브랜치는 삭제합니다.
+- 배포는 세 필수 검사를 모두 통과한 `main` 커밋에 대해서만 실행합니다. 외부 포크 PR에는 배포 비밀 값을 전달하지 않습니다.
+
+PR을 만들 때는 [Pull Request 템플릿](./.github/pull_request_template.md)의 체크리스트를 완료합니다.
 
 ## 🙌 참고
 
