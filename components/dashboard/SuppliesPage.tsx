@@ -9,7 +9,7 @@ import { matchedVolumeOfListing, topSitesForListing } from "@/src/domain/matchin
 import { grainClass, grainClassLabels, judgeAll, suitableUses, finesPct } from "@/src/domain/suitability";
 import { useStore } from "@/src/state/DealStore";
 import type { Listing, Port, Verification, UseKind } from "@/src/types";
-import SedimentPhoto from "./SedimentPhoto";
+import PortSatellite from "./PortSatellite";
 import { EmptyState, FitBadge, Formula, Modal, UseBadge, VerificationBadge } from "./ui";
 
 const PAGE = 12;
@@ -118,7 +118,7 @@ export default function SuppliesPage() {
           <Select label="검증 상태" value={verification} onChange={(v) => setVerification(v as "" | Verification)} options={[["verified", "검증 완료"], ["in-review", "검증 중"], ["unverified", "미검증"]]} />
           <label className="dash-compare-check"><input type="checkbox" checked={wishOnly} onChange={(e) => setWishOnly(e.target.checked)} /> 관심 매물만 ({wish.length})</label>
           <button type="button" className="dash-btn dash-btn-sm" onClick={resetFilters}>조건 초기화</button>
-          <p className="dash-muted">사진은 매물 유형을 보여 주는 참고 이미지(Wikimedia Commons, 작가·라이선스 표기)이며 해당 항만의 실제 현장이 아닙니다.</p>
+          <p className="dash-muted">사진은 해당 항만 위치의 위성 영상(Esri World Imagery)입니다. 준설 현장이나 준설토 자체를 촬영한 것은 아닙니다.</p>
           <p className="dash-muted">거리·편익은 <b>{site.name}</b> 기준으로 계산됩니다. 금액은 시연용 가정값입니다.</p>
         </aside>
 
@@ -196,7 +196,7 @@ function ListingCard({ l, port, base, site, top, available, wished, checked, che
   return (
     <li className="dash-listing" data-wished={wished || undefined}>
       <div className="dash-listing-photo">
-        <SedimentPhoto id={l.id} grain={gc} label={`${port.name} ${l.project}`} />
+        <PortSatellite name={port.name} coordinate={port.coordinate} />
         <div className="dash-ribbons">{badges.map((b) => <span key={b}>{b}</span>)}</div>
         <button type="button" className="dash-wish" aria-pressed={wished} aria-label={wished ? "관심 매물 해제" : "관심 매물 담기"} onClick={onWish}>
           <Heart size={16} aria-hidden="true" fill={wished ? "currentColor" : "none"} />
