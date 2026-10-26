@@ -144,14 +144,6 @@ export function Formula({ title, lines }: { title: string; lines: string[] }) {
   );
 }
 
-export function SignLegend() {
-  return (
-    <span className="dash-sign-legend" title="부족/과잉 부호 범례">
-      단위 m³·억원 · <b data-sign="neg">−</b> 부족 · <b data-sign="pos">+</b> 과잉
-    </span>
-  );
-}
-
 /** 진입 시 0에서 value까지 카운트업 */
 export function useCountUp(value: number, durationMs = 900) {
   const [shown, setShown] = useState(0);

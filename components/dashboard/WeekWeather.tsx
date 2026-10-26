@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Cloud, CloudDrizzle, CloudLightning, CloudRain, CloudSun, Snowflake, Sun, type LucideIcon } from "lucide-react";
 import { WORK_LIMITS } from "@/src/config/assumptions";
 import { fmt1, NO_INFO } from "@/src/domain/format";
@@ -27,12 +27,16 @@ interface Props {
   id: string;
   name: string;
   coordinate: LonLat;
-  /** 0~167 시간 인덱스(오늘 00시 기준) */
-  hourIndex: number;
-  onHourChange: (index: number) => void;
 }
 
-export default function WeekWeather({ id, name, coordinate, hourIndex, onHourChange }: Props) {
+export default function WeekWeather({ id, name, coordinate }: Props) {
+  const [hour, setHour] = useState(12);
+  useEffect(() => {
+    const update = () => setHour(new Date().getHours());
+    update();
+    const t = setInterval(update, 60_000);
+    return () => clearInterval(t);
+  }, []);
   const lon = coordinate[0];
   const lat = coordinate[1];
   const load = useCallback((signal: AbortSignal) => loadWeather([{ id, coordinate: [lon, lat] }], new Set([id]), signal), [id, lon, lat]);
@@ -46,8 +50,7 @@ export default function WeekWeather({ id, name, coordinate, hourIndex, onHourCha
   if (rows.length === 0) return <LoadingState label="기상 데이터가 없습니다" />;
 
   const bundle = state.data;
-  const idx = Math.min(hourIndex, rows.length - 1);
-  const cur = rows[idx];
+  const idx = Math.min(hour, rows.length - 1);
 
   return (
     <div className="dash-weather">
@@ -65,7 +68,7 @@ export default function WeekWeather({ id, name, coordinate, hourIndex, onHourCha
           const selected = idx >= day.startIndex && idx < day.startIndex + 24;
           return (
             <li key={day.date}>
-              <button type="button" className="dash-weather-day" data-selected={selected || undefined} onClick={() => onHourChange(day.startIndex + 12)} aria-pressed={selected} aria-label={`${m}월 ${d}일 선택`}>
+              <div className="dash-weather-day" data-selected={selected || undefined}>
                 <span className="dash-weather-date">{i === 0 ? "오늘" : weekdays[new Date(y, m - 1, d).getDay()]}<small>{m}.{d}</small></span>
                 <Icon size={24} aria-hidden="true" />
                 <span className="dash-muted">{meta.label}</span>
@@ -79,18 +82,13 @@ export default function WeekWeather({ id, name, coordinate, hourIndex, onHourCha
                     return <Pill key={k} tone={levelTone[level]} title={workLimitText(k)}>{WORK_LIMITS[k].label} {workLevelLabels[level]}</Pill>;
                   })}
                 </span>
-              </button>
+              </div>
             </li>
           );
         })}
       </ul>
 
       <HourlyChart rows={rows} index={idx} />
-      <div className="dash-hour-slider">
-        <label htmlFor="weather-hour">시간 슬라이더 — {cur.time.replace("T", " ")} · 풍속 {fmt1(cur.windMs)} m/s · 파고 {cur.waveM === null ? NO_INFO : `${fmt1(cur.waveM)} m`} · 강수 {fmt1(cur.precipMm)} mm</label>
-        <input id="weather-hour" type="range" min={0} max={rows.length - 1} step={1} value={idx} onChange={(e) => onHourChange(Number(e.target.value))} />
-      </div>
-      <p className="dash-muted">작업 가능 기준은 시연용 가정값입니다(배지에 마우스를 올리면 기준 표시). Open-Meteo 수치 예보 모델 값이며 실측이 아닙니다.</p>
     </div>
   );
 }

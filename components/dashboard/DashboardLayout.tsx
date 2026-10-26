@@ -8,7 +8,6 @@ import { DealStoreProvider } from "@/src/state/DealStore";
 import DashboardSidebar from "./DashboardSidebar";
 import DemoTour, { DemoProvider, useDemo } from "./DemoTour";
 import PassportDrawer from "./PassportDrawer";
-import { Pill, SignLegend } from "./ui";
 
 const titles: Record<string, string> = {
   "/dashboard": "HOME — 조정 현황",
@@ -23,18 +22,16 @@ function TopBar() {
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
     setNow(new Date());
-    const t = setInterval(() => setNow(new Date()), 30_000);
+    const t = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(t);
   }, []);
   return (
     <header className="dash-topbar">
       <h1>{titles[pathname] ?? "싣다 대시보드"}</h1>
       <div className="dash-topbar-meta">
-        <SignLegend />
         <span className="dash-muted" suppressHydrationWarning>
-          기준 시각 {now ? now.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) : "—"}
+          기준 시각 {now ? now.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—"}
         </span>
-        <Pill tone="amber">시연 데이터</Pill>
         <button type="button" className="dash-btn dash-btn-primary" onClick={start} disabled={active} data-demo="start-demo">
           <PlayCircle size={15} aria-hidden="true" /> 시연 시작
         </button>

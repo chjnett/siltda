@@ -9,7 +9,7 @@ import { useStore } from "@/src/state/DealStore";
 import type { Stage } from "@/src/types";
 import { Donut, TimelineChart } from "./charts";
 import HomeMap, { LAYER_LABELS, type LayerId } from "./HomeMap";
-import PortThumb from "./PortThumb";
+import PortSatellite from "./PortSatellite";
 import { Formula, Pill, UseBadge, VerificationBadge, useCountUp } from "./ui";
 import WeekWeather from "./WeekWeather";
 
@@ -28,6 +28,12 @@ export default function HomePage() {
   const [layers, setLayers] = useState<Record<LayerId, boolean>>({ dredge: true, erosion: true, stockpile: true, routes: true, infra: true });
   const [showWeather, setShowWeather] = useState(true);
   const [hourIndex, setHourIndex] = useState(12);
+  useEffect(() => {
+    const update = () => setHourIndex(new Date().getHours());
+    update();
+    const t = setInterval(update, 60_000);
+    return () => clearInterval(t);
+  }, []);
   const [weatherPortId, setWeatherPortId] = useState(data.ports[0]?.id ?? "");
   const [signalOpen, setSignalOpen] = useState<SignalId | null>(null);
 
@@ -48,7 +54,7 @@ export default function HomePage() {
     <div className="dash-home">
       <section className="dash-card" aria-label="수급 지도">
         <header className="dash-card-head">
-          <div><h2>준설토 수급 지도</h2><p>공급(항만)과 수요(침식지)를 한 지도에서 확인 · 시연용 가상 위치</p></div>
+          <div><h2>준설토 수급 지도</h2><p>공급(항만)과 수요(침식지)를 한 지도에서 확인</p></div>
           <div className="dash-layer-toggles" role="group" aria-label="지도 레이어">
             {(Object.keys(LAYER_LABELS) as LayerId[]).map((id) => (
               <label key={id} className="dash-chip" data-active={layers[id] || undefined}>
@@ -56,7 +62,7 @@ export default function HomePage() {
               </label>
             ))}
             <label className="dash-chip" data-active={showWeather || undefined}>
-              <input type="checkbox" checked={showWeather} onChange={() => setShowWeather((v) => !v)} /> 풍속·파고(기상 슬라이더 연동)
+              <input type="checkbox" checked={showWeather} onChange={() => setShowWeather((v) => !v)} /> 풍속·파고(현재 시각)
             </label>
           </div>
         </header>
@@ -65,7 +71,7 @@ export default function HomePage() {
 
       <div className="dash-home-grid">
         <section className="dash-card" aria-label="수급 균형" data-demo="balance">
-          <header className="dash-card-head"><div><h2>수급 균형</h2><p>열린 복원 수요 기준 · 단위 m³</p></div></header>
+          <header className="dash-card-head"><div><h2>수급 균형</h2><p>열린 복원 수요 기준</p></div></header>
           <div className="dash-balance">
             <div><span>복원 수요 합계</span><b>{fmtInt(overview.demandTotal)}</b></div>
             <i aria-hidden="true">−</i>
@@ -127,14 +133,14 @@ export default function HomePage() {
 
       <section className="dash-card" aria-label="주간 해상기상" data-demo="weather">
         <header className="dash-card-head">
-          <div><h2>주간 해상기상</h2><p>작업 가능 여부는 시연용 가정 기준입니다 · 슬라이더는 지도 풍속·파고와 연동</p></div>
+          <div><h2>주간 해상기상</h2><p>선택한 항만의 7일 예보</p></div>
           <label className="dash-filter"><span>항만</span>
             <select value={weatherPortId} onChange={(e) => setWeatherPortId(e.target.value)}>
               {data.ports.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
             </select>
           </label>
         </header>
-        {port && <WeekWeather id={port.id} name={port.name} coordinate={port.coordinate} hourIndex={hourIndex} onHourChange={setHourIndex} />}
+        {port && <WeekWeather id={port.id} name={port.name} coordinate={port.coordinate} />}
       </section>
 
       <section className="dash-kpis" aria-label="핵심 지표" data-demo="kpis">
@@ -180,26 +186,21 @@ export default function HomePage() {
 function RecentListings({ onAll }: { onAll: () => void }) {
   const { state, openPassport } = useStore();
   const { data, base } = state;
-  const [animate, setAnimate] = useState(true);
   const recent = [...data.listings].sort((a, b) => a.registeredDaysAgo - b.registeredDaysAgo).slice(0, 4);
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => { setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches); }, []);
-  const on = animate && !reduced;
   return (
     <section className="dash-card" aria-label="최근 등록 매물" data-demo="recent">
       <header className="dash-card-head">
         <div><h2>최근 등록 매물</h2><p>가장 최근에 등록된 준설토 4건</p></div>
         <div className="dash-head-actions">
-          <label className="dash-chip" data-active={animate || undefined}><input type="checkbox" checked={animate} onChange={() => setAnimate((v) => !v)} /> 등장 애니메이션</label>
           <button type="button" className="dash-btn" onClick={onAll}>전체 보기</button>
         </div>
       </header>
       <ul className="dash-recent">
-        {recent.map((l, i) => {
+        {recent.map((l) => {
           const p = data.ports.find((x) => x.id === l.portId);
           return (
-            <li key={l.id} className="dash-recent-card" data-animate={on || undefined} style={on ? { animationDelay: `${i * 120}ms` } : undefined}>
-              <PortThumb name={p?.name ?? ""} variant="port" />
+            <li key={l.id} className="dash-recent-card">
+              {p && <PortSatellite name={p.name} coordinate={p.coordinate} />}
               <div>
                 <b>{p?.name} · {l.project}</b>
                 <p>{fmtM3(l.volumeM3)} · {monthRange(base, l.dredgeStart, l.dredgeEnd)}</p>

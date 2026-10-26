@@ -13,6 +13,7 @@ import FeasibilityModal from "./FeasibilityModal";
 import MrvPanel from "./MrvPanel";
 import SatelliteMap, { type RouteLine } from "./SatelliteMap";
 import ScheduleGantt from "./ScheduleGantt";
+import SiteRecommend from "./SiteRecommend";
 import WeekWeather from "./WeekWeather";
 import { Donut } from "./charts";
 import { DetailList, Formula, Pill, UrgencyBadge } from "./ui";
@@ -26,7 +27,6 @@ export default function CandidatesPage() {
   const [shifts, setShifts] = useState<Record<string, number>>({});
   const [hoveredPort, setHoveredPort] = useState<string | null>(null);
   const [focusToken, setFocusToken] = useState(0);
-  const [weatherHour, setWeatherHour] = useState(12);
   const ganttRef = useRef<HTMLElement>(null);
 
   const [y0, y1] = yearRange(site);
@@ -92,12 +92,18 @@ export default function CandidatesPage() {
 
   return (
     <div className="dash-candidates">
-      <div className="dash-site-tabs" role="tablist" aria-label="복원 후보지 선택" data-demo="site-tabs">
+      <SiteRecommend />
+
+      <div className="dash-site-pick">
+        <h2 className="dash-site-pick-title">내 복원지 선택하기</h2>
+        <p className="dash-muted">추천 복원지 또는 아래 목록에서 복원지를 고르면, 선택한 복원지 기준으로 아래 매칭·일정·경제성 단계가 진행됩니다.</p>
+      <div className="dash-site-tabs" role="tablist" aria-label="내 복원지 선택" data-demo="site-tabs">
         {data.sites.map((s) => (
           <button key={s.id} role="tab" aria-selected={s.id === site.id} className="dash-chip" data-active={s.id === site.id || undefined} onClick={() => { selectSite(s.id); setTab("match"); }}>
             {s.name} {s.status === "completed" ? "· 복원 완료" : ""}
           </button>
         ))}
+      </div>
       </div>
 
       <div className="dash-cand-layout">
@@ -163,7 +169,7 @@ export default function CandidatesPage() {
 
       <section className="dash-card" ref={ganttRef} aria-label="일정 비교" data-demo="gantt">
         <header className="dash-card-head">
-          <div><h2>일정 비교(간트)</h2><p>{selected ? `${selected.port.name} · ${selected.listing.project}` : "후보를 선택하세요"} vs {site.name} 복원 사업</p></div>
+          <div><h2>일정 비교</h2><p>{selected ? `${selected.port.name} · ${selected.listing.project}` : "후보를 선택하세요"} vs {site.name} 복원 사업</p></div>
         </header>
         {selected ? (
           <ScheduleGantt listing={selected.listing} site={site} base={base} shift={shiftOf(selected.listing.id)} schedule={selected.schedule} volumeM3={selected.useVolumeM3} onShift={(m) => setShifts((s) => ({ ...s, [selected.listing.id]: m }))} />
@@ -183,7 +189,7 @@ export default function CandidatesPage() {
         </section>
         <section className="dash-card" aria-label="일주일 해상기상">
           <header className="dash-card-head"><div><h2>일주일 해상기상</h2><p>{site.name} 기준</p></div></header>
-          <WeekWeather id={`site:${site.id}`} name={site.name} coordinate={site.coordinate} hourIndex={weatherHour} onHourChange={setWeatherHour} />
+          <WeekWeather id={`site:${site.id}`} name={site.name} coordinate={site.coordinate} />
         </section>
       </div>
 
