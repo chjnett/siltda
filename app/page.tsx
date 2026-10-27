@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import TeamDashboardEmbed from "@/components/TeamDashboardEmbed";
 
 const CoastalStudio = dynamic(() => import("@/components/CoastalStudio"), {
   ssr: false,
@@ -8,5 +9,10 @@ const CoastalStudio = dynamic(() => import("@/components/CoastalStudio"), {
 });
 
 export default function Home() {
-  return <CoastalStudio />;
+  return (
+    <main className="home-experience">
+      <CoastalStudio />
+      <TeamDashboardEmbed />
+    </main>
+  );
 }

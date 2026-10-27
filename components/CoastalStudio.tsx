@@ -252,7 +252,7 @@ export default function CoastalStudio() {
   )), [step]);
 
   return (
-    <main className={`studio-shell step-${step} ${introActive ? "intro-active" : "workspace-active"}`}>
+    <section id="coastal-studio" className={`studio-shell step-${step} ${introActive ? "intro-active" : "workspace-active"}`} aria-label="siltDA 3D Coastal Studio">
       <header className="app-header">
         <div className="brand-block">
           <div className="brand-copy">
@@ -267,7 +267,7 @@ export default function CoastalStudio() {
         </div>
         <div className="header-status">
           <Badge variant="secondary" className="data-badge"><Database size={14} /> {mapStatus}</Badge>
-          <Link href="/operations" className="ui-button operations-link"><LayoutDashboard size={15} /> 운영 콘솔</Link>
+          <Link href="#team-dashboard" className="ui-button operations-link"><LayoutDashboard size={15} /> 통합 대시보드</Link>
           <Button variant="outline" size="sm" className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</Button>
           {fullscreenSupported && (
             <Button variant="outline" size="sm" className="fullscreen-button" onClick={toggleFullscreen}>
@@ -583,6 +583,6 @@ export default function CoastalStudio() {
         </div>
         <div className="system-note"><span className="status-light" />{notice}</div>
       </footer>
-    </main>
+    </section>
   );
 }
