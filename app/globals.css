@@ -103,6 +103,7 @@ button { color: inherit; }
 .left-panel, .right-panel { min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: rgba(100,145,160,.4) transparent; }
 .left-panel { display: flex; flex-direction: column; padding: 16px; }
 .right-panel { display: flex; flex-direction: column; padding: 17px; }
+.right-panel > * { flex: 0 0 auto; }
 
 .workflow-heading, .inspector-heading { display: flex; align-items: center; justify-content: space-between; color: #87a1ae; font-size: 9px; letter-spacing: 1.7px; font-weight: 700; }
 .workflow-heading strong { color: var(--cyan); font-size: 11px; }
