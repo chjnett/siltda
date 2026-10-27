@@ -25,7 +25,7 @@ const compact = new Intl.NumberFormat("ko-KR", { notation: "compact", maximumFra
 
 const navItems: Array<{ id: ViewId; label: string; icon: typeof LayoutDashboard }> = [
   { id: "overview", label: "운영 현황", icon: LayoutDashboard },
-  { id: "listings", label: "준설토·복원 수요", icon: Ship },
+  { id: "listings", label: "준설토·활용 수요", icon: Ship },
   { id: "matches", label: "매칭 워크플로", icon: ClipboardCheck },
   { id: "data", label: "데이터·문서", icon: Database },
   { id: "admin", label: "기관·감사 기록", icon: ShieldCheck },
@@ -33,14 +33,14 @@ const navItems: Array<{ id: ViewId; label: string; icon: typeof LayoutDashboard 
 
 const viewCopy: Record<ViewId, { eyebrow: string; title: string; description: string }> = {
   overview: { eyebrow: "OPERATIONS", title: "연안 퇴적물 운영 현황", description: "공급·수요·승인·운송 상태를 한 흐름으로 관리합니다." },
-  listings: { eyebrow: "MARKETPLACE", title: "준설토 공급과 복원 수요", description: "기관별 물량과 품질 조건을 등록하고 매칭 대상을 검토합니다." },
-  matches: { eyebrow: "WORKFLOW", title: "매칭 승인 및 이행 관리", description: "검토부터 계약, 운송, 복원 완료까지 변경 이력을 남깁니다." },
+  listings: { eyebrow: "MARKETPLACE", title: "준설토 공급과 활용 수요", description: "매립·습지·사질 해안별 수용 조건과 공정 시기를 함께 검토합니다." },
+  matches: { eyebrow: "WORKFLOW", title: "매칭 승인 및 이행 관리", description: "시험 검토부터 계약, 운송, 활용 완료까지 변경 이력을 남깁니다." },
   data: { eyebrow: "DATA ROOM", title: "공간 데이터와 증빙 문서", description: "GeoJSON을 검증하고 수심·허가·시험 자료를 프로젝트에 연결합니다." },
   admin: { eyebrow: "GOVERNANCE", title: "기관, 권한 및 감사 기록", description: "참여 기관의 역할과 프로젝트 변경 기록을 확인합니다." },
 };
 
 const roleLabel: Record<UserRole, string> = { port: "항만 운영자", restoration: "복원 기관", admin: "관리자" };
-const listingKindLabel: Record<ListingKind, string> = { supply: "공급", demand: "복원 수요" };
+const listingKindLabel: Record<ListingKind, string> = { supply: "공급", demand: "활용 수요" };
 
 interface ListingDraft {
   id?: string;
@@ -281,7 +281,7 @@ export default function OperationsDashboard() {
           </nav>
           <div className="operations-sidebar-note">
             <ShieldCheck size={15} />
-            <div><strong>{roleLabel[role]}</strong><span>{role === "admin" ? "전체 승인 및 감사 권한" : role === "port" ? "공급 등록 및 품질 제출" : "복원 수요와 검토 권한"}</span></div>
+            <div><strong>{roleLabel[role]}</strong><span>{role === "admin" ? "전체 승인 및 감사 권한" : role === "port" ? "공급 등록 및 시험성적 제출" : "활용 수요와 검토 권한"}</span></div>
           </div>
         </aside>
 
@@ -290,7 +290,7 @@ export default function OperationsDashboard() {
             <div><span>{copy.eyebrow}</span><h1>{copy.title}</h1><p>{copy.description}</p></div>
             <div className="operations-title-actions">
               <Button variant="outline" size="sm" onClick={exportReport}><Download size={15} /> 보고서</Button>
-              <Button size="sm" onClick={() => { setListingDraft(blankListing(role, currentUser.organization)); setView("listings"); }}><Plus size={15} /> {role === "restoration" ? "복원 수요 등록" : "준설토 등록"}</Button>
+              <Button size="sm" onClick={() => { setListingDraft(blankListing(role, currentUser.organization)); setView("listings"); }}><Plus size={15} /> {role === "restoration" ? "활용 수요 등록" : "준설토 등록"}</Button>
             </div>
           </div>
 
@@ -298,22 +298,22 @@ export default function OperationsDashboard() {
             <>
               <div className="operations-metrics">
                 <Card><span><Ship size={15} /> 가용 준설토</span><strong>{compact.format(metrics.supply)} <i>m³</i></strong><small>활성 공급 {state.listings.filter((item) => item.kind === "supply").length}건</small></Card>
-                <Card><span><Map size={15} /> 복원 수요</span><strong>{compact.format(metrics.demand)} <i>m³</i></strong><small>미충족 {Math.max(0, metrics.demand - metrics.supply).toLocaleString()} m³</small></Card>
+                <Card><span><Map size={15} /> 활용 수요</span><strong>{compact.format(metrics.demand)} <i>m³</i></strong><small>미충족 {Math.max(0, metrics.demand - metrics.supply).toLocaleString()} m³</small></Card>
                 <Card><span><ClipboardCheck size={15} /> 진행 매칭</span><strong>{metrics.active} <i>건</i></strong><small>승인·계약·운송 포함</small></Card>
                 <Card><span><Activity size={15} /> 운송 확정</span><strong>{compact.format(metrics.shipping)} <i>m³</i></strong><small>예정 및 운송 중 물량</small></Card>
               </div>
               <div className="operations-overview-grid">
                 <Card className="operations-panel operations-match-map">
                   <div className="operations-panel-head"><div><span>LIVE SPATIAL OPERATIONS</span><h2>부산 연안 매칭 현황</h2></div><Link href="/">3D Studio 열기 <ArrowRight size={14} /></Link></div>
-                  <div className="operations-map-visual" aria-label="부산 연안 공급과 복원 연결 개요">
+                  <div className="operations-map-visual" aria-label="부산항 준설토 공급과 활용 수요 연결 개요">
                     <div className="map-grid-lines" />
                     <span className="map-coast coast-a" /><span className="map-coast coast-b" />
                     <i className="map-node supply node-a"><b>18.2만</b><small>부산신항</small></i>
-                    <i className="map-node demand node-b"><b>15.1만</b><small>다대포</small></i>
+                    <i className="map-node demand node-b"><b>15.8만</b><small>신항 배후</small></i>
                     <i className="map-node supply node-c"><b>9.6만</b><small>북항</small></i>
-                    <i className="map-node demand node-d"><b>12.3만</b><small>송정</small></i>
+                    <i className="map-node demand node-d"><b>7.2만</b><small>하구 습지</small></i>
                     <span className="map-route route-a" /><span className="map-route route-b" />
-                    <div className="map-legend"><span><i className="supply" /> 공급</span><span><i className="demand" /> 복원 수요</span><span><i className="route" /> 검토 경로</span></div>
+                    <div className="map-legend"><span><i className="supply" /> 공급</span><span><i className="demand" /> 활용 수요</span><span><i className="route" /> 검토 경로</span></div>
                   </div>
                 </Card>
                 <Card className="operations-panel">
@@ -336,7 +336,7 @@ export default function OperationsDashboard() {
                 <div className="operations-search"><Search size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="항만, 기관, 토질 검색" /></div>
                 <div className="operations-filter"><Filter size={14} />{(["all", "supply", "demand"] as const).map((kind) => <button key={kind} type="button" className={listingFilter === kind ? "active" : ""} onClick={() => setListingFilter(kind)}>{kind === "all" ? "전체" : listingKindLabel[kind]}</button>)}</div>
               </div>
-              <div className="operations-table" role="table" aria-label="준설토와 복원 수요 목록">
+              <div className="operations-table" role="table" aria-label="준설토와 활용 수요 목록">
                 <div className="operations-table-row heading" role="row"><span>구분·사업명</span><span>기관·위치</span><span>물량</span><span>작업 기간</span><span>상태</span><span>관리</span></div>
                 {filteredListings.map((listing) => (
                   <div className="operations-table-row" role="row" key={listing.id}>
@@ -408,7 +408,7 @@ export default function OperationsDashboard() {
           <form className="operations-modal" onSubmit={saveListing}>
             <div className="operations-modal-head"><div><span>{listingDraft.id ? "EDIT LISTING" : "NEW LISTING"}</span><h2>{listingDraft.id ? "등록 정보 수정" : "새 운영 항목 등록"}</h2></div><button type="button" onClick={() => setListingDraft(null)} aria-label="닫기"><X size={18} /></button></div>
             <div className="operations-form-grid">
-              <label>구분<select value={listingDraft.kind} onChange={(event) => setListingDraft({ ...listingDraft, kind: event.target.value as ListingKind })}><option value="supply">준설토 공급</option><option value="demand">복원 수요</option></select></label>
+              <label>구분<select value={listingDraft.kind} onChange={(event) => setListingDraft({ ...listingDraft, kind: event.target.value as ListingKind })}><option value="supply">준설토 공급</option><option value="demand">활용 수요</option></select></label>
               <label>기관<input required value={listingDraft.organization} onChange={(event) => setListingDraft({ ...listingDraft, organization: event.target.value })} /></label>
               <label className="wide">사업명<input required value={listingDraft.title} onChange={(event) => setListingDraft({ ...listingDraft, title: event.target.value })} placeholder="예: 부산신항 항로 유지 준설토" /></label>
               <label>위치<input required value={listingDraft.location} onChange={(event) => setListingDraft({ ...listingDraft, location: event.target.value })} /></label>

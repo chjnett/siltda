@@ -14,7 +14,7 @@ interface Props {
 
 export default function OperationsInsight({ deposit, erosion, distanceKm }: Props) {
   const match = getMatchInsight(deposit, erosion, distanceKm);
-  const verification = deposit.operation.verification === "verified" ? "검증 완료" : "검증 중";
+  const verification = deposit.operation.verification === "verified" ? "시험 적합" : "시험 대기";
 
   return (
     <Card className="operations-insight" aria-label="3D 매칭 운영 정보">
@@ -39,11 +39,11 @@ export default function OperationsInsight({ deposit, erosion, distanceKm }: Prop
         <div><small>예상 순편익</small><strong>{match.netBenefitEok.toFixed(1)} 억</strong></div>
       </div>
 
-      <div className="operations-timeline" aria-label="준설과 복원 일정 비교">
-        <div className="operations-timeline-title"><CalendarRange size={13} /><span>12개월 일정 정합성</span></div>
+      <div className="operations-timeline" aria-label="준설과 활용 공정 일정 비교">
+        <div className="operations-timeline-title"><CalendarRange size={13} /><span>준설·활용 공정 일정 정합성</span></div>
         <div className="timeline-months">{timelineMonths.map((month) => <span key={month}>{month}</span>)}</div>
         <div className="timeline-track"><span className="timeline-label">준설</span><i className="timeline-bar supply" style={timelineStyle(deposit)} /></div>
-        <div className="timeline-track"><span className="timeline-label">복원</span><i className="timeline-bar demand" style={timelineStyle(erosion)} /></div>
+        <div className="timeline-track"><span className="timeline-label">활용</span><i className="timeline-bar demand" style={timelineStyle(erosion)} /></div>
       </div>
 
       <div className="passport-strip">
@@ -52,7 +52,7 @@ export default function OperationsInsight({ deposit, erosion, distanceKm }: Prop
         <span>중앙입경 {deposit.operation.medianMm ?? "—"} mm</span>
         <span><CheckCircle2 size={13} /> {deposit.operation.use}</span>
       </div>
-      <p className="operations-assumption">금액·품질·일정 기준은 해커톤 시연용 가정값입니다.</p>
+      <p className="operations-assumption">{deposit.operation.qualityGate}. 금액·품질·일정 기준은 해커톤 시연용 가정값입니다.</p>
     </Card>
   );
 }

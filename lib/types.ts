@@ -10,6 +10,7 @@ export interface CandidateOperation {
   endMonth: number;
   verification: "verified" | "in-review" | "observed";
   use: string;
+  qualityGate?: string;
   finesPct?: number;
   medianMm?: number;
   urgency?: "critical" | "high" | "normal";
@@ -25,6 +26,9 @@ export interface CandidateSite {
   grain: string;
   volume: number;
   erosionRate?: number;
+  demandType?: "port-fill" | "wetland" | "beach";
+  demandMetricLabel?: string;
+  demandMetricValue?: string;
   matchScore: number;
   operation: CandidateOperation;
 }

@@ -82,7 +82,7 @@ export const matchStatusLabel: Record<MatchStatus, string> = {
   contract: "계약 진행",
   scheduled: "운송 예정",
   shipping: "운송 중",
-  completed: "복원 완료",
+  completed: "활용 완료",
   rejected: "반려",
 };
 
@@ -95,27 +95,28 @@ export const initialOperationsState: OperationsState = {
     { id: "user-admin", name: "박현우", organization: "siltDA 운영센터", role: "admin" },
   ],
   listings: [
-    { id: "supply-new-port", kind: "supply", title: "부산신항 항로 유지 준설토", organization: "부산항만공사", location: "부산신항", volume: 182000, material: "세립사 혼합 실트", period: "2026.12–2027.02", status: "matched", updatedAt: now },
-    { id: "supply-north-port", kind: "supply", title: "부산항 북항 부두 전면 준설토", organization: "부산항만공사", location: "부산항 북항", volume: 96000, material: "중립사", period: "2027.01–2027.03", status: "open", updatedAt: now },
-    { id: "demand-dadaepo", kind: "demand", title: "다대포 완충사구 복원 수요", organization: "부산광역시 연안관리팀", location: "다대포", volume: 151000, material: "요구 입도 0.12–0.48 mm", period: "2027.01–2027.04", status: "matched", updatedAt: now },
-    { id: "demand-songjeong", kind: "demand", title: "송정 해빈 침식 복원 수요", organization: "해운대구", location: "송정 해안", volume: 123000, material: "요구 입도 0.25–0.62 mm", period: "2027.03–2027.06", status: "open", updatedAt: now },
+    { id: "supply-new-port", kind: "supply", title: "부산신항 항로 유지 준설토", organization: "부산항만공사", location: "부산신항", volume: 182000, material: "고함수비 실트·점토질 (세립분 85%)", period: "2026.12–2027.02", status: "matched", updatedAt: now },
+    { id: "supply-north-port", kind: "supply", title: "부산항 북항 부두 전면 준설토", organization: "부산항만공사", location: "부산항 북항", volume: 96000, material: "실트질 준설토 (세립분 74%)", period: "2027.01–2027.03", status: "open", updatedAt: now },
+    { id: "demand-new-port-fill", kind: "demand", title: "부산신항 배후부지 관리형 매립 수요", organization: "부산항만공사", location: "부산신항 배후부지", volume: 158000, material: "세립질 수용 · 오염도/함수비 시험 필요", period: "2027.02–2027.05", status: "matched", updatedAt: now },
+    { id: "demand-wetland", kind: "demand", title: "낙동강 하구 염습지 고도 보강 수요", organization: "부산광역시 연안관리팀", location: "낙동강 하구", volume: 72000, material: "세립질 수용 · 얇은층 살포 검토", period: "2027.04–2027.06", status: "open", updatedAt: now },
+    { id: "demand-dadaepo", kind: "demand", title: "다대포 사질 해안 조건부 양빈 수요", organization: "부산광역시 연안관리팀", location: "다대포", volume: 32000, material: "모래 85% 이상 선별 물량만 허용", period: "2027.05–2027.06", status: "open", updatedAt: now },
   ],
   matches: [
-    { id: "match-2607", supplyId: "supply-new-port", demandId: "demand-dadaepo", projectName: "부산신항–다대포 순환 실증", status: "quality", score: 96, distanceKm: 13.6, matchedVolume: 151000, assignee: "박현우", updatedAt: now },
-    { id: "match-2608", supplyId: "supply-north-port", demandId: "demand-songjeong", projectName: "북항–송정 연안 복원", status: "review", score: 84, distanceKm: 18.4, matchedVolume: 96000, assignee: "이수연", updatedAt: now },
+    { id: "match-2607", supplyId: "supply-new-port", demandId: "demand-new-port-fill", projectName: "부산신항 준설토 현장 내 순환 실증", status: "quality", score: 93, distanceKm: 2.8, matchedVolume: 158000, assignee: "박현우", updatedAt: now },
+    { id: "match-2608", supplyId: "supply-north-port", demandId: "demand-wetland", projectName: "북항–낙동강 하구 습지 보강", status: "review", score: 78, distanceKm: 11.2, matchedVolume: 72000, assignee: "이수연", updatedAt: now },
   ],
   documents: [
     { id: "doc-1", name: "부산신항_입도시험성적서.pdf", category: "시험성적서", size: 1840000, projectId: "match-2607", uploadedBy: "김해진", uploadedAt: now },
-    { id: "doc-2", name: "다대포_복원사업_협의서.pdf", category: "허가서", size: 920000, projectId: "match-2607", uploadedBy: "이수연", uploadedAt: now },
+    { id: "doc-2", name: "부산신항_토양오염시험_검토서.pdf", category: "허가서", size: 920000, projectId: "match-2607", uploadedBy: "이수연", uploadedAt: now },
   ],
   activities: [
-    { id: "activity-1", actor: "박현우", action: "품질 검증 단계로 변경", target: "부산신항–다대포 순환 실증", at: now },
+    { id: "activity-1", actor: "박현우", action: "토양오염 시험 검토 단계로 변경", target: "부산신항 준설토 현장 내 순환 실증", at: now },
     { id: "activity-2", actor: "김해진", action: "시험성적서 등록", target: "부산신항 항로 유지 준설토", at: "2026-10-27T09:15:00.000Z" },
-    { id: "activity-3", actor: "이수연", action: "매칭 검토 요청", target: "북항–송정 연안 복원", at: "2026-10-26T16:40:00.000Z" },
+    { id: "activity-3", actor: "이수연", action: "매칭 검토 요청", target: "북항–낙동강 하구 습지 보강", at: "2026-10-26T16:40:00.000Z" },
   ],
   datasets: [
-    { id: "dataset-1", name: "busan_candidates.geojson", format: "GeoJSON", featureCount: 4, size: 42800, status: "validated", uploadedAt: now },
-    { id: "dataset-2", name: "dadaepo_demo_bathymetry.tif", format: "GeoTIFF", size: 12840000, status: "metadata-only", uploadedAt: now },
+    { id: "dataset-1", name: "busan_utilization_candidates.geojson", format: "GeoJSON", featureCount: 5, size: 46800, status: "validated", uploadedAt: now },
+    { id: "dataset-2", name: "new_port_demo_bathymetry.tif", format: "GeoTIFF", size: 12840000, status: "metadata-only", uploadedAt: now },
   ],
 };
 

@@ -614,7 +614,7 @@ export default function CesiumScene(props: Props) {
       </div>
       {(props.flowVisible || props.volumeMarkersVisible) && !props.introActive && (
         <div className="operations-legend" aria-label="3D 운영 레이어 범례">
-          {props.volumeMarkersVisible && <span><i className="legend-volume supply" /> 공급 물량 <i className="legend-volume demand" /> 복원 수요</span>}
+          {props.volumeMarkersVisible && <span><i className="legend-volume supply" /> 공급 물량 <i className="legend-volume demand" /> 활용 수요</span>}
           {props.flowVisible && <span><i className="legend-route" /> 선택 매칭 경로</span>}
         </div>
       )}

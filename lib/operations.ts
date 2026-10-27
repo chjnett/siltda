@@ -3,7 +3,7 @@ import type { CandidateSite } from "./types";
 const MATCH_WEIGHTS = { quality: 0.4, schedule: 0.25, distance: 0.2, volume: 0.15 } as const;
 const COSTS = {
   disposalPerM3: 16000,
-  sandPurchasePerM3: 29000,
+  alternativeFillPerM3: 18000,
   transportPerM3Km: 85,
   inspectionFixedWon: 20_000_000,
   inspectionPerM3: 300,
@@ -40,7 +40,7 @@ export function getMatchInsight(deposit: CandidateSite, erosion: CandidateSite, 
       + volumeScore * MATCH_WEIGHTS.volume,
   );
 
-  const avoided = matchedVolume * (COSTS.disposalPerM3 + COSTS.sandPurchasePerM3);
+  const avoided = matchedVolume * (COSTS.disposalPerM3 + COSTS.alternativeFillPerM3);
   const transport = matchedVolume * distanceKm * COSTS.transportPerM3Km;
   const inspection = COSTS.inspectionFixedWon + matchedVolume * COSTS.inspectionPerM3;
   const storage = matchedVolume * storageMonths * COSTS.storagePerM3Month;

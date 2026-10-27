@@ -33,7 +33,7 @@ type SafariFullscreenElement = HTMLElement & {
 const steps = [
   { id: 1 as StepId, eyebrow: "STEP 01", title: "후보지 선정", icon: MapPinned },
   { id: 2 as StepId, eyebrow: "STEP 02", title: "준설 설계", icon: Anchor },
-  { id: 3 as StepId, eyebrow: "STEP 03", title: "복원 설계", icon: Waves },
+  { id: 3 as StepId, eyebrow: "STEP 03", title: "활용·복원 설계", icon: Waves },
 ];
 
 const compact = new Intl.NumberFormat("ko-KR", { notation: "compact", maximumFractionDigits: 1 });
@@ -66,7 +66,20 @@ export default function CoastalStudio() {
   useEffect(() => {
     const stored = localStorage.getItem("siltda-project-v1");
     if (stored) {
-      try { setProject({ ...initialProject, ...JSON.parse(stored) }); } catch { /* ignore corrupt demo state */ }
+      try {
+        const parsed = JSON.parse(stored) as Partial<ProjectState>;
+        const depositStillExists = candidates.some((candidate) => candidate.kind === "deposit" && candidate.id === parsed.selectedDepositId);
+        const demandStillExists = candidates.some((candidate) => candidate.kind === "erosion" && candidate.id === parsed.selectedErosionId);
+        const selectedDepositId = depositStillExists ? parsed.selectedDepositId ?? initialProject.selectedDepositId : initialProject.selectedDepositId;
+        const selectedErosionId = demandStillExists ? parsed.selectedErosionId ?? initialProject.selectedErosionId : initialProject.selectedErosionId;
+        setProject({
+          ...initialProject,
+          ...parsed,
+          selectedDepositId,
+          selectedErosionId,
+          ...(!demandStillExists ? { restorationPolygon: initialProject.restorationPolygon } : {}),
+        });
+      } catch { /* ignore corrupt demo state */ }
     }
   }, []);
 
@@ -154,7 +167,7 @@ export default function CoastalStudio() {
       [kind === "deposit" ? "selectedDepositId" : "selectedErosionId"]: id,
     }));
     setCandidateFocus((current) => ({ id, requestId: current.requestId + 1 }));
-    setNotice(kind === "deposit" ? "퇴적지 후보를 프로젝트에 연결했습니다" : "침식지 후보를 프로젝트에 연결했습니다");
+    setNotice(kind === "deposit" ? "준설 발생지를 프로젝트에 연결했습니다" : "활용 수요지를 프로젝트에 연결했습니다");
     if (window.matchMedia("(max-width: 640px)").matches) {
       setLeftPanelOpen(false);
       setRightPanelOpen(false);
@@ -248,7 +261,7 @@ export default function CoastalStudio() {
         </div>
         <div className="project-identity">
           <span className="project-kicker">프로젝트</span>
-          <strong>부산 연안 퇴적물 순환 실증</strong>
+          <strong>부산항 준설토 활용 실증</strong>
           <span className="project-id">SDA-BUSAN-2607</span>
         </div>
         <div className="header-status">
@@ -457,7 +470,7 @@ export default function CoastalStudio() {
 
         <aside className="right-panel glass-panel" aria-hidden={!rightPanelOpen}>
           <div className="inspector-heading">
-            <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "복원 설계"}</span>
+            <span>{step === 1 ? "후보지 정보" : step === 2 ? "준설 설계" : "활용·복원 설계"}</span>
             <span className="panel-heading-actions">
               <Badge variant="success" className="quality-chip"><span /> 데이터 확인됨</Badge>
               <Button variant="ghost" size="icon" className="mobile-panel-close" onClick={() => setRightPanelOpen(false)} aria-label="후보지 정보 닫기"><X size={16} /></Button>
@@ -467,7 +480,7 @@ export default function CoastalStudio() {
           {step === 1 ? (
             <>
               <Card className="selection-card deposit-card">
-                <span className="card-eyebrow">퇴적지 · 공급원</span>
+                <span className="card-eyebrow">준설 발생지 · 공급원</span>
                 <h2>{deposit.name}</h2>
                 <p>{deposit.subtitle}</p>
                 <div className="property-grid">
@@ -478,27 +491,27 @@ export default function CoastalStudio() {
               </Card>
               <div className="match-connector"><span /><strong>{routeDistance.toFixed(1)} km</strong><span /></div>
               <Card className="selection-card erosion-card">
-                <span className="card-eyebrow">침식지 · 복원 대상</span>
+                <span className="card-eyebrow">활용처 · 수요 대상</span>
                 <h2>{erosion.name}</h2>
                 <p>{erosion.subtitle}</p>
                 <div className="property-grid">
-                  <div><small>필요 토량</small><strong>{compact.format(erosion.volume)} m³</strong></div>
-                  <div><small>연간 침식률</small><strong>{erosion.erosionRate} m</strong></div>
+                  <div><small>설계 물량</small><strong>{compact.format(erosion.volume)} m³</strong></div>
+                  <div><small>{erosion.demandMetricLabel ?? "검토 지표"}</small><strong>{erosion.demandMetricValue ?? "검토 중"}</strong></div>
                 </div>
-                <dl><div><dt>토질</dt><dd>{erosion.soil}</dd></div><div><dt>요구 입도</dt><dd>{erosion.grain}</dd></div></dl>
+                <dl><div><dt>수용 조건</dt><dd>{erosion.soil}</dd></div><div><dt>재료 조건</dt><dd>{erosion.grain}</dd></div></dl>
               </Card>
-              <ErosionRiskCard candidateId={erosion.id} />
+              {erosion.demandType === "beach" && <ErosionRiskCard candidateId={erosion.id} />}
               <OperationsInsight deposit={deposit} erosion={erosion} distanceKm={routeDistance} />
               <Card className="recommendation-box">
                 <Check size={16} />
-                <div><strong>연결 검토 결과</strong><p>입도 조건과 공급 시기가 일치하고 운송 거리가 비교적 짧습니다.</p></div>
+                <div><strong>연결 검토 결과</strong><p>{erosion.demandType === "beach" ? "현재 뻘질 준설토는 양빈에 부적합합니다. 사질분 선별 물량만 별도 검토하세요." : "세립질 수용 조건과 공정 시기가 유사합니다. 토양오염 시험 적합 후 연결할 수 있습니다."}</p></div>
               </Card>
             </>
           ) : (
             <>
               <section className="model-summary">
                 <span className="card-eyebrow">{step === 2 ? "사용자 정의 굴착 메시" : "사용자 정의 성토 메시"}</span>
-                <h2>{step === 2 ? "준설 구역 설계" : "침식지 복원 설계"}</h2>
+                <h2>{step === 2 ? "준설 구역 설계" : "활용 구역 설계"}</h2>
                 <p>Cesium 지형과 분리된 사용자 정의 삼각형 메시를 실시간으로 갱신합니다.</p>
               </section>
 
@@ -508,7 +521,7 @@ export default function CoastalStudio() {
                   <strong>{integer.format(step === 2 ? dredgeArea : restorationArea)} <i>m²</i></strong>
                 </Card>
                 <Card className="large-metric accent">
-                  <small>{step === 2 ? "예상 준설량" : "복원 필요량"}</small>
+                  <small>{step === 2 ? "예상 준설량" : "투입 필요량"}</small>
                   <strong>{integer.format(step === 2 ? dredgeVolume : restorationVolume)} <i>m³</i></strong>
                 </Card>
               </section>
@@ -543,7 +556,7 @@ export default function CoastalStudio() {
                 <Card className={`balance-callout ${balance < 0 ? "shortage" : "surplus"}`}>
                   <span>{balance < 0 ? "공급 부족" : "잔여 준설토"}</span>
                   <strong>{integer.format(Math.abs(balance))} m³</strong>
-                  <p>{balance < 0 ? "복원 설계를 축소하거나 추가 공급원을 연결하세요." : "잔여량은 인근 후보지에 재배분할 수 있습니다."}</p>
+                  <p>{balance < 0 ? "활용 설계를 축소하거나 추가 공급원을 연결하세요." : "잔여량은 인근 매립·습지 후보지에 재배분할 수 있습니다."}</p>
                 </Card>
               )}
             </>
@@ -562,7 +575,7 @@ export default function CoastalStudio() {
         </div>
         <div className="balance-stat supply"><small>준설 공급량</small><strong>{integer.format(dredgeVolume)} <i>m³</i></strong></div>
         <div className="balance-flow"><span style={{ width: `${Math.min(100, restorationVolume && dredgeVolume ? (Math.min(dredgeVolume, restorationVolume) / Math.max(dredgeVolume, restorationVolume)) * 100 : 0)}%` }} /></div>
-        <div className="balance-stat demand"><small>복원 필요량</small><strong>{integer.format(restorationVolume)} <i>m³</i></strong></div>
+        <div className="balance-stat demand"><small>활용 필요량</small><strong>{integer.format(restorationVolume)} <i>m³</i></strong></div>
         <div className={`balance-result ${balance < 0 ? "negative" : "positive"}`}>
           <small>{balance < 0 ? "부족" : "잔여"}</small>
           <strong>{balance < 0 ? "−" : "+"}{integer.format(Math.abs(balance))} m³</strong>

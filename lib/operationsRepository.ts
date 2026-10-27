@@ -1,6 +1,6 @@
 import { initialOperationsState, type OperationsDocument, type OperationsState, type SpatialDataset } from "./operationsDomain";
 
-const STORAGE_KEY = "siltda-operations-v1";
+const STORAGE_KEY = "siltda-operations-v2";
 const API_URL = process.env.NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL?.replace(/\/$/, "");
 
 export interface OperationsSnapshot {
