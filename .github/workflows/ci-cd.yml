@@ -26,6 +26,7 @@ jobs:
     timeout-minutes: 15
     env:
       NEXT_PUBLIC_SILTDA_ML_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_ML_API_URL }}
+      NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -40,10 +41,15 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         env:
           ML_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_ML_API_URL }}
+          OPERATIONS_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL }}
         run: |
           case "$ML_API_URL" in
             https://*) ;;
             *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
+          esac
+          case "$OPERATIONS_API_URL" in
+            https://*) ;;
+            *) echo "NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
           esac
 
       - name: Install dependencies
@@ -113,6 +119,49 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  operations-api:
+    name: Operations API / Worker dry run
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate Worker bundle and bindings
+        run: npm run operations:dry-run
+
+  deploy-operations-api:
+    name: Deploy / Operations API Worker
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs:
+      - frontend
+      - backend
+      - backend-container
+      - operations-api
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Deploy verified operations Worker
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config workers/operations-api/wrangler.jsonc
+
   deploy-pages:
     name: Deploy / Cloudflare Pages
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -120,6 +169,7 @@ jobs:
       - frontend
       - backend
       - backend-container
+      - operations-api
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -132,6 +182,7 @@ jobs:
       - name: Validate deployment configuration
         env:
           ML_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_ML_API_URL }}
+          OPERATIONS_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
@@ -140,6 +191,10 @@ jobs:
           case "$ML_API_URL" in
             https://*) ;;
             *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
+          esac
+          case "$OPERATIONS_API_URL" in
+            https://*) ;;
+            *) echo "NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
           esac
 
       - name: Download verified static export

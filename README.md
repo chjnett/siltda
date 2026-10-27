@@ -49,6 +49,29 @@ siltDA는 항만에서 발생하는 준설토를 해안 복원의 자원으로 �
 | 물량 계산 | 준설량·복원량·잔여량 또는 부족량 실시간 계산 |
 | 침식 위험 분석 | 공공 관측 이력과 실험적 ML 추정치를 분리해 표시 |
 | 프로젝트 관리 | 브라우저 로컬 저장, 인트로 다시 보기, 전 단계 해양 영상 배경 |
+| 운영 콘솔 | 공급·수요 CRUD, 매칭 승인 상태, 문서·공간 데이터, 기관 역할, 감사 이력 |
+
+## 🧑‍💼 운영 콘솔
+
+`/operations`는 3D 설계 화면과 분리된 운영 업무 공간입니다. 현재 디자인 시스템을 그대로 사용하면서 다음 흐름을 제공합니다.
+
+1. 항만 운영자, 복원 기관, 관리자 역할 전환
+2. 준설토 공급과 복원 수요 등록·수정·삭제·검색
+3. 초안부터 품질 검증, 승인, 계약, 운송, 복원 완료까지 상태 전환
+4. 프로젝트별 시험성적서·허가서·계약서 메타데이터 관리
+5. GeoJSON `FeatureCollection` 구조와 피처 수 브라우저 검증
+6. 기관 구성원과 변경 이력 확인
+7. 운영 상태 JSON 보고서 내보내기
+
+`NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL`이 없으면 기능 검증을 위해 `localStorage` 저장소를 사용하고 화면에 **로컬 시연**으로 표시합니다. 환경 변수가 설정되면 `/api/bootstrap`과 `/api/snapshot`을 제공하는 Cloudflare Worker 저장소를 사용합니다.
+
+Cloudflare 운영 API 초안은 `workers/operations-api/`에 있습니다.
+
+- D1: 기관, 사용자, 공급·수요, 매칭 상태, 문서 메타데이터, 감사 이력
+- R2: 시험성적서, 허가서, 계약서와 공간 데이터 원본
+- Cloudflare Access: 이메일 기반 운영 사용자 인증
+
+Worker 생성과 마이그레이션 절차는 [`workers/operations-api/README.md`](./workers/operations-api/README.md)를 참고하세요. Worker는 Cloudflare Access와 실제 사용자 이메일 연결 전까지 `API_ENABLED=false`로 잠기며, 이때 프론트는 명시적인 로컬 시연 저장소로 전환됩니다.
 
 ## 🧭 침식 위험 분석 흐름
 

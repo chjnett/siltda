@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "siltda-operations-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "upload_source_maps": true,
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "vars": {
+    "API_ENABLED": "false",
+    "AUTH_MODE": "access",
+    "ALLOWED_ORIGINS": "https://siltda.pages.dev,https://siltda-4p1.pages.dev,http://localhost:3000,http://localhost:3001,http://127.0.0.1:3010"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "siltda-operations",
+      "database_id": "0f24cca3-cb96-4942-8a54-4ea89ff6309d",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "siltda-project-files"
+    }
+  ]
+}

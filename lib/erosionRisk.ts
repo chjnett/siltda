@@ -90,7 +90,7 @@ export async function fetchErosionRisk(siteId: string, signal?: AbortSignal): Pr
     throw new ErosionRiskError("ML 서버에 연결할 수 없습니다.", "network");
   }
   if (!response.ok) {
-    const body = await response.json().catch(() => null);
+    const body = await response.json().catch(() => null) as { detail?: { message?: string; code?: string } } | null;
     const message: string = body?.detail?.message ?? `ML 서버 오류 (${response.status})`;
     if (response.status === 422) {
       throw new ErosionRiskError(message, body?.detail?.code === "NO_AREA_HISTORY" ? "no-area-history" : "insufficient-data");

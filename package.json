@@ -8,7 +8,10 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "copy:cesium": "node scripts/copy-cesium-assets.mjs",
-    "postinstall": "npm run copy:cesium"
+    "postinstall": "npm run copy:cesium",
+    "operations:dev": "wrangler dev --config workers/operations-api/wrangler.jsonc --port 8787",
+    "operations:dry-run": "WRANGLER_LOG_PATH=.wrangler/wrangler.log wrangler deploy --config workers/operations-api/wrangler.jsonc --dry-run --outdir .wrangler-dist",
+    "operations:deploy": "wrangler deploy --config workers/operations-api/wrangler.jsonc"
   },
   "dependencies": {
     "cesium": "^1.124.0",
@@ -23,6 +26,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "wrangler": "^4.153.0"
   }
 }

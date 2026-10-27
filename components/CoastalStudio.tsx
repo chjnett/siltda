@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   Anchor, BarChart3, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
-  Globe2, Layers3, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
+  Globe2, Layers3, LayoutDashboard, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
   PanelRightClose, PanelRightOpen, PanelTop, Route, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
 } from "lucide-react";
@@ -252,6 +253,7 @@ export default function CoastalStudio() {
         </div>
         <div className="header-status">
           <Badge variant="secondary" className="data-badge"><Database size={14} /> {mapStatus}</Badge>
+          <Link href="/operations" className="ui-button operations-link"><LayoutDashboard size={15} /> 운영 콘솔</Link>
           <Button variant="outline" size="sm" className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</Button>
           {fullscreenSupported && (
             <Button variant="outline" size="sm" className="fullscreen-button" onClick={toggleFullscreen}>
