@@ -33,7 +33,7 @@ interface Props {
 }
 
 const ll = (p: LonLat): [number, number] => [p[1], p[0]];
-const urgencyColor: Record<Urgency, string> = { critical: "#dc2626", high: "#f59e0b", normal: "#14b8a6" };
+const urgencyColor: Record<Urgency, string> = { critical: "#ef4444", high: "#f59e0b", normal: "#a1a1aa" };
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
 /** 공급 마커 반지름: 물량의 제곱근에 비례 (면적 ∝ 물량) */
@@ -80,7 +80,7 @@ export default function HomeMap({ data, base, layers, showWeather, hourIndex, hi
     if (layers.infra) {
       for (const p of data.ports) {
         const label = [p.name, wx(p.id)].filter(Boolean).join(" · ");
-        L.circleMarker(ll(p.coordinate), { radius: 4, color: "#fff", weight: 1.5, fillColor: warn(p.id) ? "#dc2626" : "#64748b", fillOpacity: 1 })
+        L.circleMarker(ll(p.coordinate), { radius: 4, color: "#09090b", weight: 1.5, fillColor: warn(p.id) ? "#ef4444" : "#71717a", fillOpacity: 1 })
           .bindTooltip(label, { permanent: showWeather && weather.status === "ready", direction: "bottom", className: "dash-map-tip dash-map-tip--wx", offset: [0, 4] })
           .addTo(group);
       }
@@ -105,7 +105,7 @@ export default function HomeMap({ data, base, layers, showWeather, hourIndex, hi
         if (!port || !site) continue;
         const hot = d.id === highlightDealId;
         L.polyline([ll(port.coordinate), ll(site.coordinate)], {
-          color: hot ? "#f59e0b" : "#3358f4", weight: hot ? 5 : 3, opacity: 0.9,
+          color: hot ? "#f59e0b" : "#22d3ee", weight: hot ? 5 : 3, opacity: 0.9,
           className: `dash-route-line${d.stage === "placed" ? "" : " dash-route-line--deal"}`,
         })
           .bindTooltip(`${port.name} → ${site.name} · ${fmtM3(d.volumeM3)}`, { sticky: true, className: "dash-map-tip" })
@@ -126,7 +126,7 @@ export default function HomeMap({ data, base, layers, showWeather, hourIndex, hi
         const port = portById.get(portId);
         if (!port) continue;
         const top = [...listings].sort((a, b) => b.volumeM3 - a.volumeM3)[0];
-        const marker = L.circleMarker(ll(port.coordinate), { radius: supplyRadius(m3), color: "#fff", weight: 2, fillColor: "#3358f4", fillOpacity: 0.78 });
+        const marker = L.circleMarker(ll(port.coordinate), { radius: supplyRadius(m3), color: "#09090b", weight: 2, fillColor: "#22d3ee", fillOpacity: 0.35 });
         marker.bindPopup(
           `<div class="dash-lpopup"><b>${esc(port.name)}</b><dl>` +
           `<div><dt>미매칭 공급</dt><dd>${fmtInt(m3)} m³</dd></div>` +
@@ -141,8 +141,8 @@ export default function HomeMap({ data, base, layers, showWeather, hourIndex, hi
     if (layers.erosion) {
       for (const s of data.sites) {
         const need = requiredVolume(s);
-        const color = s.status === "completed" ? "#64748b" : urgencyColor[s.urgency];
-        L.circleMarker(ll(s.coordinate), { radius: s.status === "completed" ? 7 : 9, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1 })
+        const color = s.status === "completed" ? "#71717a" : urgencyColor[s.urgency];
+        L.circleMarker(ll(s.coordinate), { radius: s.status === "completed" ? 7 : 9, color: "#09090b", weight: 2, fillColor: color, fillOpacity: 1 })
           .bindPopup(
             `<div class="dash-lpopup"><b>${esc(s.name)}</b><dl>` +
             `<div><dt>긴급도</dt><dd>${s.status === "completed" ? "복원 완료" : urgencyLabels[s.urgency]}</dd></div>` +
@@ -174,8 +174,8 @@ export default function HomeMap({ data, base, layers, showWeather, hourIndex, hi
     <div className="dash-map-wrap">
       <div ref={canvasRef} className="dash-map-canvas dash-map-canvas--home" role="application" aria-label="준설토 수급 지도" />
       <ul className="dash-map-legend" aria-label="범례">
-        <li><i style={{ background: "#3358f4" }} />준설 예정(크기 = 물량)</li>
-        <li><i style={{ background: "#dc2626" }} />침식 긴급 · <i style={{ background: "#f59e0b" }} />높음 · <i style={{ background: "#14b8a6" }} />보통</li>
+        <li><i style={{ background: "#22d3ee" }} />준설 예정(크기 = 물량)</li>
+        <li><i style={{ background: "#ef4444" }} />침식 긴급 · <i style={{ background: "#f59e0b" }} />높음 · <i style={{ background: "#a1a1aa" }} />보통</li>
         <li><i className="dash-legend-line" />매칭 운송경로</li>
       </ul>
     </div>

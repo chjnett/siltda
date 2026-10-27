@@ -15,10 +15,6 @@ export default function DashboardSidebar() {
   const pathname = usePathname().replace(/\/$/, "") || "/";
   return (
     <aside className="dash-sidebar">
-      <Link href="/dashboard" className="dash-logo" aria-label="싣다 siltDA 홈">
-        <span className="dash-logo-mark">silt<span>DA</span></span>
-        <span className="dash-logo-sub">싣다 · Coastal Studio</span>
-      </Link>
       <nav aria-label="대시보드 메뉴" className="dash-nav">
         {items.map(({ href, label, icon: Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);

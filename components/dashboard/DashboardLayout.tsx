@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 import { PRODUCT_MESSAGE } from "@/src/config/assumptions";
 import { DealStoreProvider } from "@/src/state/DealStore";
@@ -16,8 +17,7 @@ const titles: Record<string, string> = {
   "/dashboard/list": "준설토 수급 목록 — 전체 데이터",
 };
 
-function TopBar() {
-  const pathname = usePathname().replace(/\/$/, "") || "/";
+function GlobalHeader() {
   const { start, active } = useDemo();
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -27,17 +27,25 @@ function TopBar() {
   }, []);
   return (
     <header className="dash-topbar">
-      <h1>{titles[pathname] ?? "싣다 대시보드"}</h1>
+      <Link href="/dashboard" className="dash-logo" aria-label="싣다 siltDA 홈">
+        <span className="dash-logo-mark">silt<span>DA</span></span>
+        <span className="dash-logo-sub">싣다 · Coastal Studio</span>
+      </Link>
       <div className="dash-topbar-meta">
-        <span className="dash-muted" suppressHydrationWarning>
+        <span className="dash-muted dash-mono" suppressHydrationWarning>
           기준 시각 {now ? now.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—"}
         </span>
-        <button type="button" className="dash-btn dash-btn-primary" onClick={start} disabled={active} data-demo="start-demo">
-          <PlayCircle size={15} aria-hidden="true" /> 시연 시작
+        <button type="button" className="dash-btn dash-btn-primary" onClick={start} disabled={active} data-demo="start-demo" aria-label="시연 시작">
+          <PlayCircle size={15} aria-hidden="true" /> <span className="dash-btn-label">시연 시작</span>
         </button>
       </div>
     </header>
   );
+}
+
+function PageTitle() {
+  const pathname = usePathname().replace(/\/$/, "") || "/";
+  return <h1 className="dash-page-title">{titles[pathname] ?? "싣다 대시보드"}</h1>;
 }
 
 /** 모든 화면 상단에 항상 보이는 서비스 정의 */
@@ -60,9 +68,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <DealStoreProvider>
       <DemoProvider>
         <div className="dash-root">
+          <GlobalHeader />
           <DashboardSidebar />
           <main className="dash-main" id="dash-main">
-            <TopBar />
+            <PageTitle />
             <ServiceBanner />
             {children}
           </main>

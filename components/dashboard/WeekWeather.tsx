@@ -113,18 +113,18 @@ function HourlyChart({ rows, index }: { rows: HourRow[]; index: number }) {
   return (
     <div className="dash-hourly">
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="시간별 풍속, 유의파고, 강수 그래프">
-        {dayStarts.map((i) => <line key={i} x1={x(i)} x2={x(i)} y1={padT} y2={H - padB} stroke="#e2e8f0" />)}
-        {rows.map((r, i) => (r.precipMm > 0 ? <rect key={i} x={x(i) - 1} y={yv(r.precipMm, maxRain)} width={2} height={H - padB - yv(r.precipMm, maxRain)} fill="#93c5fd" /> : null))}
-        <path d={wind} fill="none" stroke="#3358f4" strokeWidth={1.6} />
-        {wave && <path d={wave} fill="none" stroke="#0d9488" strokeWidth={1.6} />}
-        <line x1={x(index)} x2={x(index)} y1={padT} y2={H - padB} stroke="#14213d" strokeWidth={1.5} />
-        {dayStarts.map((i) => <text key={i} x={x(i) + 3} y={H - 4} fontSize={9} fill="#64748b">{rows[i].time.slice(5, 10).replace("-", ".")}</text>)}
-        <text x={2} y={padT + 8} fontSize={9} fill="#64748b">{maxWind.toFixed(0)}</text>
+        {dayStarts.map((i) => <line key={i} x1={x(i)} x2={x(i)} y1={padT} y2={H - padB} stroke="#29292d" />)}
+        {rows.map((r, i) => (r.precipMm > 0 ? <rect key={i} x={x(i) - 1} y={yv(r.precipMm, maxRain)} width={2} height={H - padB - yv(r.precipMm, maxRain)} fill="#52525b" /> : null))}
+        <path d={wind} fill="none" stroke="#e4e4e7" strokeWidth={1.6} />
+        {wave && <path d={wave} fill="none" stroke="#a1a1aa" strokeWidth={1.6} />}
+        <line x1={x(index)} x2={x(index)} y1={padT} y2={H - padB} stroke="#fafafa" strokeWidth={1.5} />
+        {dayStarts.map((i) => <text key={i} x={x(i) + 3} y={H - 4} fontSize={9} fill="#a1a1aa">{rows[i].time.slice(5, 10).replace("-", ".")}</text>)}
+        <text x={2} y={padT + 8} fontSize={9} fill="#a1a1aa">{maxWind.toFixed(0)}</text>
       </svg>
       <ul className="dash-timeline-legend">
-        <li><i style={{ background: "#3358f4" }} /> 풍속(m/s)</li>
-        <li><i style={{ background: "#0d9488" }} /> 유의파고(m)</li>
-        <li><i style={{ background: "#93c5fd" }} /> 강수(mm/h)</li>
+        <li><i style={{ background: "#e4e4e7" }} /> 풍속(m/s)</li>
+        <li><i style={{ background: "#a1a1aa" }} /> 유의파고(m)</li>
+        <li><i style={{ background: "#52525b" }} /> 강수(mm/h)</li>
       </ul>
     </div>
   );

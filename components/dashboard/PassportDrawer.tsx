@@ -30,7 +30,7 @@ function MiniMap({ port }: { port: Port }) {
     const L = leafletRef.current;
     const map = mapRef.current;
     if (!ready || !L || !map) return;
-    const marker = L.circleMarker([port.coordinate[1], port.coordinate[0]], { radius: 8, color: "#fff", weight: 2, fillColor: "#3358f4", fillOpacity: 1 }).addTo(map);
+    const marker = L.circleMarker([port.coordinate[1], port.coordinate[0]], { radius: 8, color: "#09090b", weight: 2, fillColor: "#22d3ee", fillOpacity: 1 }).addTo(map);
     return () => { marker.remove(); };
   }, [ready, port, leafletRef, mapRef]);
   return <div ref={ref} className="dash-minimap" role="img" aria-label={`${port.name} 발생지 위치`} />;

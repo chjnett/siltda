@@ -12,13 +12,13 @@ export function Donut({ pct, label, size = 96 }: { pct: number | null; label: st
   const shown = pct === null ? 0 : Math.max(0, Math.min(100, pct));
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`${label} ${pct === null ? "계산 불가" : `${pct.toFixed(1)}%`}`}>
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e9eeff" strokeWidth={10} />
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#27272a" strokeWidth={10} />
       <circle
-        cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#3358f4" strokeWidth={10} strokeLinecap="round"
+        cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#22c55e" strokeWidth={10} strokeLinecap="round"
         strokeDasharray={`${(c * shown) / 100} ${c}`} transform={`rotate(-90 ${size / 2} ${size / 2})`}
         style={{ transition: "stroke-dasharray .8s ease" }}
       />
-      <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central" fontSize={size * 0.2} fontWeight={800} fill="#14213d">
+      <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central" fontSize={size * 0.2} fontWeight={650} fill="#fafafa">
         {pct === null ? "—" : `${pct.toFixed(0)}%`}
       </text>
     </svg>
@@ -52,16 +52,16 @@ export function Waterfall({ items, net, muted = false }: { items: AltItems; net:
   const bw = W / steps.length;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="dash-waterfall" role="img" aria-label={`순편익 워터폴, 순편익 ${fmt2(net)}억원`} data-muted={muted || undefined}>
-      <line x1={0} x2={W} y1={y(0)} y2={y(0)} stroke="#cbd5e1" />
+      <line x1={0} x2={W} y1={y(0)} y2={y(0)} stroke="#35353a" />
       {bars.map((b, i) => {
-        const fill = b.total ? (b.value > 0 ? "#3358f4" : "#dc2626") : b.value >= 0 ? "#0d9488" : "#f59e0b";
+        const fill = b.total ? (b.value > 0 ? "#d4d4d8" : "#ef4444") : b.value >= 0 ? "#22c55e" : "#f59e0b";
         const top = y(b.hi);
         const h = Math.max(1.5, y(b.lo) - y(b.hi));
         return (
           <g key={b.label}>
             <rect x={i * bw + 6} y={top} width={bw - 12} height={h} rx={2} fill={fill} opacity={muted ? 0.45 : 1} />
-            <text x={i * bw + bw / 2} y={top - 3} textAnchor="middle" fontSize={9} fontWeight={700} fill="#1e293b">{b.value >= 0 ? "" : "−"}{fmt2(Math.abs(b.value))}</text>
-            <text x={i * bw + bw / 2} y={H - 10} textAnchor="middle" fontSize={8.5} fill="#64748b">{b.label}</text>
+            <text x={i * bw + bw / 2} y={top - 3} textAnchor="middle" fontSize={9} fontWeight={600} fill="#fafafa">{b.value >= 0 ? "" : "−"}{fmt2(Math.abs(b.value))}</text>
+            <text x={i * bw + bw / 2} y={H - 10} textAnchor="middle" fontSize={8.5} fill="#a1a1aa">{b.label}</text>
           </g>
         );
       })}
@@ -104,8 +104,8 @@ export function TimelineChart({ months, base }: { months: TimelineMonth[]; base:
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="12개월 준설 발생 예정량과 복원 필요량 비교 막대 차트">
         {ticks.map((t) => (
           <g key={t}>
-            <line x1={padL} x2={W} y1={y(t)} y2={y(t)} stroke="#e2e8f0" />
-            <text x={padL - 6} y={y(t) + 3} textAnchor="end" fontSize={10} fill="#64748b">{fmtInt(t / 1000)}k</text>
+            <line x1={padL} x2={W} y1={y(t)} y2={y(t)} stroke="#29292d" />
+            <text x={padL - 6} y={y(t) + 3} textAnchor="end" fontSize={10} fill="#a1a1aa">{fmtInt(t / 1000)}k</text>
           </g>
         ))}
         {months.map((m, i) => {
@@ -113,22 +113,22 @@ export function TimelineChart({ months, base }: { months: TimelineMonth[]; base:
           const bw = slot * 0.32;
           return (
             <g key={m.month} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(i)} onBlur={() => setHover(null)} tabIndex={0} aria-label={`${monthShort(base, m.month)} 공급 ${fmtInt(m.supply)} 수요 ${fmtInt(m.demand)} 세제곱미터`}>
-              {m.mismatch && <rect x={x + 1} y={padT} width={slot - 2} height={H - padT - padB} fill="#fee2e2" opacity={0.7} />}
-              {hover === i && <rect x={x + 1} y={padT} width={slot - 2} height={H - padT - padB} fill="#e9eeff" opacity={0.8} />}
-              <rect x={x + slot / 2 - bw - 1} y={y(m.supply)} width={bw} height={Math.max(0, y(0) - y(m.supply))} rx={2} fill="#3358f4" />
+              {m.mismatch && <rect x={x + 1} y={padT} width={slot - 2} height={H - padT - padB} fill="#ef4444" opacity={0.16} />}
+              {hover === i && <rect x={x + 1} y={padT} width={slot - 2} height={H - padT - padB} fill="#27272a" opacity={0.8} />}
+              <rect x={x + slot / 2 - bw - 1} y={y(m.supply)} width={bw} height={Math.max(0, y(0) - y(m.supply))} rx={2} fill="#22d3ee" />
               <rect x={x + slot / 2 + 1} y={y(m.demand)} width={bw} height={Math.max(0, y(0) - y(m.demand))} rx={2} fill="#f59e0b" />
-              <text x={x + slot / 2} y={H - 8} textAnchor="middle" fontSize={10} fill="#64748b">{monthShort(base, m.month)}</text>
+              <text x={x + slot / 2} y={H - 8} textAnchor="middle" fontSize={10} fill="#a1a1aa">{monthShort(base, m.month)}</text>
               <rect x={x} y={padT} width={slot} height={H - padT - padB} fill="transparent" />
             </g>
           );
         })}
-        <path d={line} fill="none" stroke="#dc2626" strokeWidth={2} strokeDasharray="5 3" />
+        <path d={line} fill="none" stroke="#ef4444" strokeWidth={2} strokeDasharray="5 3" />
       </svg>
       <ul className="dash-timeline-legend">
-        <li><i style={{ background: "#3358f4" }} /> 준설 발생 예정량(공급)</li>
+        <li><i style={{ background: "#22d3ee" }} /> 준설 발생 예정량(공급)</li>
         <li><i style={{ background: "#f59e0b" }} /> 복원 사업 필요량(수요)</li>
-        <li><i style={{ background: "#dc2626" }} /> 임시적치 필요량(누적)</li>
-        <li><i style={{ background: "#fecaca" }} /> 시점 어긋남 구간</li>
+        <li><i style={{ background: "#ef4444" }} /> 임시적치 필요량(누적)</li>
+        <li><i style={{ background: "rgba(239, 68, 68, 0.35)" }} /> 시점 어긋남 구간</li>
       </ul>
       {active && (
         <div className="dash-tooltip" role="tooltip">

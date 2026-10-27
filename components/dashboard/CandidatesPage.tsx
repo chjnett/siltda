@@ -92,8 +92,6 @@ export default function CandidatesPage() {
 
   return (
     <div className="dash-candidates">
-      <SiteRecommend />
-
       <div className="dash-site-pick">
         <h2 className="dash-site-pick-title">내 복원지 선택하기</h2>
         <p className="dash-muted">추천 복원지 또는 아래 목록에서 복원지를 고르면, 선택한 복원지 기준으로 아래 매칭·일정·경제성 단계가 진행됩니다.</p>
@@ -166,6 +164,8 @@ export default function CandidatesPage() {
           />
         </aside>
       </div>
+
+      <SiteRecommend />
 
       <section className="dash-card" ref={ganttRef} aria-label="일정 비교" data-demo="gantt">
         <header className="dash-card-head">

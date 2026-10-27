@@ -55,9 +55,9 @@ function Scene({ kind }: { kind: "before" | "after" }) {
   const sandTop = kind === "before" ? 128 : 96;
   return (
     <svg viewBox="0 0 400 200" preserveAspectRatio="none" className="dash-scene" aria-hidden="true">
-      <rect width="400" height="200" fill="#bcd7ee" />
-      <path d={`M0 ${sandTop - 10} Q100 ${sandTop - 24} 200 ${sandTop - 10} T400 ${sandTop - 12} V200 H0Z`} fill="#f1dfb0" />
-      <path d={`M0 ${sandTop + 34} Q100 ${sandTop + 20} 200 ${sandTop + 34} T400 ${sandTop + 30} V200 H0Z`} fill="#9bbf84" />
+      <rect width="400" height="200" fill="#0E3A46" />
+      <path d={`M0 ${sandTop - 10} Q100 ${sandTop - 24} 200 ${sandTop - 10} T400 ${sandTop - 12} V200 H0Z`} fill="#A8956A" />
+      <path d={`M0 ${sandTop + 34} Q100 ${sandTop + 20} 200 ${sandTop + 34} T400 ${sandTop + 30} V200 H0Z`} fill="#4D6B44" />
       {kind === "before" && <path d="M0 106 Q100 92 200 106 T400 104 L400 118 Q300 120 200 118 T0 120Z" fill="#ef4444" opacity=".35" />}
       <path d={`M0 ${sandTop - 10} Q100 ${sandTop - 24} 200 ${sandTop - 10} T400 ${sandTop - 12}`} fill="none" stroke="#22d3ee" strokeWidth="3" />
     </svg>

@@ -53,13 +53,13 @@ export default function SatelliteMap({ site, year, ports, hoveredPortId, routes,
 
     for (const port of ports) {
       const hot = port.id === hoveredPortId;
-      L.circleMarker(ll(port.coordinate), { radius: hot ? 8 : 5, color: "#fff", weight: 2, fillColor: "#3358f4", fillOpacity: 1 })
+      L.circleMarker(ll(port.coordinate), { radius: hot ? 8 : 5, color: "#fff", weight: 2, fillColor: "#22d3ee", fillOpacity: 1 })
         .bindTooltip(port.name, { permanent: hot, direction: "top", className: "dash-map-tip" })
         .addTo(group);
     }
     const hovered = ports.find((p) => p.id === hoveredPortId);
     if (hovered) L.polyline([ll(hovered.coordinate), ll(site.coordinate)], { color: "#f59e0b", weight: 4, className: "dash-route-line", interactive: false }).addTo(group);
-    for (const r of routes) L.polyline([ll(r.from), ll(r.to)], { color: "#3358f4", weight: 4, className: "dash-route-line dash-route-line--deal", interactive: false }).addTo(group);
+    for (const r of routes) L.polyline([ll(r.from), ll(r.to)], { color: "#22d3ee", weight: 4, className: "dash-route-line dash-route-line--deal", interactive: false }).addTo(group);
   }, [ready, site, year, ports, hoveredPortId, routes, leafletRef]);
 
   useEffect(() => {
