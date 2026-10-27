@@ -38,6 +38,7 @@ const steps = [
 
 const compact = new Intl.NumberFormat("ko-KR", { notation: "compact", maximumFractionDigits: 1 });
 const integer = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 0 });
+const PROJECT_STORAGE_KEY = "siltda-project-v2";
 
 export default function CoastalStudio() {
   const [step, setStep] = useState<StepId>(1);
@@ -64,7 +65,7 @@ export default function CoastalStudio() {
   const splashVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("siltda-project-v1");
+    const stored = localStorage.getItem(PROJECT_STORAGE_KEY);
     if (stored) {
       try {
         const parsed = JSON.parse(stored) as Partial<ProjectState>;
@@ -189,7 +190,7 @@ export default function CoastalStudio() {
   const saveProject = () => {
     const next = { ...project, savedAt: new Date().toISOString() };
     setProject(next);
-    localStorage.setItem("siltda-project-v1", JSON.stringify(next));
+    localStorage.setItem(PROJECT_STORAGE_KEY, JSON.stringify(next));
     setSaved(true);
     setNotice("프로젝트 상태와 단계별 설계값을 이 브라우저에 저장했습니다");
     window.setTimeout(() => setSaved(false), 1800);
