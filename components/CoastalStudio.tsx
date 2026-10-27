@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  Anchor, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
+  Anchor, BarChart3, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
-  PanelRightClose, PanelRightOpen, PanelTop, Save, Ship, SlidersHorizontal,
+  PanelRightClose, PanelRightOpen, PanelTop, Route, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
 import ErosionRiskCard from "./ErosionRiskCard";
+import OperationsInsight from "./OperationsInsight";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -44,6 +45,8 @@ export default function CoastalStudio() {
   const [drawTarget, setDrawTarget] = useState<"dredge" | "restore" | null>(null);
   const [satelliteVisible, setSatelliteVisible] = useState(true);
   const [candidatesVisible, setCandidatesVisible] = useState(true);
+  const [flowVisible, setFlowVisible] = useState(true);
+  const [volumeMarkersVisible, setVolumeMarkersVisible] = useState(true);
   const [mapStatus, setMapStatus] = useState("3D 엔진 초기화 중");
   const [saved, setSaved] = useState(false);
   const [notice, setNotice] = useState("가상 수심 DEM · 실제 측량 자료가 아닙니다");
@@ -304,6 +307,14 @@ export default function CoastalStudio() {
               <span><BoxSelect size={14} /> 후보지 경계</span>
               <Switch checked={candidatesVisible} onCheckedChange={setCandidatesVisible} aria-label="후보지 경계 표시" />
             </div>
+            <div className="toggle-row">
+              <span><BarChart3 size={14} /> 수급 물량 기둥</span>
+              <Switch checked={volumeMarkersVisible} onCheckedChange={setVolumeMarkersVisible} aria-label="수급 물량 기둥 표시" />
+            </div>
+            <div className="toggle-row">
+              <span><Route size={14} /> 매칭 운송 흐름</span>
+              <Switch checked={flowVisible} onCheckedChange={setFlowVisible} aria-label="매칭 운송 흐름 표시" />
+            </div>
             <div className="toggle-row muted-toggle">
               <span><Mountain size={14} /> 가상 수심 DEM</span>
               <Switch checked disabled aria-label="가상 수심 DEM 표시" />
@@ -384,6 +395,8 @@ export default function CoastalStudio() {
             drawTarget={drawTarget}
             satelliteVisible={satelliteVisible}
             candidatesVisible={candidatesVisible}
+            flowVisible={flowVisible}
+            volumeMarkersVisible={volumeMarkersVisible}
             focusCandidateId={candidateFocus.id}
             focusRequestId={candidateFocus.requestId}
             onProjectChange={setProject}
@@ -473,6 +486,7 @@ export default function CoastalStudio() {
                 <dl><div><dt>토질</dt><dd>{erosion.soil}</dd></div><div><dt>요구 입도</dt><dd>{erosion.grain}</dd></div></dl>
               </Card>
               <ErosionRiskCard candidateId={erosion.id} />
+              <OperationsInsight deposit={deposit} erosion={erosion} distanceKm={routeDistance} />
               <Card className="recommendation-box">
                 <Check size={16} />
                 <div><strong>연결 검토 결과</strong><p>입도 조건과 공급 시기가 일치하고 운송 거리가 비교적 짧습니다.</p></div>

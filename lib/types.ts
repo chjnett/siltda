@@ -3,6 +3,18 @@ export type StepId = 1 | 2 | 3;
 export type CompareMode = "before" | "after" | "compare" | "section";
 export type CandidateKind = "deposit" | "erosion";
 
+export interface CandidateOperation {
+  status: string;
+  period: string;
+  startMonth: number;
+  endMonth: number;
+  verification: "verified" | "in-review" | "observed";
+  use: string;
+  finesPct?: number;
+  medianMm?: number;
+  urgency?: "critical" | "high" | "normal";
+}
+
 export interface CandidateSite {
   id: string;
   kind: CandidateKind;
@@ -14,6 +26,7 @@ export interface CandidateSite {
   volume: number;
   erosionRate?: number;
   matchScore: number;
+  operation: CandidateOperation;
 }
 
 export interface CameraPreset {

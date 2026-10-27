@@ -18,6 +18,8 @@ interface Props {
   drawTarget: DrawTarget;
   satelliteVisible: boolean;
   candidatesVisible: boolean;
+  flowVisible: boolean;
+  volumeMarkersVisible: boolean;
   focusCandidateId: string | null;
   focusRequestId: number;
   onProjectChange: (next: ProjectState) => void;
@@ -61,6 +63,7 @@ export default function CesiumScene(props: Props) {
   const onSelectCandidateRef = useRef(props.onSelectCandidate);
   const satelliteLayerRef = useRef<Cesium.ImageryLayer | null>(null);
   const candidateEntitiesRef = useRef<Cesium.Entity[]>([]);
+  const operationsEntitiesRef = useRef<Cesium.Entity[]>([]);
   const draftEntitiesRef = useRef<Cesium.Entity[]>([]);
   const deformationRef = useRef<{ dredge?: Cesium.Primitive; restore?: Cesium.Primitive }>({});
   const cameraByStepRef = useRef(new Map<StepId, { destination: Cesium.Cartesian3; orientation: { heading: number; pitch: number; roll: number } }>());
@@ -284,6 +287,78 @@ export default function CesiumScene(props: Props) {
 
   useEffect(() => {
     const viewer = viewerRef.current;
+    if (!viewer || !ready) return;
+    for (const entity of operationsEntitiesRef.current) viewer.entities.remove(entity);
+    operationsEntitiesRef.current = [];
+    if (props.introActive) return;
+
+    if (props.volumeMarkersVisible) {
+      for (const site of candidates) {
+        const [lon, lat] = centroid(site.polygon);
+        const height = Math.max(520, Math.min(2200, site.volume / 110));
+        const isDeposit = site.kind === "deposit";
+        operationsEntitiesRef.current.push(viewer.entities.add({
+          id: `volume-${site.id}`,
+          position: Cesium.Cartesian3.fromDegrees(lon, lat, height / 2 + 16),
+          properties: { siteId: site.id, siteKind: site.kind },
+          cylinder: {
+            length: height,
+            topRadius: isDeposit ? 145 : 34,
+            bottomRadius: isDeposit ? 145 : 180,
+            material: (isDeposit ? Cesium.Color.fromCssColorString("#22d3ee") : Cesium.Color.fromCssColorString("#f59e0b")).withAlpha(0.72),
+            outline: true,
+            outlineColor: Cesium.Color.WHITE.withAlpha(0.42),
+          },
+        }));
+      }
+    }
+
+    const deposit = candidates.find((site) => site.id === props.project.selectedDepositId);
+    const erosion = candidates.find((site) => site.id === props.project.selectedErosionId);
+    if (props.flowVisible && deposit && erosion) {
+      const [fromLon, fromLat] = centroid(deposit.polygon);
+      const [toLon, toLat] = centroid(erosion.polygon);
+      const midLon = (fromLon + toLon) / 2;
+      const midLat = (fromLat + toLat) / 2;
+      operationsEntitiesRef.current.push(viewer.entities.add({
+        id: "selected-match-route",
+        polyline: {
+          positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+            fromLon, fromLat, 42,
+            midLon, midLat, 1450,
+            toLon, toLat, 42,
+          ]),
+          width: 5,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            glowPower: 0.22,
+            taperPower: 0.35,
+            color: Cesium.Color.fromCssColorString("#67e8f9").withAlpha(0.92),
+          }),
+        },
+      }));
+      operationsEntitiesRef.current.push(viewer.entities.add({
+        id: "selected-match-flow-marker",
+        position: new Cesium.CallbackPositionProperty(() => {
+          const t = (performance.now() % 5200) / 5200;
+          const lon = fromLon + (toLon - fromLon) * t;
+          const lat = fromLat + (toLat - fromLat) * t;
+          const height = 80 + Math.sin(Math.PI * t) * 1370;
+          return Cesium.Cartesian3.fromDegrees(lon, lat, height);
+        }, false),
+        point: {
+          pixelSize: 10,
+          color: Cesium.Color.WHITE,
+          outlineColor: Cesium.Color.fromCssColorString("#22d3ee"),
+          outlineWidth: 4,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        },
+      }));
+    }
+    viewer.scene.requestRender();
+  }, [props.flowVisible, props.introActive, props.project.selectedDepositId, props.project.selectedErosionId, props.volumeMarkersVisible, ready]);
+
+  useEffect(() => {
+    const viewer = viewerRef.current;
     if (!viewer || !ready || !props.introPlaying) return;
 
     let koreaTimer: number | undefined;
@@ -474,9 +549,31 @@ export default function CesiumScene(props: Props) {
     }
   }, [props.project.selectedDepositId, props.project.selectedErosionId, ready]);
 
-  const flyPreset = (kind: "aerial" | "oblique" | "close") => {
+  const flyPreset = (kind: "aerial" | "oblique" | "close" | "match") => {
     const viewer = viewerRef.current;
     if (!viewer) return;
+    if (kind === "match") {
+      const deposit = candidates.find((item) => item.id === props.project.selectedDepositId);
+      const erosion = candidates.find((item) => item.id === props.project.selectedErosionId);
+      if (deposit && erosion) {
+        const [depositLon, depositLat] = centroid(deposit.polygon);
+        const [erosionLon, erosionLat] = centroid(erosion.polygon);
+        const sphere = Cesium.BoundingSphere.fromPoints([
+          Cesium.Cartesian3.fromDegrees(depositLon, depositLat, 0),
+          Cesium.Cartesian3.fromDegrees(erosionLon, erosionLat, 0),
+        ]);
+        viewer.camera.flyToBoundingSphere(sphere, {
+          offset: new Cesium.HeadingPitchRange(
+            Cesium.Math.toRadians(28),
+            Cesium.Math.toRadians(-48),
+            Math.max(15500, sphere.radius * 3.15),
+          ),
+          duration: 1.35,
+          easingFunction: Cesium.EasingFunction.CUBIC_IN_OUT,
+        });
+      }
+      return;
+    }
     const id = props.step === 3 ? props.project.selectedErosionId : props.project.selectedDepositId;
     const site = candidates.find((item) => item.id === id) ?? candidates[0];
     const [lon, lat] = centroid(site.polygon);
@@ -513,7 +610,14 @@ export default function CesiumScene(props: Props) {
         <button onClick={() => flyPreset("aerial")}>상공</button>
         <button onClick={() => flyPreset("oblique")}>사선</button>
         <button onClick={() => flyPreset("close")}>근접</button>
+        <button onClick={() => flyPreset("match")}>연결</button>
       </div>
+      {(props.flowVisible || props.volumeMarkersVisible) && !props.introActive && (
+        <div className="operations-legend" aria-label="3D 운영 레이어 범례">
+          {props.volumeMarkersVisible && <span><i className="legend-volume supply" /> 공급 물량 <i className="legend-volume demand" /> 복원 수요</span>}
+          {props.flowVisible && <span><i className="legend-route" /> 선택 매칭 경로</span>}
+        </div>
+      )}
       {props.drawTarget && (
         <div className="draw-hint">
           <strong>{props.drawTarget === "dredge" ? "준설 구역 입력 중" : "복원 구역 입력 중"}</strong>

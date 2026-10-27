@@ -748,3 +748,75 @@ button { color: inherit; }
 .risk-card dd { min-width: 0; overflow-wrap: anywhere; }
 .risk-card .risk-subtitle { margin: 14px 0 6px; font-size: 11px; color: #bdcdd4; display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
 .risk-card .risk-subtitle small { color: #6d8490; font-size: 9px; font-weight: 400; text-align: right; }
+
+/* 3D-first operations layer: dashboard information stays contextual to the map. */
+.operations-legend {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 14px;
+  max-width: calc(100% - 220px);
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 7px;
+  background: rgba(9,9,11,.82);
+  color: #a1a1aa;
+  font-size: 9px;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+}
+.operations-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend-volume { display: inline-block; width: 6px; height: 13px; border-radius: 2px 2px 0 0; }
+.legend-volume.supply { background: #22d3ee; }
+.legend-volume.demand { margin-left: 3px; background: #f59e0b; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.legend-route { display: inline-block; width: 22px; height: 2px; background: linear-gradient(90deg, #22d3ee 0 65%, transparent 65% 78%, #22d3ee 78%); }
+
+.operations-insight {
+  margin-top: 12px;
+  padding: 14px;
+  border-color: var(--border);
+  border-radius: 9px;
+  background: var(--card);
+}
+.operations-insight-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.operations-insight-head h3 { margin: 5px 0 0; font-size: 13px; font-weight: 600; }
+.match-score-badge { flex: 0 0 auto; font-variant-numeric: tabular-nums; }
+.operations-route-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  color: #d4d4d8;
+  font-size: 9px;
+}
+.operations-route-line span { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.operations-route-line span:last-child { justify-content: flex-end; text-align: right; }
+.operations-route-line i { display: flex; align-items: center; gap: 4px; color: #67e8f9; font-style: normal; white-space: nowrap; }
+.operations-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+.operations-score-grid div { padding: 8px; border-radius: 7px; background: var(--muted-surface); }
+.operations-score-grid small, .operations-score-grid strong { display: block; }
+.operations-score-grid small { color: var(--muted-foreground); font-size: 8px; }
+.operations-score-grid strong { margin-top: 4px; color: #e4e4e7; font-size: 11px; font-weight: 550; font-variant-numeric: tabular-nums; }
+.operations-timeline { margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--border); }
+.operations-timeline-title { display: flex; align-items: center; gap: 6px; color: #d4d4d8; font-size: 9px; }
+.timeline-months { display: grid; grid-template-columns: repeat(12, 1fr); margin: 9px 0 5px 42px; color: #52525b; font-size: 7px; }
+.timeline-months span { text-align: center; overflow: hidden; }
+.timeline-track { position: relative; height: 16px; margin: 3px 0 0 42px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--secondary) 0 calc(8.333% - 1px), var(--border) calc(8.333% - 1px) 8.333%); }
+.timeline-label { position: absolute; right: calc(100% + 8px); top: 3px; color: var(--muted-foreground); font-size: 8px; white-space: nowrap; }
+.timeline-bar { position: absolute; top: 3px; height: 10px; border-radius: 3px; }
+.timeline-bar.supply { background: #22d3ee; }
+.timeline-bar.demand { background: #f59e0b; }
+.passport-strip { display: flex; flex-wrap: wrap; gap: 5px 9px; margin-top: 12px; color: #a1a1aa; font-size: 8px; }
+.passport-strip span { display: inline-flex; align-items: center; gap: 4px; }
+.operations-assumption { margin: 9px 0 0; color: #52525b; font-size: 8px; line-height: 1.45; }
+
+@media (max-width: 640px) {
+  .operations-legend { left: 8px; bottom: 56px; max-width: calc(100% - 16px); }
+  .operations-score-grid { grid-template-columns: 1fr 1fr; }
+  .timeline-months { display: none; }
+  .timeline-track:first-of-type { margin-top: 9px; }
+}

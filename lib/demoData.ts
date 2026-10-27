@@ -11,6 +11,16 @@ export const candidates: CandidateSite[] = [
     grain: "모래 62% · 실트 31% · 점토 7%",
     volume: 182000,
     matchScore: 92,
+    operation: {
+      status: "품질검증",
+      period: "2026.12 ~ 2027.02",
+      startMonth: 2,
+      endMonth: 4,
+      verification: "verified",
+      use: "양빈 · 매립",
+      finesPct: 12,
+      medianMm: 0.31,
+    },
   },
   {
     id: "busan-north-port-b",
@@ -22,6 +32,16 @@ export const candidates: CandidateSite[] = [
     grain: "모래 78% · 실트 19% · 점토 3%",
     volume: 96000,
     matchScore: 86,
+    operation: {
+      status: "매칭",
+      period: "2027.01 ~ 2027.03",
+      startMonth: 3,
+      endMonth: 5,
+      verification: "verified",
+      use: "매립",
+      finesPct: 18,
+      medianMm: 0.24,
+    },
   },
   {
     id: "dadaepo-erosion",
@@ -34,6 +54,15 @@ export const candidates: CandidateSite[] = [
     volume: 151000,
     erosionRate: 1.8,
     matchScore: 92,
+    operation: {
+      status: "복원 수요",
+      period: "2027.01 ~ 2027.04",
+      startMonth: 3,
+      endMonth: 6,
+      verification: "observed",
+      use: "양빈",
+      urgency: "critical",
+    },
   },
   {
     id: "songjeong-erosion",
@@ -46,6 +75,15 @@ export const candidates: CandidateSite[] = [
     volume: 123000,
     erosionRate: 1.2,
     matchScore: 84,
+    operation: {
+      status: "복원 수요",
+      period: "2027.03 ~ 2027.06",
+      startMonth: 5,
+      endMonth: 8,
+      verification: "observed",
+      use: "양빈",
+      urgency: "high",
+    },
   },
 ];
 
