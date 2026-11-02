@@ -82,6 +82,7 @@ export default function CesiumScene(props: Props) {
     window.CESIUM_BASE_URL = "/cesium";
 
     const initialize = async () => {
+      const mobileOptimized = window.matchMedia("(max-width: 640px), (pointer: coarse)").matches;
       const viewer = new Cesium.Viewer(containerRef.current!, {
         timeline: false,
         animation: false,
@@ -95,8 +96,9 @@ export default function CesiumScene(props: Props) {
         infoBox: false,
         baseLayer: false,
         terrainProvider: new Cesium.EllipsoidTerrainProvider(),
-        requestRenderMode: false,
-        msaaSamples: 4,
+        requestRenderMode: mobileOptimized,
+        maximumRenderTimeChange: mobileOptimized ? Number.POSITIVE_INFINITY : 0,
+        msaaSamples: mobileOptimized ? 1 : 4,
       });
       if (cancelled) { viewer.destroy(); return; }
       viewerRef.current = viewer;
@@ -105,11 +107,11 @@ export default function CesiumScene(props: Props) {
       if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true;
       viewer.scene.fog.enabled = true;
       viewer.scene.highDynamicRange = true;
-      viewer.scene.globe.maximumScreenSpaceError = 1.25;
-      viewer.scene.globe.tileCacheSize = 512;
+      viewer.scene.globe.maximumScreenSpaceError = mobileOptimized ? 2.4 : 1.25;
+      viewer.scene.globe.tileCacheSize = mobileOptimized ? 192 : 512;
       viewer.scene.globe.preloadAncestors = true;
-      viewer.scene.globe.preloadSiblings = true;
-      viewer.resolutionScale = Math.min(window.devicePixelRatio, 2);
+      viewer.scene.globe.preloadSiblings = !mobileOptimized;
+      viewer.resolutionScale = Math.min(window.devicePixelRatio, mobileOptimized ? 1.25 : 2);
       viewer.camera.percentageChanged = 0.01;
 
       try {

@@ -43,7 +43,7 @@ export default function FieldEvidence({ visible, onClose }: FieldEvidenceProps) 
               <time dateTime={article.date.replaceAll(".", "-")}>{article.date}</time>
             </span>
             <span className="field-news-thumb">
-              <img src={article.image} alt="" loading="eager" referrerPolicy="no-referrer" />
+              <img src={article.image} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" />
               <ExternalLink size={12} />
             </span>
           </a>
