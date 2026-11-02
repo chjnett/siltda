@@ -43,10 +43,14 @@ jobs:
           ML_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_ML_API_URL }}
           OPERATIONS_API_URL: ${{ vars.NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL }}
         run: |
-          case "$ML_API_URL" in
-            https://*) ;;
-            *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
-          esac
+          if [ -n "$ML_API_URL" ]; then
+            case "$ML_API_URL" in
+              https://*) ;;
+              *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be HTTPS when configured"; exit 1 ;;
+            esac
+          else
+            echo "NEXT_PUBLIC_SILTDA_ML_API_URL is unset; building with the explicit demo-data fallback"
+          fi
           case "$OPERATIONS_API_URL" in
             https://*) ;;
             *) echo "NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
@@ -188,10 +192,14 @@ jobs:
         run: |
           test -n "$CF_ACCOUNT_ID" || { echo "Missing CLOUDFLARE_ACCOUNT_ID"; exit 1; }
           test -n "$CF_API_TOKEN" || { echo "Missing CLOUDFLARE_API_TOKEN"; exit 1; }
-          case "$ML_API_URL" in
-            https://*) ;;
-            *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
-          esac
+          if [ -n "$ML_API_URL" ]; then
+            case "$ML_API_URL" in
+              https://*) ;;
+              *) echo "NEXT_PUBLIC_SILTDA_ML_API_URL must be HTTPS when configured"; exit 1 ;;
+            esac
+          else
+            echo "NEXT_PUBLIC_SILTDA_ML_API_URL is unset; deploying the explicit demo-data fallback"
+          fi
           case "$OPERATIONS_API_URL" in
             https://*) ;;
             *) echo "NEXT_PUBLIC_SILTDA_OPERATIONS_API_URL must be a non-empty HTTPS URL"; exit 1 ;;
