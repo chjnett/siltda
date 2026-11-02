@@ -3,13 +3,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  Anchor, BarChart3, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
+  Anchor, ArrowRight, BarChart3, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, LayoutDashboard, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
   PanelRightClose, PanelRightOpen, PanelTop, Route, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
 } from "lucide-react";
 import CesiumScene from "./CesiumScene";
 import ErosionRiskCard from "./ErosionRiskCard";
+import FieldEvidence from "./FieldEvidence";
 import OperationsInsight from "./OperationsInsight";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,24 @@ export default function CoastalStudio() {
   const [splashPhase, setSplashPhase] = useState<"visible" | "leaving" | "hidden">("visible");
   const [fullscreenSupported, setFullscreenSupported] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [presentationMode, setPresentationMode] = useState(false);
+  const [evidenceVisible, setEvidenceVisible] = useState(false);
   const splashVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setPresentationMode(new URLSearchParams(window.location.search).get("presentation") === "1");
+  }, []);
+
+  useEffect(() => {
+    if (introActive || splashPhase !== "hidden") return;
+    const alreadySeen = sessionStorage.getItem("siltda-field-evidence-seen") === "1";
+    if (alreadySeen && !presentationMode) return;
+    const timer = window.setTimeout(() => {
+      setEvidenceVisible(true);
+      if (!presentationMode) sessionStorage.setItem("siltda-field-evidence-seen", "1");
+    }, 900);
+    return () => window.clearTimeout(timer);
+  }, [introActive, presentationMode, splashPhase]);
 
   useEffect(() => {
     const stored = localStorage.getItem(PROJECT_STORAGE_KEY);
@@ -211,6 +229,11 @@ export default function CoastalStudio() {
     setIntroActive(true);
   }, []);
 
+  const closeEvidence = () => {
+    setEvidenceVisible(false);
+    sessionStorage.setItem("siltda-field-evidence-seen", "1");
+  };
+
   const toggleFullscreen = async () => {
     const doc = document as SafariFullscreenDocument;
     const root = document.documentElement as SafariFullscreenElement;
@@ -267,7 +290,7 @@ export default function CoastalStudio() {
         </div>
         <div className="header-status">
           <Badge variant="secondary" className="data-badge"><Database size={14} /> {mapStatus}</Badge>
-          <Link href="#team-dashboard" className="ui-button operations-link"><LayoutDashboard size={15} /> 통합 대시보드</Link>
+          <Link href="/operations?view=overview" className="ui-button operations-link"><LayoutDashboard size={15} /> 운영 대시보드</Link>
           <Button variant="outline" size="sm" className="globe-button" onClick={replayIntro}><Globe2 size={15} /> 지구본 보기</Button>
           {fullscreenSupported && (
             <Button variant="outline" size="sm" className="fullscreen-button" onClick={toggleFullscreen}>
@@ -467,6 +490,7 @@ export default function CoastalStudio() {
               </svg>
             </Card>
           )}
+          <FieldEvidence visible={evidenceVisible} onClose={closeEvidence} />
         </section>
 
         <aside className="right-panel glass-panel" aria-hidden={!rightPanelOpen}>
@@ -554,11 +578,22 @@ export default function CoastalStudio() {
               </section>
 
               {step === 3 && (
-                <Card className={`balance-callout ${balance < 0 ? "shortage" : "surplus"}`}>
-                  <span>{balance < 0 ? "공급 부족" : "잔여 준설토"}</span>
-                  <strong>{integer.format(Math.abs(balance))} m³</strong>
-                  <p>{balance < 0 ? "활용 설계를 축소하거나 추가 공급원을 연결하세요." : "잔여량은 인근 매립·습지 후보지에 재배분할 수 있습니다."}</p>
-                </Card>
+                <>
+                  <Card className={`balance-callout ${balance < 0 ? "shortage" : "surplus"}`}>
+                    <span>{balance < 0 ? "공급 부족" : "잔여 준설토"}</span>
+                    <strong>{integer.format(Math.abs(balance))} m³</strong>
+                    <p>{balance < 0 ? "활용 설계를 축소하거나 추가 공급원을 연결하세요." : "잔여량은 인근 매립·습지 후보지에 재배분할 수 있습니다."}</p>
+                  </Card>
+                  <Card className="operations-handoff-card">
+                    <span>DESIGN TO OPERATIONS</span>
+                    <h3>3D 설계 결과를 운영 프로젝트로 전달합니다.</h3>
+                    <div><small>준설 공급량</small><strong>{integer.format(dredgeVolume)} m³</strong></div>
+                    <div><small>활용 필요량</small><strong>{integer.format(restorationVolume)} m³</strong></div>
+                    <Link href={`/operations?view=matches&project=match-2607${presentationMode ? "&demo=1" : ""}`}>
+                      운영 프로젝트 열기 <ArrowRight size={15} />
+                    </Link>
+                  </Card>
+                </>
               )}
             </>
           )}

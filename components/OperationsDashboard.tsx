@@ -98,11 +98,20 @@ export default function OperationsDashboard() {
   const copy = viewCopy[view];
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const requestedView = params.get("view") as ViewId | null;
+    const requestedProject = params.get("project");
+    if (requestedView && navItems.some((item) => item.id === requestedView)) setView(requestedView);
+    if (requestedProject && initialOperationsState.matches.some((match) => match.id === requestedProject)) setSelectedMatchId(requestedProject);
+  }, []);
+
+  useEffect(() => {
     void loadOperations().then((snapshot) => {
       setState(snapshot.state);
       setSource(snapshot.source);
       setLoaded(true);
-      setNotice(snapshot.source === "cloud" ? "Cloudflare D1 운영 데이터와 연결되었습니다." : "로컬 시연 저장소로 동작 중입니다.");
+      const demo = new URLSearchParams(window.location.search).get("demo") === "1";
+      setNotice(demo ? "심사위원 시연 모드 · 3D 설계에서 전달된 프로젝트를 표시합니다." : snapshot.source === "cloud" ? "Cloudflare D1 운영 데이터와 연결되었습니다." : "로컬 시연 저장소로 동작 중입니다.");
     });
   }, []);
 
