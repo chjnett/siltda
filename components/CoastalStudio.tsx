@@ -410,6 +410,7 @@ export default function CoastalStudio() {
                 title={leftPanelOpen ? "설계 도구 닫기" : "설계 도구 열기"}
               >
                 {leftPanelOpen ? <PanelLeftClose size={16} /> : <PanelLeftOpen size={16} />}
+                <span>설계</span>
               </Button>
               <Button
                 variant="outline"
@@ -421,6 +422,7 @@ export default function CoastalStudio() {
                 title={rightPanelOpen ? "후보지 정보 닫기" : "후보지 정보 열기"}
               >
                 {rightPanelOpen ? <PanelRightClose size={16} /> : <PanelRightOpen size={16} />}
+                <span>정보</span>
               </Button>
             </>
           )}
