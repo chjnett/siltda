@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  Anchor, ArrowRight, BarChart3, BoxSelect, Check, ChevronRight, CircleHelp, Database, Eye,
+  Anchor, ArrowRight, BarChart3, BoxSelect, Check, ChevronDown, ChevronRight, CircleHelp, Database, Eye,
   Globe2, Layers3, LayoutDashboard, MapPinned, Maximize2, Minimize2, Mountain, PanelLeftClose, PanelLeftOpen,
   PanelRightClose, PanelRightOpen, PanelTop, Route, Save, Ship, SlidersHorizontal,
   Undo2, Waves, X,
@@ -65,6 +65,9 @@ export default function CoastalStudio() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [presentationMode, setPresentationMode] = useState(false);
   const [evidenceVisible, setEvidenceVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [scrollHintVisible, setScrollHintVisible] = useState(false);
+  const [scrollHintResolved, setScrollHintResolved] = useState(false);
   const splashVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function CoastalStudio() {
   }, []);
 
   useEffect(() => {
-    if (introActive || splashPhase !== "hidden") return;
+    if (introActive || splashPhase !== "hidden" || !scrollHintResolved) return;
     const alreadySeen = sessionStorage.getItem("siltda-field-evidence-seen") === "1";
     if (alreadySeen && !presentationMode) return;
     const timer = window.setTimeout(() => {
@@ -80,7 +83,7 @@ export default function CoastalStudio() {
       if (!presentationMode) sessionStorage.setItem("siltda-field-evidence-seen", "1");
     }, 900);
     return () => window.clearTimeout(timer);
-  }, [introActive, presentationMode, splashPhase]);
+  }, [introActive, presentationMode, scrollHintResolved, splashPhase]);
 
   useEffect(() => {
     const stored = localStorage.getItem(PROJECT_STORAGE_KEY);
@@ -119,6 +122,8 @@ export default function CoastalStudio() {
   useEffect(() => {
     const mobile = window.matchMedia("(max-width: 640px)");
     const syncPanels = () => {
+      setIsMobile(mobile.matches);
+      if (!mobile.matches) setScrollHintResolved(true);
       if (mobile.matches) {
         setLeftPanelOpen(false);
         setRightPanelOpen(false);
@@ -131,6 +136,31 @@ export default function CoastalStudio() {
     mobile.addEventListener("change", syncPanels);
     return () => mobile.removeEventListener("change", syncPanels);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile || introActive || splashPhase !== "hidden") return;
+    const alreadySeen = sessionStorage.getItem("siltda-mobile-scroll-hint-seen") === "1";
+    if (alreadySeen && !presentationMode) {
+      setScrollHintResolved(true);
+      return;
+    }
+    const timer = window.setTimeout(() => setScrollHintVisible(true), 650);
+    return () => window.clearTimeout(timer);
+  }, [introActive, isMobile, presentationMode, splashPhase]);
+
+  useEffect(() => {
+    if (!scrollHintVisible) return;
+    const scroller = document.querySelector<HTMLElement>(".home-experience");
+    if (!scroller) return;
+    const dismissOnScroll = () => {
+      if (scroller.scrollTop < 48) return;
+      setScrollHintVisible(false);
+      setScrollHintResolved(true);
+      sessionStorage.setItem("siltda-mobile-scroll-hint-seen", "1");
+    };
+    scroller.addEventListener("scroll", dismissOnScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", dismissOnScroll);
+  }, [scrollHintVisible]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setMinimumSplashElapsed(true), 3900);
@@ -232,6 +262,19 @@ export default function CoastalStudio() {
   const closeEvidence = () => {
     setEvidenceVisible(false);
     sessionStorage.setItem("siltda-field-evidence-seen", "1");
+  };
+
+  const closeScrollHint = () => {
+    setScrollHintVisible(false);
+    setScrollHintResolved(true);
+    sessionStorage.setItem("siltda-mobile-scroll-hint-seen", "1");
+  };
+
+  const openDashboard = () => {
+    closeScrollHint();
+    window.requestAnimationFrame(() => {
+      document.getElementById("team-dashboard")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const toggleFullscreen = async () => {
@@ -620,6 +663,23 @@ export default function CoastalStudio() {
         </div>
         <div className="system-note"><span className="status-light" />{notice}</div>
       </footer>
+
+      {scrollHintVisible && (
+        <div className="mobile-scroll-hint" role="dialog" aria-modal="true" aria-label="대시보드 스크롤 안내">
+          <button type="button" className="mobile-scroll-hint-close" onClick={closeScrollHint} aria-label="안내 닫기">
+            <X size={26} />
+          </button>
+          <button type="button" className="mobile-scroll-hint-action" onClick={openDashboard}>
+            <span>아래로 스크롤하여</span>
+            <strong>siltDA 대시보드를 만나보세요</strong>
+            <span className="mobile-scroll-arrows" aria-hidden="true">
+              <ChevronDown />
+              <ChevronDown />
+              <ChevronDown />
+            </span>
+          </button>
+        </div>
+      )}
     </section>
   );
 }
