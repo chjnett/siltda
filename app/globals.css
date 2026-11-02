@@ -1058,14 +1058,6 @@ button { color: inherit; }
 .field-news-thumb svg { position: absolute; right: 5px; top: 5px; padding: 3px; box-sizing: content-box; border-radius: 4px; background: rgba(0, 0, 0, .65); color: #f4f4f5; opacity: 0; transition: opacity .18s ease; }
 .field-news-items > a:hover .field-news-thumb svg { opacity: 1; }
 
-.mobile-dashboard-handoff { min-height: 100%; display: grid; place-items: center; align-content: center; gap: 12px; padding: 32px 22px calc(32px + env(safe-area-inset-bottom)); color: #a1a1aa; text-align: center; }
-.mobile-dashboard-handoff > span { color: #71717a; font-size: 8px; font-weight: 750; letter-spacing: 1.4px; }
-.mobile-dashboard-handoff > svg { color: #e4e4e7; }
-.mobile-dashboard-handoff h3 { max-width: 300px; margin: 0; color: #f4f4f5; font-size: 17px; line-height: 1.45; }
-.mobile-dashboard-handoff p { max-width: 330px; margin: 0 0 4px; font-size: 10px; line-height: 1.65; }
-.mobile-dashboard-handoff a { width: min(320px, 100%); min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid #3f3f46; border-radius: 8px; color: #d4d4d8; font-size: 11px; font-weight: 650; text-decoration: none; }
-.mobile-dashboard-handoff a:first-of-type { border-color: #e4e4e7; background: #f4f4f5; color: #18181b; }
-
 .mobile-scroll-hint { display: none; }
 
 .operations-handoff-card { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding: 14px; border-color: #3f3f46; background: #111113; }
