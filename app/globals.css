@@ -1100,20 +1100,11 @@ button { color: inherit; }
     z-index: 120;
     display: grid;
     place-items: center;
-    overflow: hidden;
-    background: rgba(5, 7, 9, .76);
+    overflow: visible;
+    background: transparent;
     color: #fafafa;
-    backdrop-filter: blur(7px) saturate(.78);
-    -webkit-backdrop-filter: blur(7px) saturate(.78);
-    touch-action: pan-y;
-    animation: scroll-hint-enter .36s ease both;
-  }
-  .mobile-scroll-hint::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 56%, rgba(255,255,255,.035), transparent 45%);
     pointer-events: none;
+    animation: scroll-hint-enter .36s ease both;
   }
   .mobile-scroll-hint-close {
     position: absolute;
@@ -1129,23 +1120,28 @@ button { color: inherit; }
     background: rgba(24, 24, 27, .48);
     color: #f4f4f5;
     cursor: pointer;
+    pointer-events: auto;
   }
   .mobile-scroll-hint-action {
     position: relative;
     z-index: 1;
-    width: 100%;
-    min-height: 100%;
+    width: min(calc(100% - 40px), 390px);
+    min-height: 246px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 72px 24px calc(72px + env(safe-area-inset-bottom));
-    border: 0;
-    background: transparent;
+    padding: 42px 20px 38px;
+    border: 1px solid rgba(255, 255, 255, .20);
+    border-radius: 20px;
+    background: rgba(9, 12, 16, .56);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(12px) saturate(.88);
+    -webkit-backdrop-filter: blur(12px) saturate(.88);
     color: inherit;
     text-align: center;
     cursor: pointer;
-    touch-action: pan-y;
+    pointer-events: auto;
   }
   .mobile-scroll-hint-action > span:first-child,
   .mobile-scroll-hint-action > strong { display: block; font-size: clamp(19px, 5.7vw, 24px); line-height: 1.5; letter-spacing: -.03em; }
