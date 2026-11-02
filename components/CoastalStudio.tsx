@@ -665,20 +665,10 @@ export default function CoastalStudio() {
       </footer>
 
       {scrollHintVisible && (
-        <div className="mobile-scroll-hint" role="dialog" aria-modal="true" aria-label="대시보드 스크롤 안내">
-          <button type="button" className="mobile-scroll-hint-close" onClick={closeScrollHint} aria-label="안내 닫기">
-            <X size={26} />
-          </button>
-          <button type="button" className="mobile-scroll-hint-action" onClick={openDashboard}>
-            <span>아래로 스크롤하여</span>
-            <strong>siltDA 대시보드를 만나보세요</strong>
-            <span className="mobile-scroll-arrows" aria-hidden="true">
-              <ChevronDown />
-              <ChevronDown />
-              <ChevronDown />
-            </span>
-          </button>
-        </div>
+        <button type="button" className="mobile-scroll-hint" onClick={openDashboard} aria-label="아래 대시보드로 이동">
+          <span>아래로 스크롤</span>
+          <ChevronDown size={15} aria-hidden="true" />
+        </button>
       )}
     </section>
   );
