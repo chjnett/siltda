@@ -2,6 +2,9 @@
   "name": "siltda-3d-gis",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "npm run copy:cesium && next build",
