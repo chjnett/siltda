@@ -3,6 +3,19 @@ export type StepId = 1 | 2 | 3;
 export type CompareMode = "before" | "after" | "compare" | "section";
 export type CandidateKind = "deposit" | "erosion";
 
+export interface CandidateOperation {
+  status: string;
+  period: string;
+  startMonth: number;
+  endMonth: number;
+  verification: "verified" | "in-review" | "observed";
+  use: string;
+  qualityGate?: string;
+  finesPct?: number;
+  medianMm?: number;
+  urgency?: "critical" | "high" | "normal";
+}
+
 export interface CandidateSite {
   id: string;
   kind: CandidateKind;
@@ -13,7 +26,11 @@ export interface CandidateSite {
   grain: string;
   volume: number;
   erosionRate?: number;
+  demandType?: "port-fill" | "wetland" | "beach";
+  demandMetricLabel?: string;
+  demandMetricValue?: string;
   matchScore: number;
+  operation: CandidateOperation;
 }
 
 export interface CameraPreset {

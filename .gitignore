@@ -22,6 +22,9 @@ backend/artifacts_synthetic/
 __pycache__/
 .pytest_cache/
 .playwright-mcp/
+.archify/
+.wrangler/
+.wrangler-dist/
 
 # Local Archify validation evidence (published HTML/PNG assets remain tracked)
 docs/architecture/*-visual-check/
