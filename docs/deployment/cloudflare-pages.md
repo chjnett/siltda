@@ -29,7 +29,7 @@ GitHub 저장소의 **Settings → Environments**에서 `cloudflare-pages-produc
 
 | 이름 | 값 |
 | --- | --- |
-| `NEXT_PUBLIC_SILTDA_ML_API_URL` | 운영 FastAPI의 HTTPS 주소. 예: `https://siltda-ml-api.onrender.com` |
+| `NEXT_PUBLIC_SILTDA_ML_API_URL` | 선택 사항. 운영 FastAPI의 HTTPS 주소. 비워두면 프론트는 명시적으로 표시된 시연 데이터를 사용합니다. |
 
 환경에는 필요하면 승인자와 배포 브랜치 `main` 보호 규칙도 설정합니다. 토큰은 저장소 파일이나 일반 변수에 넣지 않습니다.
 
@@ -51,7 +51,7 @@ PR #1처럼 외부 fork에서 만들어진 Pull Request에도 비밀 값 없이 
 4. 같은 세 검사를 `main`에서 다시 실행
 5. 성공한 프론트 `out/` 아티팩트만 Pages에 배포
 
-배포 작업은 `NEXT_PUBLIC_SILTDA_ML_API_URL`이 비어 있거나 HTTPS가 아니면 중단됩니다. 배포 결과 URL은 GitHub Deployment와 작업 요약에 기록됩니다.
+배포 작업은 `NEXT_PUBLIC_SILTDA_ML_API_URL`이 설정됐지만 HTTPS가 아니면 중단됩니다. 값이 비어 있으면 ML API를 호출하지 않고 명시적으로 표시된 시연 데이터로 빌드합니다. 배포 결과 URL은 GitHub Deployment와 작업 요약에 기록됩니다.
 
 ## 5. ML API 배포
 
